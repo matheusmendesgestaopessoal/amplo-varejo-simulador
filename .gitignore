@@ -1,0 +1,5 @@
+ambiente/
+__pycache__/
+*.pyc
+dados/brutos/
+dados/processados/
