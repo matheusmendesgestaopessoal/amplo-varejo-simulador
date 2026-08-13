@@ -1,0 +1,81 @@
+﻿id_produto;nome_produto;categoria;preco;custo;ativo;id_categoria
+1;Jogo de Panelas;Casa;299.9;180.0;True;1
+2;Panela de Pressão;Casa;159.9;95.0;True;1
+3;Frigideira Antiaderente;Casa;89.9;55.0;True;1
+4;Conjunto de Copos;Casa;59.9;35.0;True;1
+5;Jogo de Pratos;Casa;119.9;75.0;True;1
+6;Jogo de Talheres;Casa;79.9;45.0;True;1
+7;Liquidificador;Casa;179.9;110.0;True;1
+8;Batedeira;Casa;199.9;120.0;True;1
+9;Cafeteira Elétrica;Casa;159.9;95.0;True;1
+10;Air Fryer;Casa;349.9;230.0;True;1
+11;Aspirador de Pó;Casa;279.9;180.0;True;1
+12;Ventilador;Casa;169.9;100.0;True;1
+13;Ferro de Passar;Casa;119.9;75.0;True;1
+14;Escorredor de Louça;Casa;59.9;35.0;True;1
+15;Lixeira Inox;Casa;119.9;70.0;True;1
+16;Organizador Multiuso;Casa;69.9;40.0;True;1
+17;Tapete Sala;Casa;169.9;100.0;True;1
+18;Cortina Blackout;Casa;139.9;80.0;True;1
+19;Edredom Casal;Casa;199.9;120.0;True;1
+20;Travesseiro;Casa;59.9;35.0;True;1
+21;Geladeira Frost Free;Eletro;3999.9;2600.0;True;2
+22;Freezer Vertical;Eletro;3299.9;2200.0;True;2
+23;Fogão 5 Bocas;Eletro;1699.9;1100.0;True;2
+24;Cooktop 4 Bocas;Eletro;999.9;650.0;True;2
+25;Forno Elétrico;Eletro;699.9;450.0;True;2
+26;Micro-ondas;Eletro;799.9;500.0;True;2
+27;Máquina de Lavar;Eletro;2799.9;1800.0;True;2
+28;Secadora de Roupas;Eletro;3399.9;2200.0;True;2
+29;Lava e Seca;Eletro;4299.9;2800.0;True;2
+30;Adega Climatizada;Eletro;1399.9;900.0;True;2
+31;Purificador de Água;Eletro;699.9;450.0;True;2
+32;Bebedouro;Eletro;799.9;500.0;True;2
+33;Ar Condicionado 9000 BTUs;Eletro;1999.9;1300.0;True;2
+34;Ar Condicionado 12000 BTUs;Eletro;2299.9;1500.0;True;2
+35;Smart TV 43 Polegadas;Eletro;2499.9;1700.0;True;2
+36;Smart TV 50 Polegadas;Eletro;3099.9;2100.0;True;2
+37;Smart TV 65 Polegadas;Eletro;4799.9;3300.0;True;2
+38;Soundbar;Eletro;699.9;450.0;True;2
+39;Caixa de Som Bluetooth;Eletro;299.9;180.0;True;2
+40;Home Theater;Eletro;1399.9;900.0;True;2
+41;Notebook Dell Inspiron;Tecnologia;3999.9;2800.0;True;3
+42;Notebook Lenovo IdeaPad;Tecnologia;3899.9;2700.0;True;3
+43;Notebook Acer Aspire;Tecnologia;3799.9;2600.0;True;3
+44;MacBook Air;Tecnologia;7999.9;6000.0;True;3
+45;Desktop Gamer;Tecnologia;6499.9;4500.0;True;3
+46;Monitor 24 Polegadas;Tecnologia;999.9;650.0;True;3
+47;Monitor 27 Polegadas;Tecnologia;1399.9;950.0;True;3
+48;Mouse Logitech M170;Tecnologia;79.9;45.0;True;3
+49;Mouse Gamer Redragon;Tecnologia;169.9;100.0;True;3
+50;Teclado Mecânico;Tecnologia;299.9;180.0;True;3
+51;Headset Gamer;Tecnologia;249.9;150.0;True;3
+52;Webcam Full HD;Tecnologia;299.9;180.0;True;3
+53;SSD 1TB;Tecnologia;549.9;350.0;True;3
+54;HD Externo 2TB;Tecnologia;549.9;350.0;True;3
+55;Pendrive 64GB;Tecnologia;59.9;35.0;True;3
+56;Roteador Wi-Fi;Tecnologia;299.9;180.0;True;3
+57;Impressora Multifuncional;Tecnologia;999.9;650.0;True;3
+58;Tablet Samsung;Tecnologia;1399.9;900.0;True;3
+59;Smartwatch;Tecnologia;599.9;350.0;True;3
+60;Caixa de Som JBL;Tecnologia;649.9;400.0;True;3
+61;Mesa Escritório;Escritório;549.9;350.0;True;4
+62;Mesa em L;Escritório;799.9;500.0;True;4
+63;Cadeira Ergonômica;Escritório;899.9;550.0;True;4
+64;Cadeira Presidente;Escritório;749.9;450.0;True;4
+65;Gaveteiro;Escritório;299.9;180.0;True;4
+66;Armário de Escritório;Escritório;749.9;450.0;True;4
+67;Estante de Livros;Escritório;499.9;300.0;True;4
+68;Luminária de Mesa;Escritório;119.9;70.0;True;4
+69;Suporte para Notebook;Escritório;119.9;70.0;True;4
+70;Suporte para Monitor;Escritório;149.9;90.0;True;4
+71;Grampeador;Escritório;29.9;15.0;True;4
+72;Perfurador de Papel;Escritório;34.9;20.0;True;4
+73;Calculadora Financeira;Escritório;299.9;180.0;True;4
+74;Quadro Branco;Escritório;169.9;100.0;True;4
+75;Agenda Executiva;Escritório;59.9;30.0;True;4
+76;Organizador de Mesa;Escritório;44.9;25.0;True;4
+77;Arquivo Suspenso;Escritório;54.9;30.0;True;4
+78;Pasta Sanfonada;Escritório;34.9;20.0;True;4
+79;Kit Canetas;Escritório;29.9;15.0;True;4
+80;Mouse Pad;Escritório;39.9;20.0;True;4

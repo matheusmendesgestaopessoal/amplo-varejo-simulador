@@ -1,0 +1,7 @@
+﻿id_evento;nome_evento;tipo;categoria;regiao;probabilidade;impacto_vendas;duracao_dias;prioridade;ativo;descricao
+1;Entrada de Concorrente;Mercado;Todas;Sudeste;0.03;-0.2;90;3;True;Novo concorrente reduz as vendas da região.
+2;Campanha Nacional;Marketing;Todas;Todas;0.02;0.25;30;2;True;Campanha nacional aumenta as vendas.
+3;Problema Logístico;Operacional;Todas;Sul;0.02;-0.15;20;4;True;Atrasos reduzem a quantidade de pedidos.
+4;Produto Viral;Mercado;Tecnologia;Todas;0.01;0.4;45;5;True;Produto ganha destaque e aumenta as vendas.
+5;Ruptura de Estoque;Operacional;Eletro;Nordeste;0.02;-0.3;15;5;True;Falta de estoque reduz as vendas.
+6;Crise Econômica Regional;Econômico;Todas;Centro-Oeste;0.01;-0.25;120;5;True;Redução temporária do consumo.

@@ -1,0 +1,13 @@
+﻿mes;nome_mes;indice_vendas;classificacao;descricao
+1;Janeiro;0.95;Baixa;Pós-Natal, redução no consumo.
+2;Fevereiro;0.9;Baixa;Mês mais curto e menor volume de vendas.
+3;Março;1.0;Normal;Mercado estabilizado.
+4;Abril;0.98;Normal;Pequena desaceleração.
+5;Maio;1.1;Alta;Aumento devido ao Dia das Mães.
+6;Junho;1.03;Normal;Estabilidade.
+7;Julho;1.05;Normal;Férias escolares.
+8;Agosto;0.97;Normal;Pequena retração.
+9;Setembro;1.02;Normal;Retomada gradual.
+10;Outubro;1.08;Alta;Dia das Crianças.
+11;Novembro;1.2;Muito Alta;Black Friday.
+12;Dezembro;1.35;Muito Alta;Natal e compras de fim de ano.
