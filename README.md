@@ -183,26 +183,20 @@ O dashboard é composto por 4 páginas, cada uma direcionada a uma perspectiva d
 As métricas foram construídas utilizando DAX diretamente sobre o modelo dimensional, permitindo análises dinâmicas por período, região, loja e demais dimensões, sem depender de dados previamente agregados em SQL.
 
 <p align="center">
-<table>
-  <tr>
-    <td width="50%" valign="top">
-      <img 
-        src="imagens/Captura de tela 2026-08-13 122324.png"
-        width="100%"
-        height="220"
-      />
-    </td>
-    <td width="50%" valign="top">
-      <img 
-        src="imagens/Captura de tela 2026-08-18 120625.png"
-        width="100%"
-        height="220"
-      />
-    </td>
-  </tr>
-</table>
+  <img 
+    src="imagens/Captura de tela 2026-08-13 122324.png"
+    width="100%"
+  />
+</p>
 
 📊 Acessar Dashboard Interativo: [Dashboard Gerencial - Amplo Varejo](https://app.powerbi.com/groups/me/reports/6c99b626-4f11-4e71-afde-18bc470d4392?ctid=da49a844-e2e3-40af-86a6-c3819d704f49&pbi_source=linkShare&bookmarkGuid=72150cd0-17b6-42bf-8068-ace9ab46231c)
+
+<p align="center">
+  <img 
+    src="imagens/Captura de tela 2026-08-18 120625.png"
+    width="100%"
+  />
+</p>
 
 As principais métricas utilizadas no dashboard, juntamente com suas respectivas regras de cálculo, estão documentadas em [Medidas DAX](documentos/dax.md)
 
