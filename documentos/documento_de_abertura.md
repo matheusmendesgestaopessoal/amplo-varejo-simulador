@@ -28,7 +28,7 @@ Cada unidade possui sua própria operação comercial, gerando diariamente dados
 ---
 
 ## 2. Contexto do Projeto
-A Amplo Varejo S.A. identificou uma queda aproximada de 12% no faturamento nos últimos seis meses, mas a diretoria não consegue identificar claramente onde essa redução está concentrada ou quais fatores podem estar relacionados ao resultado.
+A Amplo Varejo S.A. identificou uma queda aproximada de 12% no faturamento anual, mas a diretoria não consegue identificar claramente onde essa redução está concentrada ou quais fatores podem estar relacionados ao resultado.
 
 Diante desse cenário, o projeto propõe a construção de uma estrutura de dados capaz de integrar as informações da operação e permitir uma análise detalhada do desempenho da empresa, considerando regiões, lojas, produtos, categorias, vendedores, metas e períodos.
 
@@ -37,7 +37,7 @@ A partir dessa análise, busca-se identificar os principais pontos de impacto e 
 ---
 
 ## 3. Problema de Negócio
-A diretoria da Amplo Varejo S.A. identificou uma queda aproximada de 12% no faturamento durante os últimos seis meses.
+A diretoria da Amplo Varejo S.A. identificou uma queda aproximada de 12% no faturamento anual.
 
 Apesar de possuir dados sobre vendas, lojas, regiões, produtos, vendedores e metas, a empresa não consegue identificar claramente:
 - onde a queda está concentrada;

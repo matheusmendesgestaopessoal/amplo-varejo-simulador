@@ -1,5 +1,12 @@
-# CATALOGO PRODUTOS
+# PESO DE FREQUÊNCIA DE COMPRA POR CATEGORIA
+PESO_CATEGORIA = {
+    "Casa": 0.40,
+    "Escritório": 0.30,
+    "Eletro": 0.18,
+    "Tecnologia": 0.12,
+}
 
+# CATALOGO PRODUTOS
 PRODUTOS = {
     "Casa": [
         {"nome": "Jogo de Panelas", "custo": 180.00, "preco_venda": 299.90},

@@ -6,6 +6,18 @@ def gerar_movimentacao_estoque(dados):
 
     df_movimentacoes = []
     id_movimentacao = 1
+    id_calendario_inicial = dados.calendario.sort_values("data").iloc[0]["id_calendario"]
+
+    for i, estoque in dados.estoque.iterrows():
+        df_movimentacoes.append({
+            "id_movimentacao": id_movimentacao,
+            "id_estoque": estoque["id_estoque"],
+            "id_item_pedido": None,
+            "tipo_movimentacao": "entrada",
+            "quantidade": estoque["quantidade"],
+            "id_calendario": id_calendario_inicial
+        })
+        id_movimentacao += 1
 
     for i, item in dados.itens_pedido.iterrows():
 

@@ -1,7 +1,7 @@
 ﻿id_campanha;nome;tipo;mes_inicio;dia_inicio;mes_fim;dia_fim;desconto_percentual;multiplicador_vendas;categoria;prioridade;ativo;descricao
-1;Volta às Aulas;Sazonal;1;15;2;15;15;1.25;Escritório;2;True;Campanha voltada para produtos escolares e escritório.
-2;Dia das Mães;Data Comemorativa;5;1;5;14;10;1.3;Casa;2;True;Campanha especial para presentes do Dia das Mães.
-3;Liquidação de Inverno;Liquidação;7;1;7;15;20;1.2;Todas;1;True;Liquidação nacional para renovação de estoque.
-4;Dia das Crianças;Data Comemorativa;10;1;10;12;15;1.25;Tecnologia;2;True;Campanha para produtos infantis e eletrônicos.
-5;Black Friday;Promoção;11;20;11;30;30;1.8;Todas;5;True;Maior campanha promocional do ano.
-6;Natal;Data Comemorativa;12;1;12;24;20;1.4;Todas;4;True;Campanha de Natal.
+1;Volta às Aulas;Sazonal;1;15;2;15;15;1.1;Escritório;2;True;Campanha voltada para produtos escolares e escritório.
+2;Dia das Mães;Data Comemorativa;5;1;5;14;10;1.1;Casa;2;True;Campanha especial para presentes do Dia das Mães.
+3;Liquidação de Inverno;Liquidação;7;1;7;15;20;1.1;Todas;1;True;Liquidação nacional para renovação de estoque.
+4;Dia das Crianças;Data Comemorativa;10;1;10;12;15;1.1;Tecnologia;2;True;Campanha para produtos infantis e eletrônicos.
+5;Black Friday;Promoção;11;20;11;30;30;1.2;Todas;5;True;Maior campanha promocional do ano.
+6;Natal;Data Comemorativa;12;1;12;24;20;1.2;Todas;4;True;Campanha de Natal.

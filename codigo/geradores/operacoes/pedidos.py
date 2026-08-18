@@ -7,32 +7,39 @@ def gerar_pedidos(dados):
 
     df_pedidos = []
     id_pedido = 1
+    lojas_com_regiao = dados.lojas.merge(dados.estados[["id_estado", "regiao"]], on="id_estado")
+    regioes = lojas_com_regiao["regiao"].unique()
 
     for i, linha in dados.calendario.iterrows():
+        data = linha["data"]
 
-        quantidade_pedidos = calcular_demanda_dia(dados, linha["data"])
+        for regiao in regioes:
+            quantidade_pedidos = calcular_demanda_dia(dados, data, regiao)
+            lojas_regiao = lojas_com_regiao[lojas_com_regiao["regiao"] == regiao]
 
-        for i in range(quantidade_pedidos):
+            for i in range(quantidade_pedidos):
 
-            loja = dados.lojas.sample(1).iloc[0]
-            clientes_loja = dados.clientes[dados.clientes["id_loja"] == loja["id_loja"]]
-            vendedores_loja = dados.vendedores[dados.vendedores["id_loja"] == loja["id_loja"]]
+                loja = lojas_regiao.sample(1).iloc[0]
+                clientes_loja = dados.clientes[dados.clientes["id_loja"] == loja["id_loja"]]
+                vendedores_loja = dados.vendedores[dados.vendedores["id_loja"] == loja["id_loja"]]
 
-            cliente = clientes_loja.sample(1).iloc[0]
-            vendedor = vendedores_loja.sample(1).iloc[0]
+                if clientes_loja.empty or vendedores_loja.empty:
+                    continue
+                
+                cliente = clientes_loja.sample(1).iloc[0]
+                vendedor = vendedores_loja.sample(1).iloc[0]
 
-            status = random.choices(["pendente", "pago", "cancelado", "enviado"],
-                                    weights=[5, 85, 5, 5],k=1)[0]
+                status = random.choices(["pendente", "pago", "cancelado", "enviado"],
+                                        weights=[5, 81, 9, 5],k=1)[0]
 
-            df_pedidos.append({
-                "id_pedido": id_pedido,
-                "id_calendario": linha["id_calendario"],
-                "id_cliente": cliente["id_cliente"],
-                "id_vendedor": vendedor["id_vendedor"],
-                "id_loja": loja["id_loja"],
-                "status": status })
-            id_pedido += 1
-
+                df_pedidos.append({
+                    "id_pedido": id_pedido,
+                    "id_calendario": linha["id_calendario"],
+                    "id_cliente": cliente["id_cliente"],
+                    "id_vendedor": vendedor["id_vendedor"],
+                    "id_loja": loja["id_loja"],
+                    "status": status })
+                id_pedido += 1
     return pd.DataFrame(df_pedidos)
 
 if __name__ == "__main__":

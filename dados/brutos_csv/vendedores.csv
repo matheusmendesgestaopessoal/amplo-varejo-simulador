@@ -1,101 +1,101 @@
 ﻿id_vendedor;nome_vendedor;cpf_vendedor;email;data_admissao;id_loja
-1;João Miguel Aparecida;268.590.174-49;rrios@example.org;2023-10-08;1
-2;Sabrina Rodrigues;256.483.109-51;cardosoleonardo@example.com;2025-02-09;1
-3;Isaac Aragão;560.382.417-44;nda-cruz@example.org;2025-04-20;2
-4;Josué da Mota;143.579.620-99;marcos-viniciuspastor@example.net;2019-02-19;2
-5;Dante Cardoso;604.193.827-04;aragaogabrielly@example.com;2025-07-15;3
-6;Igor Câmara;567.043.819-10;emanuella45@example.net;2023-09-19;3
-7;Liam Aragão;208.759.134-23;guilherme62@example.com;2024-12-17;4
-8;Dr. Kevin Camargo;102.765.489-49;hadassaborges@example.org;2018-10-28;4
-9;Bárbara Aparecida;938.570.421-41;maria-julia38@example.net;2019-03-21;5
-10;Davi Lucas Correia;684.972.510-67;eazevedo@example.com;2025-07-07;5
-11;Alícia Cavalcante;942.708.563-00;rmonteiro@example.net;2025-05-04;6
-12;Enzo Macedo;869.342.105-06;pedro-henriquepastor@example.net;2016-10-03;6
-13;Mirella Montenegro;849.612.730-31;pietroaparecida@example.net;2020-08-28;7
-14;Asafe Porto;249.701.865-02;rezendececilia@example.net;2022-11-19;7
-15;Sr. Yan da Luz;264.905.871-49;theoalmeida@example.net;2026-07-12;8
-16;Mateus Rezende;483.671.290-40;ccassiano@example.org;2023-12-27;8
-17;Sr. Rhavi Borges;729.165.380-03;asafe42@example.org;2023-04-24;9
-18;Esther Azevedo;216.835.094-98;pereiraguilherme@example.com;2023-02-20;9
-19;Daniel Albuquerque;023.698.145-51;vieiraheitor@example.net;2022-05-12;10
-20;Srta. Gabriela Carvalho;792.863.105-95;yasmin10@example.org;2018-05-09;10
-21;Laís Caldeira;862.019.537-95;claricerezende@example.com;2020-06-12;11
-22;Maria Isis Rodrigues;172.096.854-30;isaac51@example.org;2019-03-05;11
-23;Paulo Moura;526.198.470-01;melina54@example.net;2017-11-26;12
-24;Dom Vasconcelos;259.368.041-51;joao-vitor15@example.org;2019-09-13;12
-25;Maria Dias;769.534.208-47;jleao@example.com;2025-10-08;13
-26;Sabrina Nascimento;836.049.127-50;eloaabreu@example.org;2016-11-23;13
-27;Dr. Davi Luiz Camargo;058.612.397-03;ottocamara@example.org;2018-12-13;14
-28;Diego Garcia;065.978.413-01;casa-grandeemanuelly@example.org;2017-12-12;14
-29;Breno Albuquerque;962.813.574-00;ujesus@example.com;2024-02-27;15
-30;Alice da Paz;120.574.986-11;goncalveslavinia@example.net;2024-05-01;15
-31;Joana Oliveira;843.712.095-05;otavioguerra@example.net;2017-07-22;16
-32;Matteo Cirino;817.326.405-80;lais34@example.org;2018-05-19;16
-33;Luiz Miguel Pereira;503.214.876-80;saana-luiza@example.org;2025-12-28;17
-34;Arthur Gabriel da Costa;410.937.685-84;antony54@example.com;2025-02-11;17
-35;Levi Sá;652.890.714-58;beniciopastor@example.com;2024-09-19;18
-36;Ana Carolina da Rocha;297.056.148-49;melissamoreira@example.net;2025-07-04;18
-37;Dr. Davi Lucca Fernandes;456.083.172-62;maysabrito@example.org;2019-01-12;19
-38;Yan Viana;179.328.506-30;emanuella51@example.org;2019-08-27;19
-39;Sra. Joana Melo;472.093.618-04;njesus@example.net;2018-10-19;20
-40;Maria Clara Moraes;958.073.416-00;sousasamuel@example.net;2026-02-22;20
-41;Eduardo Caldeira;462.930.157-70;ferreiramaria-flor@example.com;2025-09-16;21
-42;Bianca Barros;216.738.540-44;caroline97@example.org;2024-09-15;21
-43;João Lucas Marques;082.315.769-59;zaraujo@example.com;2023-12-03;22
-44;Hadassa Aragão;306.271.895-12;jade14@example.net;2024-04-14;22
-45;Valentina Cunha;420.738.965-29;larissa77@example.net;2019-05-04;23
-46;Sra. Maria Sales;960.481.723-03;anna-liz02@example.com;2019-02-11;23
-47;Luiza Camargo;640.319.782-78;laurasampaio@example.net;2019-06-07;24
-48;Maria Flor Cunha;538.940.216-24;ana-liz81@example.net;2025-02-04;24
-49;Mirella Jesus;658.943.207-47;xlima@example.org;2026-01-03;25
-50;Elisa Nogueira;694.853.270-56;caldeirafelipe@example.net;2016-11-19;25
-51;Maria Sophia Caldeira;781.534.029-60;ocunha@example.com;2025-12-27;26
-52;Bruna Costa;715.639.408-84;nataliada-paz@example.com;2021-02-07;26
-53;Oliver Rocha;306.875.192-68;luigi96@example.org;2026-01-22;27
-54;Evelyn Pimenta;609.153.742-34;luizada-conceicao@example.org;2018-10-02;27
-55;Bárbara Pires;964.871.203-40;alvesluiza@example.org;2019-03-18;28
-56;Yago Barros;960.581.324-60;rhavirezende@example.org;2021-08-28;28
-57;Vitor Gabriel da Cruz;640.271.593-06;marquesjoaquim@example.org;2019-01-07;29
-58;João Cirino;197.628.304-31;jesusdiogo@example.com;2017-11-26;29
-59;Otto Garcia;572.180.694-01;fernandescecilia@example.com;2025-11-25;30
-60;Emanuel Moreira;413.906.527-34;emanuellacamargo@example.org;2017-02-08;30
-61;Sr. Henry Barros;248.310.965-98;zsouza@example.com;2024-01-09;31
-62;Maria Liz Correia;423.568.701-80;noahsilveira@example.com;2023-12-24;31
-63;Mariana Peixoto;451.938.726-46;davi-lucas72@example.org;2025-04-21;32
-64;Nicolas da Rocha;985.307.162-21;elisada-cruz@example.org;2020-04-07;32
-65;Maria Fernanda Freitas;251.096.847-58;ravi-lucca81@example.com;2021-06-06;33
-66;Hadassa Moura;314.570.928-32;antonella33@example.org;2025-01-03;33
-67;Ana Clara da Mota;618.374.295-37;asafeda-paz@example.org;2026-05-26;34
-68;Ravi da Paz;260.487.935-29;melogabriel@example.com;2021-09-22;34
-69;Liam Sá;561.423.079-34;pmonteiro@example.org;2022-12-19;35
-70;Bella Alves;308.172.954-88;correiaemilly@example.net;2016-09-08;35
-71;Srta. Joana Viana;019.276.438-13;luigi29@example.com;2018-08-24;36
-72;Liam Casa Grande;967.504.123-43;uda-mota@example.net;2024-10-25;36
-73;Caleb da Luz;415.987.036-84;cunhaapollo@example.net;2020-04-13;37
-74;Maria Isis Correia;715.849.263-09;mirellacaldeira@example.org;2020-04-29;37
-75;Dr. Rael Pinto;836.102.957-59;casa-grandemaria-eduarda@example.org;2018-06-24;38
-76;Antony Marques;240.358.619-60;novaesenzo-gabriel@example.com;2023-12-12;38
-77;Dom Gonçalves;865.032.497-56;bsiqueira@example.org;2021-08-09;39
-78;Nathan Cavalcanti;947.830.625-10;camaraian@example.org;2017-03-18;39
-79;Juliana da Costa;189.274.356-64;camaravitor-gabriel@example.com;2020-02-08;40
-80;Gustavo Ferreira;490.718.325-97;luigidias@example.net;2017-10-14;40
-81;Francisco Farias;720.536.894-47;eduardo20@example.net;2022-08-06;41
-82;Agatha Mendonça;371.064.259-07;gabrielbrito@example.com;2022-04-25;41
-83;Rebeca Sousa;584.932.710-04;ana-julia58@example.net;2024-11-04;42
-84;João Gabriel Rodrigues;802.315.749-32;lorenafonseca@example.org;2018-02-14;42
-85;Marcos Vinicius Porto;147.892.653-82;tda-mota@example.org;2017-04-21;43
-86;Stephany Sampaio;516.734.280-53;monteirojuan@example.com;2019-02-28;43
-87;Lavínia Pinto;824.390.571-50;cunhaalexia@example.net;2018-09-15;44
-88;Samuel das Neves;065.798.241-58;milena82@example.org;2021-03-17;44
-89;Gael Henrique Lopes;914.803.256-51;gguerra@example.com;2021-09-28;45
-90;Luana Cavalcanti;965.841.730-20;mnovaes@example.com;2021-10-17;45
-91;Kaique Nunes;782.360.195-86;milena57@example.com;2023-11-18;46
-92;Mariah Jesus;708.639.125-59;oliviafreitas@example.org;2025-11-05;46
-93;Laís Aragão;629.503.478-00;da-mataheitor@example.com;2018-04-06;47
-94;Rodrigo Sales;501.946.823-15;mayacarvalho@example.org;2019-03-28;48
-95;Leonardo Silveira;073.965.124-25;da-cruznicolas@example.org;2024-08-30;49
-96;Thiago Macedo;601.235.784-26;nribeiro@example.org;2023-12-17;50
-97;Antônio Cirino;239.456.187-46;amanda19@example.com;2022-11-08;51
-98;Kamilly Gonçalves;617.398.042-87;nunesheloisa@example.org;2026-06-25;52
-99;Arthur Gabriel Ramos;970.213.458-79;elisamontenegro@example.net;2020-03-10;53
-100;Dr. Théo Azevedo;295.764.810-58;ana-julia61@example.net;2024-10-31;54
+1;Marina Nogueira;908.621.453-33;manuella37@example.net;2018-04-23;1
+2;Benjamin Costa;803.954.712-14;alice64@example.net;2023-05-31;1
+3;Anna Liz Câmara;729.853.641-91;vieiraalicia@example.net;2017-04-22;2
+4;Miguel Porto;604.298.537-00;allana96@example.org;2017-08-30;2
+5;Nicolas Pimenta;796.413.285-73;luiz-felipeviana@example.net;2019-03-29;3
+6;Maria Júlia Barros;371.826.904-03;mda-mata@example.org;2018-04-01;3
+7;Gabrielly Monteiro;074.826.153-26;britoaylla@example.com;2019-08-28;4
+8;Arthur Gabriel Lima;931.608.427-03;yan50@example.com;2019-10-10;4
+9;Yuri Moreira;815.327.406-62;saraharagao@example.org;2022-04-05;5
+10;Henry das Neves;483.921.560-05;kaique70@example.org;2017-11-05;5
+11;Anna Liz Costela;546.798.301-66;pimentahelena@example.com;2026-04-07;6
+12;Maria Cecília Pires;054.612.793-25;brunafonseca@example.net;2023-10-30;6
+13;Lucas Freitas;296.130.578-03;luana39@example.org;2023-01-03;7
+14;Mariah Lima;270.163.859-30;rhavicunha@example.net;2017-12-09;7
+15;Dr. Calebe Vieira;234.918.506-06;oliviacavalcante@example.net;2022-04-07;8
+16;Beatriz Rodrigues;307.286.541-80;felipebrito@example.net;2023-03-15;8
+17;Davi Siqueira;471.295.863-46;randrade@example.net;2017-01-12;9
+18;Srta. Ana Cirino;379.542.860-29;sabrinaaragao@example.org;2019-08-31;9
+19;Bianca Cirino;463.985.271-19;lunamoreira@example.org;2020-07-17;10
+20;Stephany Aragão;169.403.725-80;camargobruna@example.net;2023-11-01;10
+21;Letícia Souza;305.624.879-56;larissa36@example.com;2018-07-04;11
+22;Bernardo Gonçalves;671.920.835-77;garcialuiz-fernando@example.com;2024-02-14;11
+23;Enzo Gabriel Guerra;681.079.235-02;bmoreira@example.com;2023-08-15;12
+24;Ana Liz Aparecida;428.759.130-50;da-rochanicolas@example.net;2019-04-27;12
+25;Samuel Silva;830.264.917-13;da-cruzmateus@example.net;2020-03-30;13
+26;Marcos Vinicius Costa;165.739.402-61;dom15@example.com;2019-12-22;13
+27;José Miguel Monteiro;487.693.021-03;vieirakaique@example.net;2017-03-13;14
+28;Luna Macedo;892.461.735-46;maria-vitoriaferreira@example.net;2018-01-08;14
+29;Luara Macedo;678.532.401-71;stellanascimento@example.net;2022-05-07;15
+30;Olivia Vieira;047.239.158-50;allana52@example.org;2018-03-15;15
+31;Manuella Costela;570.184.963-57;apollomachado@example.com;2025-04-27;16
+32;João Pedro Teixeira;421.857.690-49;cecilia24@example.net;2023-06-07;16
+33;Anthony Gabriel Fernandes;561.073.498-39;julia61@example.net;2022-06-07;17
+34;Ana Clara Fonseca;248.931.750-41;garciatheodoro@example.net;2022-01-06;17
+35;Davi Miguel Cassiano;548.730.961-20;vporto@example.org;2026-06-04;18
+36;Brenda Nogueira;208.941.753-60;da-motanoah@example.com;2022-03-09;18
+37;Srta. Isabela Fonseca;046.581.297-01;wfernandes@example.net;2017-02-16;19
+38;Hadassa Mendes;547.390.128-04;da-cunhabruna@example.com;2024-01-06;19
+39;Marcela Correia;318.540.726-17;raul20@example.net;2018-05-15;20
+40;Caio da Cruz;153.472.068-53;ester12@example.org;2016-10-14;20
+41;João Felipe Borges;670.452.918-76;upimenta@example.org;2022-12-28;21
+42;Raquel Cunha;712.805.436-71;julianaporto@example.org;2017-02-24;21
+43;Ian Teixeira;416.372.908-96;otaviosouza@example.org;2020-05-29;22
+44;Sra. Beatriz Novaes;568.139.074-84;nathanda-mota@example.com;2023-04-02;22
+45;Gabrielly Cavalcanti;385.047.916-10;nascimentoesther@example.org;2018-08-09;23
+46;Melina Cirino;538.140.729-79;brendadias@example.net;2024-10-26;23
+47;Dra. Ana Júlia Cunha;107.942.685-01;agathabrito@example.com;2020-03-09;24
+48;Dr. Davi Luiz Abreu;270.543.186-17;ufreitas@example.com;2024-12-15;24
+49;Isaque Fogaça;156.732.894-64;falmeida@example.com;2016-12-19;25
+50;Gabriela Aragão;936.028.754-74;rodriguesjoao-lucas@example.org;2024-03-16;25
+51;Sra. Stephany da Rocha;975.420.863-83;alexandrecamara@example.org;2022-01-22;26
+52;Srta. Luara Azevedo;145.620.983-33;ana-clarada-paz@example.net;2022-04-23;26
+53;Liz Albuquerque;014.972.368-78;oalbuquerque@example.net;2017-12-27;27
+54;Henrique Campos;983.041.756-57;ottosiqueira@example.net;2020-09-25;27
+55;Srta. Isabelly Silva;573.612.849-73;mariana53@example.org;2021-10-24;28
+56;Ana Clara Ribeiro;041.562.387-17;caldeiraanthony@example.net;2017-06-03;28
+57;Srta. Maria Flor Viana;035.942.187-32;davi43@example.net;2018-07-25;29
+58;Théo Porto;467.135.092-07;brayanpinto@example.net;2023-03-25;29
+59;Sr. Ian Oliveira;724.183.659-64;marianovais@example.com;2021-11-20;30
+60;Sra. Melissa Ferreira;568.940.217-67;tabreu@example.net;2022-02-09;30
+61;Heitor Rios;518.962.340-89;ecardoso@example.com;2019-05-04;31
+62;Alana da Mata;254.910.638-51;pmonteiro@example.org;2023-10-05;31
+63;Dom Guerra;170.859.246-67;isouza@example.com;2019-10-26;32
+64;Cauã da Luz;890.612.735-95;lucas-gabriel97@example.net;2022-09-28;32
+65;Lucca Freitas;075.461.389-57;novaisanna-liz@example.net;2018-04-01;33
+66;Ravy Peixoto;804.192.763-78;evelyn01@example.com;2017-11-18;33
+67;Marcelo Martins;935.480.162-51;mlima@example.com;2024-06-18;34
+68;Ana Beatriz da Cruz;763.291.584-28;luiz-miguel95@example.org;2023-08-23;34
+69;Zoe Rocha;068.345.927-92;ayla15@example.com;2020-04-11;35
+70;Juliana Albuquerque;076.582.139-77;juliarodrigues@example.net;2020-04-19;35
+71;Danilo Casa Grande;087.342.956-74;alicia15@example.org;2022-08-07;36
+72;Stella Azevedo;914.826.573-09;znovaes@example.org;2020-04-24;36
+73;Henry Gabriel Machado;291.470.568-94;marianeazevedo@example.com;2019-02-16;37
+74;Maysa Vasconcelos;741.390.865-48;brunafreitas@example.net;2025-03-23;37
+75;Sra. Juliana Barros;210.736.598-95;qsampaio@example.org;2024-09-11;38
+76;Brayan Moraes;495.387.216-91;theo92@example.org;2025-03-11;38
+77;Mariana Alves;432.756.198-37;sofia05@example.com;2020-09-29;39
+78;Sr. Lucas Araújo;193.874.620-13;enrico25@example.org;2024-12-07;39
+79;Vinícius Costa;357.421.896-64;ferreiragael-henrique@example.com;2018-08-25;40
+80;Ana Vitória da Rosa;837.021.456-80;jade36@example.org;2023-10-13;40
+81;Dr. Levi Vasconcelos;923.460.178-50;da-rochasara@example.com;2021-12-11;41
+82;Pietra Nogueira;958.162.304-33;cpacheco@example.org;2021-11-22;41
+83;Sophia Nunes;841.236.507-08;nascimentojose-miguel@example.net;2019-09-15;42
+84;Cauê Correia;702.543.691-70;dcamargo@example.org;2023-11-21;42
+85;Dr. Dom Andrade;482.193.075-79;mendesmaria-eduarda@example.net;2018-06-24;43
+86;Lavínia Barros;356.084.912-89;luizacirino@example.org;2017-01-08;43
+87;Sarah Martins;056.937.824-92;tcorreia@example.net;2024-11-20;44
+88;Caroline da Cruz;954.781.206-85;ramoshadassa@example.net;2021-11-23;44
+89;Kaique Rocha;768.145.309-10;novaisisabela@example.org;2023-10-19;45
+90;Maria Helena Borges;689.210.457-67;raelcunha@example.org;2023-01-11;45
+91;Maria da Cruz;791.283.560-12;mmarques@example.org;2022-08-08;46
+92;Enrico Barbosa;684.513.729-37;zda-conceicao@example.com;2021-04-15;46
+93;Maria Liz da Luz;048.165.329-51;emanuelly74@example.net;2021-02-07;47
+94;Catarina Abreu;261.984.073-22;da-conceicaoluiza@example.net;2022-08-22;48
+95;Davi Lucas Barros;749.506.231-25;yagoporto@example.org;2019-10-14;49
+96;Sabrina Montenegro;793.401.852-50;isabelcaldeira@example.com;2023-11-06;50
+97;Hellena Ribeiro;978.430.265-92;nascimentojoao@example.com;2023-05-15;51
+98;Enrico Moura;258.901.764-20;rezendejoana@example.com;2020-09-20;52
+99;Beatriz Pereira;754.283.916-00;peixotorodrigo@example.net;2019-05-25;53
+100;Davi Lucca Aparecida;712.986.435-46;nrios@example.com;2025-10-08;54

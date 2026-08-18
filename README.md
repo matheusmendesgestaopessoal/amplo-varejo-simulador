@@ -28,7 +28,7 @@
     </td>
     <td width="33%" valign="top">
       <img 
-        src="imagens/Captura%20de%20tela%202026-08-13%20122324.png"
+        src="imagens/Captura de tela 2026-08-18 122230.png"
         width="100%"
         height="220"
       />
@@ -48,14 +48,14 @@ O projeto cobre: definição de regras de negócio → geração de dados sinté
 
 ## O Problema de Negócio
 
-A diretoria da **Amplo Varejo S.A.** identificou uma **queda aproximada de 12% no faturamento** durante os últimos seis meses. Apesar de possuir dados detalhados sobre vendas, lojas, regiões, produtos, vendedores e metas, a empresa não consegue identificar com clareza a causa raiz nem a distribuição dessa perda.
+A diretoria da **Amplo Varejo S.A.** identificou uma **queda aproximada de 12% no faturamento** anual. Apesar de possuir dados detalhados sobre vendas, lojas, regiões, produtos, vendedores e metas, a empresa não consegue identificar com clareza a causa raiz nem a distribuição dessa perda.
 
 ## Pergunta Central do Projeto
 > *"Onde está ocorrendo a queda do faturamento e quais fatores podem estar relacionados a esse comportamento?"*
 
 Essa pergunta orienta todas as etapas de geração, engenharia, transformação e análise dos dados.
 
-## 🔍 Diagnóstico e Lacunas Identificadas
+## Diagnóstico e Lacunas Identificadas
 A análise busca responder às seguintes dúvidas estratégicas da diretoria:
 * **Concentração Geográfica:** Onde a queda está concentrada e quais regiões/lojas apresentaram maior redução?
 * **Mix de Produtos:** Quais categorias e produtos específicos contribuíram para a perda de faturamento?
@@ -82,7 +82,7 @@ Investigar detalhadamente a redução de ~12% no faturamento da Amplo Varejo S.A
 <p align="center">
   <img 
     src="imagens/Diagrama%20em%20branco.png"
-    width="40%"
+    width="100%"
   />
 </p>
 <p align="center">
@@ -122,7 +122,7 @@ Para traduzir as regras de negócio em um ecossistema de software e dados, foram
 - **Automação e Reprodutibilidade:** Controle de aleatoriedade via semente configurável (`SEMENTE_ALEATORIA = 42`) e suporte a múltiplos modos de execução (*desenvolvimento*, *teste* e *produção*).
 - **Integridade e Qualidade:** Implementação de rotinas de validação automática para rastrear registros ausentes, inconsistências dimensionais ou falhas de estoque antes da carga nos ambientes OLTP e DW.
 
-📄 Documento de requisitos do sistema: [Regras de Negócio](documentos/requisitos_do_sistema.md)
+📄 Documento de requisitos do sistema: [Requisitos do Sistema](documentos/requisitos_do_sistema.md)
 
 ### 5. Banco Operacional (OLTP)
 A partir do levantamento de requisitos, o ponto de partida para a criação é o **MER**, organizado em 4 grupos de entidades: Cadastros Mestres, Operações Comerciais, Operações Logísticas e Gestão e Apoio.
@@ -130,7 +130,7 @@ A partir do levantamento de requisitos, o ponto de partida para a criação é o
 <p align="center">
   <img 
     src="imagens/Captura de tela 2026-08-13 121624.png"
-    width="60%"
+    width="100%"
   />
 </p>
 
@@ -139,7 +139,7 @@ A partir do MER, o modelo foi implementado fisicamente em MySQL. O banco `amplo_
 <p align="center">
   <img 
     src="imagens/Captura%20de%20tela%202026-08-13%20142618.png"
-    width="60%"
+    width="100%"
   />
 </p>
 
@@ -166,7 +166,7 @@ Com o OLTP populado e validado, o ETL transforma esses dados operacionais num mo
 <p align="center">
   <img 
     src="imagens/star_schema.png"
-    width="60%"
+    width="100%"
   />
 </p>
 
@@ -176,23 +176,44 @@ O Data Warehouse é abastecido automaticamente a partir do banco OLTP: o ETL lê
 📄 Modelo físico do DW: [`sql/02_star_schema.sql`](sql/02_star_schema.sql)) · código de carga: [`codigo/dw/atualizar_dw.py`](codigo/dw/atualizar_dw.py)
 
 ### 8. Dashboard
-Com o Data Warehouse pronto, os dados ganham vida em um dashboard interativo no Power BI. São 4 páginas, cada uma construída para responder a uma pergunta de negócio específica — da performance de vendas por região à evolução de metas e estoque —, com todas as métricas calculadas em DAX diretamente sobre o modelo dimensional, sem depender de SQL pré-agregado.
+Com o Data Warehouse estruturado, os dados são transformados em informações para tomada de decisão por meio de um dashboard interativo desenvolvido no Power BI.
+
+O dashboard é composto por 4 páginas, cada uma direcionada a uma perspectiva do negócio, permitindo acompanhar indicadores de performance comercial, produtos, clientes, estoque e metas.
+
+As métricas foram construídas utilizando DAX diretamente sobre o modelo dimensional, permitindo análises dinâmicas por período, região, loja e demais dimensões, sem depender de dados previamente agregados em SQL.
 
 <p align="center">
-  <img 
-    src="imagens/Captura de tela 2026-08-13 122324.png"
-    width="60%"
-  />
-</p>
+<table>
+  <tr>
+    <td width="50%" valign="top">
+      <img 
+        src="imagens/Captura de tela 2026-08-13 122324.png"
+        width="100%"
+        height="220"
+      />
+    </td>
+    <td width="50%" valign="top">
+      <img 
+        src="imagens/Captura de tela 2026-08-18 120625.png"
+        width="100%"
+        height="220"
+      />
+    </td>
+  </tr>
+</table>
 
-📄 Todas as páginas e medidas DAX: [`docs/dashboard.md`](docs/dashboard.md)
+📊 Acessar Dashboard Interativo: [Dashboard Gerencial - Amplo Varejo](https://app.powerbi.com/groups/me/reports/6c99b626-4f11-4e71-afde-18bc470d4392?ctid=da49a844-e2e3-40af-86a6-c3819d704f49&pbi_source=linkShare&bookmarkGuid=72150cd0-17b6-42bf-8068-ace9ab46231c)
+
+As principais métricas utilizadas no dashboard, juntamente com suas respectivas regras de cálculo, estão documentadas em [Medidas DAX](documentos/dax.md)
 
 ### 9. Principais Insights
-- `[insight 1 — preencher com achado real do resumo executivo]`
-- `[insight 2]`
-- `[insight 3]`
+- **Taxa de cancelamento acima da meta:** o indicador atingiu 9,8%, significativamente acima da meta empresarial de 3%, representando o principal impacto financeiro identificado na análise.
+- **Baixo giro de estoque:** foram identificados produtos com baixa saída em relação ao volume mantido em estoque, resultando em aproximadamente R$ 357 mil em capital imobilizado e indicando oportunidades de redistribuição, campanhas e revisão de compras.
+- **Lojas abaixo da meta:** um subconjunto de lojas apresentou desempenho comercial abaixo do esperado, com um gap estimado de R$ 273 mil, demandando diagnóstico individual para identificar se a causa está relacionada a fluxo de clientes, conversão, mix, estoque ou desempenho dos vendedores.
 
-📄 Análise completa e recomendações: [`docs/resumo_executivo.md`](docs/resumo_executivo.md)
+> Os três problemas representam um impacto financeiro estimado de R$ 2,1 milhões, direcionando a priorização das ações entre Operações, Estoque e Comercial.
+
+📄 Análise completa e recomendações: [Análise e Recomendações](documentos/acoes_recomendacoes.md)
 
 ---
 
@@ -272,6 +293,7 @@ amplo-varejo/
 ├── docs/
 │   ├── documento_de_abertura.md
 │   ├── regras_de_negocio.md
+│   ├── acoes_recomendacoes.md
 │   └── requisitos_do_sistema.md
 │
 ├── sql/
@@ -290,7 +312,7 @@ amplo-varejo/
 ## Como executar
 
 ```bash
-git clone [link-do-repositorio]
+git clone https://github.com/matheusmendesgestaopessoal/amplo-varejo-simulador.git
 pip install -r requirements.txt
 
 # pipeline completo: geração → validação → CSV → OLTP → DW
@@ -303,5 +325,11 @@ Configurações de volume, período e semente aleatória em `codigo/configuracoe
 
 ## Autor
 
-**Matheus Mendes** — Análise e Desenvolvimento de Sistemas (ADS) · CPA-10 e CPA Pro R (ANBIMA)
-[LinkedIn] · [GitHub]
+**Matheus Mendes** — Estudante de Análise e Desenvolvimento de Sistemas (ADS), com foco em **Dados, Engenharia de Dados e Business Intelligence**.
+
+**Stack:** Python · SQL · MySQL · ETL · Data Warehouse · Power BI · DAX
+
+**Certificações:** CPA-10 · CPA Pro R — ANBIMA 
+
+[LinkedIn](https://www.linkedin.com/in/matheusmendes-finan%C3%A7as/) · [GitHub](https://github.com/matheusmendesgestaopessoal)
+

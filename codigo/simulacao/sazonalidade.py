@@ -75,21 +75,21 @@ def gerar_sazonalidade():
         {
             "mes": 10,
             "nome_mes": "Outubro",
-            "indice_vendas": 1.08,
+            "indice_vendas": 1.03,
             "classificacao": "Alta",
             "descricao": "Dia das Crianças."
         },
         {
             "mes": 11,
             "nome_mes": "Novembro",
-            "indice_vendas": 1.20,
+            "indice_vendas": 1.05,
             "classificacao": "Muito Alta",
             "descricao": "Black Friday."
         },
         {
             "mes": 12,
             "nome_mes": "Dezembro",
-            "indice_vendas": 1.35,
+            "indice_vendas": 1.15,
             "classificacao": "Muito Alta",
             "descricao": "Natal e compras de fim de ano."
         }]

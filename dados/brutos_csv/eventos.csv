@@ -1,7 +1,7 @@
-﻿id_evento;nome_evento;tipo;categoria;regiao;probabilidade;impacto_vendas;duracao_dias;prioridade;ativo;descricao
-1;Entrada de Concorrente;Mercado;Todas;Sudeste;0.03;-0.2;90;3;True;Novo concorrente reduz as vendas da região.
-2;Campanha Nacional;Marketing;Todas;Todas;0.02;0.25;30;2;True;Campanha nacional aumenta as vendas.
-3;Problema Logístico;Operacional;Todas;Sul;0.02;-0.15;20;4;True;Atrasos reduzem a quantidade de pedidos.
-4;Produto Viral;Mercado;Tecnologia;Todas;0.01;0.4;45;5;True;Produto ganha destaque e aumenta as vendas.
-5;Ruptura de Estoque;Operacional;Eletro;Nordeste;0.02;-0.3;15;5;True;Falta de estoque reduz as vendas.
-6;Crise Econômica Regional;Econômico;Todas;Centro-Oeste;0.01;-0.25;120;5;True;Redução temporária do consumo.
+﻿id_evento;nome_evento;tipo;categoria;regiao;mes_inicio;dia_inicio;mes_fim;dia_fim;impacto_vendas;prioridade;ativo;descricao
+1;Entrada de Concorrente;Mercado;Todas;Sudeste;7;1;9;30;0.0;3;True;Novo concorrente reduz as vendas do Sudeste (Jul-Set).
+2;Campanha Nacional;Marketing;Todas;Todas;6;1;6;15;0.25;2;True;Campanha nacional aumenta vendas em Junho (fora do período de queda).
+3;Problema Logístico;Operacional;Todas;Sul;10;1;10;20;-0.15;4;True;Atrasos reduzem pedidos no Sul em Outubro.
+4;Produto Viral;Mercado;Tecnologia;Todas;4;1;4;15;0.15;5;True;Produto viraliza em Tecnologia, em Abril (fora do período de queda).
+5;Ruptura de Estoque;Operacional;Eletro;Nordeste;9;1;9;15;0.0;5;True;Falta de estoque reduz vendas de Eletro no Nordeste em Setembro.
+6;Crise Econômica Regional;Econômico;Todas;Centro-Oeste;8;1;11;30;-0.1;5;True;Redução de consumo no Centro-Oeste (Ago-Nov).
