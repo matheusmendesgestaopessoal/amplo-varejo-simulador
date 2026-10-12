@@ -325,5 +325,5 @@ Configurações de volume, período e semente aleatória em `codigo/configuracoe
 
 **Certificações:** CPA-10 · CPA Pro R — ANBIMA 
 
-[LinkedIn](https://www.linkedin.com/in/matheusmendes-finan%C3%A7as/) · [GitHub](https://github.com/matheusmendesgestaopessoal)
+[LinkedIn]((https://www.linkedin.com/in/matheusmendes-dados/) · [GitHub](https://github.com/matheusmendesgestaopessoal)
 
