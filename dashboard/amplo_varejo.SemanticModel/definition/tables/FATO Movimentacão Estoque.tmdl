@@ -1,0 +1,76 @@
+table 'FATO Movimentacão Estoque'
+	lineageTag: 791c7274-9c1e-485a-9d48-77ef14daed69
+
+	column sk_movimentacao
+		dataType: int64
+		formatString: 0
+		lineageTag: 36353076-0a02-4825-8a53-6926040f1c01
+		summarizeBy: sum
+		sourceColumn: sk_movimentacao
+
+		annotation SummarizationSetBy = Automatic
+
+	column sk_calendario
+		dataType: int64
+		formatString: 0
+		lineageTag: 57cd7a2d-cf0b-4677-8b12-a7652e58bd6a
+		summarizeBy: none
+		sourceColumn: sk_calendario
+
+		annotation SummarizationSetBy = Automatic
+
+	column sk_loja
+		dataType: int64
+		formatString: 0
+		lineageTag: 1f869c10-b711-4f7f-ad0b-9402e18055dd
+		summarizeBy: none
+		sourceColumn: sk_loja
+
+		annotation SummarizationSetBy = Automatic
+
+	column sk_produto
+		dataType: int64
+		formatString: 0
+		lineageTag: b958ad60-5e87-433f-9d32-5370761bce93
+		summarizeBy: none
+		sourceColumn: sk_produto
+
+		annotation SummarizationSetBy = Automatic
+
+	column id_item_pedido
+		dataType: int64
+		formatString: 0
+		lineageTag: 23a609e2-06e7-4b01-8b14-1949dcb4f344
+		summarizeBy: sum
+		sourceColumn: id_item_pedido
+
+		annotation SummarizationSetBy = Automatic
+
+	column tipo_movimentacao
+		dataType: string
+		lineageTag: f51de72f-d2fd-4ce4-83e8-10eed75ce9fa
+		summarizeBy: none
+		sourceColumn: tipo_movimentacao
+
+		annotation SummarizationSetBy = Automatic
+
+	column quantidade
+		dataType: int64
+		formatString: 0
+		lineageTag: c365be10-c8ec-4a23-ab42-531c6a1af542
+		summarizeBy: sum
+		sourceColumn: quantidade
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'FATO Movimentacão Estoque' = m
+		mode: import
+		source =
+				let
+				  Origem = MySQL.Database("localhost", "amplo_varejo_dw"),
+				  #"Navegação 1" = Origem{[Schema = "amplo_varejo_dw", Item = "fato_movimentacao_estoque"]}[Data]
+				in
+				  #"Navegação 1"
+
+	annotation PBI_ResultType = Table
+

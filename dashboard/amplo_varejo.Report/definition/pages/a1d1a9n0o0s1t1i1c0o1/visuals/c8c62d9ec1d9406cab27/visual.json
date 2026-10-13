@@ -1,0 +1,67 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.13.0/schema.json",
+  "name": "c8c62d9ec1d9406cab27",
+  "position": {
+    "x": 693,
+    "y": 3896,
+    "z": 11800,
+    "height": 150,
+    "width": 533,
+    "tabOrder": 11800
+  },
+  "visual": {
+    "visualType": "textbox",
+    "objects": {
+      "general": [
+        {
+          "properties": {
+            "paragraphs": [
+              {
+                "textRuns": [
+                  {
+                    "value": "É capital parado em itens caros (MacBook, Desktop Gamer, TVs, notebooks), que ocupa espaço e perde valor.",
+                    "textStyle": {
+                      "fontSize": "11pt",
+                      "color": "#3F3F3F",
+                      "fontFamily": "Segoe UI"
+                    }
+                  }
+                ],
+                "horizontalTextAlignment": "left"
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "Como o excesso está concentrado em poucos produtos, a ação é dirigida e pode começar já.",
+                    "textStyle": {
+                      "fontSize": "11pt",
+                      "color": "#3F3F3F",
+                      "fontFamily": "Segoe UI"
+                    }
+                  }
+                ],
+                "horizontalTextAlignment": "left"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "visualContainerObjects": {
+      "background": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

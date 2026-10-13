@@ -2,7 +2,5 @@ pandas
 numpy
 faker
 python-dotenv
-tqdm
 sqlalchemy
-psycopg2-binary
-pathlib
+pymysql

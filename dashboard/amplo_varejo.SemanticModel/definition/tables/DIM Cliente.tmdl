@@ -1,0 +1,64 @@
+table 'DIM Cliente'
+	lineageTag: 04100fa9-b1be-4ebd-bc29-ca42cf3d6142
+
+	column sk_cliente
+		dataType: int64
+		formatString: 0
+		lineageTag: 6deec08a-d9a4-4ad2-b3ff-2e57fc4311eb
+		summarizeBy: none
+		sourceColumn: sk_cliente
+
+		annotation SummarizationSetBy = Automatic
+
+	column nome_cliente
+		dataType: string
+		lineageTag: 1ff043c9-1dc4-4182-acef-15caa3c35425
+		summarizeBy: none
+		sourceColumn: nome_cliente
+
+		annotation SummarizationSetBy = Automatic
+
+	column cpf_cliente
+		dataType: string
+		lineageTag: 66ecf514-118b-4cee-9a6f-0e9d39445580
+		summarizeBy: none
+		sourceColumn: cpf_cliente
+
+		annotation SummarizationSetBy = Automatic
+
+	column email
+		dataType: string
+		lineageTag: 5aa57b1f-5b6b-4950-9db7-1cfb81fa9472
+		summarizeBy: none
+		sourceColumn: email
+
+		annotation SummarizationSetBy = Automatic
+
+	column cidade
+		dataType: string
+		lineageTag: 25d85c01-ebae-41b6-8d88-f1c0a8d777ee
+		summarizeBy: none
+		sourceColumn: cidade
+
+		annotation SummarizationSetBy = Automatic
+
+	column id_loja
+		dataType: int64
+		formatString: 0
+		lineageTag: e24cadeb-1697-47ea-a859-a6cfb58e6a5e
+		summarizeBy: none
+		sourceColumn: id_loja
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'DIM Cliente' = m
+		mode: import
+		source =
+				let
+				  Origem = MySQL.Database("localhost", "amplo_varejo_dw"),
+				  #"Navegação 1" = Origem{[Schema = "amplo_varejo_dw", Item = "dim_cliente"]}[Data]
+				in
+				  #"Navegação 1"
+
+	annotation PBI_ResultType = Table
+

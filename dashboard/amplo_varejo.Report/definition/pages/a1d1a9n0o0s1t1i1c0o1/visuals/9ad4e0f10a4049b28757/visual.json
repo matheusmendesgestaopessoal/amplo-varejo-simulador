@@ -1,0 +1,54 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.13.0/schema.json",
+  "name": "9ad4e0f10a4049b28757",
+  "position": {
+    "x": 1254,
+    "y": 2002,
+    "z": 7900,
+    "height": 76,
+    "width": 533,
+    "tabOrder": 7900
+  },
+  "visual": {
+    "visualType": "textbox",
+    "objects": {
+      "general": [
+        {
+          "properties": {
+            "paragraphs": [
+              {
+                "textRuns": [
+                  {
+                    "value": "KPI: taxa semanal. Revisão em 30 e 90 dias. Gatilho: se em 60 dias a taxa não ficar abaixo de 8%, rever a causa priorizada.",
+                    "textStyle": {
+                      "fontSize": "10pt",
+                      "color": "#3F3F3F",
+                      "fontFamily": "Segoe UI"
+                    }
+                  }
+                ],
+                "horizontalTextAlignment": "left"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "visualContainerObjects": {
+      "background": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

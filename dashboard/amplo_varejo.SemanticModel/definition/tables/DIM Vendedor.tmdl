@@ -1,0 +1,71 @@
+table 'DIM Vendedor'
+	lineageTag: ad995969-6715-45e8-aeb5-9daa9b190714
+
+	column sk_vendedor
+		dataType: int64
+		formatString: 0
+		lineageTag: 5e64690e-41f5-4027-9e0b-b1b6928dd7f7
+		summarizeBy: none
+		sourceColumn: sk_vendedor
+
+		annotation SummarizationSetBy = Automatic
+
+	column nome_vendedor
+		dataType: string
+		lineageTag: 395719c4-5d75-497e-ac00-72faa0ea86c3
+		summarizeBy: none
+		sourceColumn: nome_vendedor
+
+		annotation SummarizationSetBy = Automatic
+
+	column data_admissao
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: fe895ce7-6811-4486-bc30-92d30fb78e7e
+		summarizeBy: none
+		sourceColumn: data_admissao
+
+		variation Variation
+			isDefault
+			relationship: 352fee78-6ed6-45ae-ab75-d7175eb738c9
+			defaultHierarchy: LocalDateTable_bbb22c18-2e73-4579-9b78-2cb13457ab82.'Hierarquia de datas'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column nome_loja
+		dataType: string
+		lineageTag: bed316c4-9b55-434e-9ccb-1cb8552a2d26
+		summarizeBy: none
+		sourceColumn: nome_loja
+
+		annotation SummarizationSetBy = Automatic
+
+	column uf_loja
+		dataType: string
+		lineageTag: 7280f306-276e-41ed-9657-3a73d4f68115
+		summarizeBy: none
+		sourceColumn: uf_loja
+
+		annotation SummarizationSetBy = Automatic
+
+	column regiao_loja
+		dataType: string
+		lineageTag: f1376ea9-cfd7-4f64-a7a6-89484dbbc2f6
+		summarizeBy: none
+		sourceColumn: regiao_loja
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'DIM Vendedor' = m
+		mode: import
+		source =
+				let
+				  Origem = MySQL.Database("localhost", "amplo_varejo_dw"),
+				  #"Navegação 1" = Origem{[Schema = "amplo_varejo_dw", Item = "dim_vendedor"]}[Data]
+				in
+				  #"Navegação 1"
+
+	annotation PBI_ResultType = Table
+

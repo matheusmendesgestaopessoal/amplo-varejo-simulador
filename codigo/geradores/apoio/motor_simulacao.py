@@ -3,6 +3,12 @@
 ''' Arquivo responsável por orquestrar toda a geração
 dos dados da Amplo Varejo S.A. '''
 
+import random
+
+import numpy as np
+
+from codigo.configuracoes.configuracao import SEMENTE_ALEATORIA
+
 # DADOS MESTRES
 
 from codigo.geradores.mestres.estados import gerar_estados
@@ -34,6 +40,12 @@ from codigo.exportadores.exportar_csv import exportar_csv
 
 def executar_simulacao():
 
+    # Semente para TODOS os sorteios (o Faker já é semeado em utilitarios/faker.py).
+    # random: status, quantidades, fatores · numpy: DataFrame.sample() (lojas, clientes, produtos).
+    # Sem isso, cada execução gerava dados diferentes.
+    random.seed(SEMENTE_ALEATORIA)
+    np.random.seed(SEMENTE_ALEATORIA)
+
     dados = DadosSimulacao()
 
     print("=" * 60)
@@ -56,13 +68,12 @@ def executar_simulacao():
     dados.categorias = gerar_categorias()
     dados.produtos = gerar_produtos(dados)
 
-
-
-    dados.metas = gerar_metas(dados)
-
     # TABELAS OPERACIONAIS
     dados.pedidos = gerar_pedidos(dados)
     dados.itens_pedido = gerar_itens_pedido(dados)
+
+    # Metas e estoque dependem das vendas geradas (acompanham a escala do modo)
+    dados.metas = gerar_metas(dados)
     dados.estoque = gerar_estoque(dados)
     dados.movimentacao_estoque = gerar_movimentacao_estoque(dados)
 

@@ -1,6 +1,29 @@
+# Ambientes virtuais do Python
+venv/
+.venv/
+env/
 ambiente/
+
+# Credenciais: nunca vão para o Git (use o .env.example)
+.env
+*.env
+!.env.example
+
+# Caches e temporários
 __pycache__/
-*.pyc
+*.py[cod]
+.ipynb_checkpoints/
+*.log
+dados/logs/
 dados/brutos/
 dados/processados/
-.env
+
+# Power BI Project: cache de dados e configurações locais
+**/.pbi/localSettings.json
+**/.pbi/cache.abf
+*.pbix.bak
+
+# Lixo do sistema
+desktop.ini
+Thumbs.db
+.DS_Store

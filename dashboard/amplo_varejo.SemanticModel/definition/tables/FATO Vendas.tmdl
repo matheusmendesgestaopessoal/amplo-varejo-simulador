@@ -1,0 +1,154 @@
+table 'FATO Vendas'
+	lineageTag: 724cebfb-dd77-4d4f-9b8b-a7791e74f3cc
+
+	column sk_venda
+		dataType: int64
+		formatString: 0
+		lineageTag: 649e057b-57ce-4845-917f-36e09c941abc
+		summarizeBy: sum
+		sourceColumn: sk_venda
+
+		annotation SummarizationSetBy = Automatic
+
+	column sk_calendario
+		dataType: int64
+		formatString: 0
+		lineageTag: 824e40bd-44bf-4979-9ed7-16123cad8e26
+		summarizeBy: none
+		sourceColumn: sk_calendario
+
+		annotation SummarizationSetBy = Automatic
+
+	column sk_cliente
+		dataType: int64
+		formatString: 0
+		lineageTag: 90f70bc2-0fae-44fb-af55-c1b1e6b518f1
+		summarizeBy: none
+		sourceColumn: sk_cliente
+
+		annotation SummarizationSetBy = Automatic
+
+	column sk_vendedor
+		dataType: int64
+		formatString: 0
+		lineageTag: 9ca025d4-9104-453f-9023-d5f0c5b1455b
+		summarizeBy: none
+		sourceColumn: sk_vendedor
+
+		annotation SummarizationSetBy = Automatic
+
+	column sk_loja
+		dataType: int64
+		formatString: 0
+		lineageTag: 158701d8-b42d-447c-bc04-529c7cb85942
+		summarizeBy: none
+		sourceColumn: sk_loja
+
+		annotation SummarizationSetBy = Automatic
+
+	column sk_produto
+		dataType: int64
+		formatString: 0
+		lineageTag: 893861df-43a0-49f7-bc0a-6f5c30de6f1a
+		summarizeBy: none
+		sourceColumn: sk_produto
+
+		annotation SummarizationSetBy = Automatic
+
+	column sk_status
+		dataType: int64
+		formatString: 0
+		lineageTag: 23f83ec1-8455-41c0-8916-662f01e5ea82
+		summarizeBy: none
+		sourceColumn: sk_status
+
+		annotation SummarizationSetBy = Automatic
+
+	column id_pedido
+		dataType: int64
+		formatString: 0
+		lineageTag: df5ca39a-9e27-4d8b-80e9-cd92d8ef6dc5
+		summarizeBy: sum
+		sourceColumn: id_pedido
+
+		annotation SummarizationSetBy = Automatic
+
+	column id_item_pedido
+		dataType: int64
+		formatString: 0
+		lineageTag: 4970b8a2-f911-4336-9cec-71eb7cf9effc
+		summarizeBy: sum
+		sourceColumn: id_item_pedido
+
+		annotation SummarizationSetBy = Automatic
+
+	column quantidade
+		dataType: int64
+		formatString: 0
+		lineageTag: b2c2d82c-bc3a-4828-b570-9879644362b8
+		summarizeBy: sum
+		sourceColumn: quantidade
+
+		annotation SummarizationSetBy = Automatic
+
+	column valor_unitario
+		dataType: double
+		lineageTag: 0a1e654d-19d9-437d-9706-ab5504d252df
+		summarizeBy: sum
+		sourceColumn: valor_unitario
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column desconto
+		dataType: double
+		lineageTag: 8c779a70-f486-4cb1-a219-f18baeebb9f9
+		summarizeBy: sum
+		sourceColumn: desconto
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column sub_total
+		dataType: double
+		lineageTag: 753af2dd-62d5-449a-976e-891d000bfef6
+		summarizeBy: sum
+		sourceColumn: sub_total
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column custo_total
+		dataType: double
+		lineageTag: da7d9299-825d-4286-8c3c-9ab4381af867
+		summarizeBy: sum
+		sourceColumn: custo_total
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column margem
+		dataType: double
+		lineageTag: 8a04ba85-b14f-4839-b219-2e5db993dc38
+		summarizeBy: sum
+		sourceColumn: margem
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition 'FATO Vendas' = m
+		mode: import
+		source =
+				let
+				  Origem = MySQL.Database("localhost", "amplo_varejo_dw"),
+				  #"Navegação 1" = Origem{[Schema = "amplo_varejo_dw", Item = "fato_vendas"]}[Data]
+				in
+				  #"Navegação 1"
+
+	annotation PBI_ResultType = Table
+

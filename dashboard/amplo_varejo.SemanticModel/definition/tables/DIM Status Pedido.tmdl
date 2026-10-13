@@ -1,0 +1,31 @@
+table 'DIM Status Pedido'
+	lineageTag: 40a9e469-524c-4a77-ab8a-c3ebb9ac5c6d
+
+	column sk_status
+		dataType: int64
+		formatString: 0
+		lineageTag: 8d2f5f45-4324-4c93-bbed-724db15133a6
+		summarizeBy: none
+		sourceColumn: sk_status
+
+		annotation SummarizationSetBy = Automatic
+
+	column status
+		dataType: string
+		lineageTag: d44b4a28-4404-48bb-9e5b-ca7420d2db91
+		summarizeBy: none
+		sourceColumn: status
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'DIM Status Pedido' = m
+		mode: import
+		source =
+				let
+				  Origem = MySQL.Database("localhost", "amplo_varejo_dw"),
+				  #"Navegação 1" = Origem{[Schema = "amplo_varejo_dw", Item = "dim_status_pedido"]}[Data]
+				in
+				  #"Navegação 1"
+
+	annotation PBI_ResultType = Table
+

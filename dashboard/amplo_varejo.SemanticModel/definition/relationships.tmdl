@@ -1,0 +1,65 @@
+relationship 352fee78-6ed6-45ae-ab75-d7175eb738c9
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'DIM Vendedor'.data_admissao
+	toColumn: LocalDateTable_bbb22c18-2e73-4579-9b78-2cb13457ab82.Date
+
+relationship 6d6105f5-9f85-15ac-7b1c-429858916e66
+	fromColumn: 'FATO Vendas'.sk_calendario
+	toColumn: 'DIM Calendario'.sk_calendario
+
+	annotation PBI_IsFromSource = FS
+
+relationship 3b1f47f9-4fb4-4342-a822-b3dd263fcd97
+	fromColumn: 'FATO Vendas'.sk_produto
+	toColumn: 'DIM Produtos'.sk_produto
+
+	annotation PBI_IsFromSource = FS
+
+relationship 4f94f5d3-09d7-53c6-e50f-8b348be314f6
+	fromColumn: 'FATO Vendas'.sk_loja
+	toColumn: 'DIM Lojas'.sk_loja
+
+	annotation PBI_IsFromSource = FS
+
+relationship 07632011-eec7-bfb6-3066-08e2cf7ec8fb
+	fromColumn: 'FATO Vendas'.sk_vendedor
+	toColumn: 'DIM Vendedor'.sk_vendedor
+
+	annotation PBI_IsFromSource = FS
+
+relationship e6a700f4-dc79-2c50-1c59-efb0e6ddbc40
+	fromColumn: 'FATO Vendas'.sk_status
+	toColumn: 'DIM Status Pedido'.sk_status
+
+	annotation PBI_IsFromSource = FS
+
+relationship 953f74f5-5ab1-e090-7cd3-24c9b97d03b5
+	fromColumn: 'FATO Movimentacão Estoque'.sk_calendario
+	toColumn: 'DIM Calendario'.sk_calendario
+
+	annotation PBI_IsFromSource = FS
+
+relationship 2e3eeeb0-cdee-ee54-d9fa-7e49dfcbdc97
+	fromColumn: 'FATO Movimentacão Estoque'.sk_produto
+	toColumn: 'DIM Produtos'.sk_produto
+
+	annotation PBI_IsFromSource = FS
+
+relationship 7f9554c7-80a0-8b9c-509a-7803a1ebe0ac
+	fromColumn: 'FATO Movimentacão Estoque'.sk_loja
+	toColumn: 'DIM Lojas'.sk_loja
+
+	annotation PBI_IsFromSource = FS
+
+relationship 235fa09c-ec22-145f-1584-009a1dce510c
+	fromColumn: 'FATO Metas'.sk_loja
+	toColumn: 'DIM Lojas'.sk_loja
+
+	annotation PBI_IsFromSource = FS
+
+relationship 4d2682bb-33ff-328d-5679-849a14da8418
+	fromColumn: 'FATO Vendas'.sk_cliente
+	toColumn: 'DIM Cliente'.sk_cliente
+
+	annotation PBI_IsFromSource = FS
+

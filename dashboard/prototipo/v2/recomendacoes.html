@@ -1,0 +1,187 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>Protótipo v2 · Recomendações</title>
+<link rel="stylesheet" href="base.css">
+<style>
+  .cartao{padding:0;overflow:hidden}
+  .cartao-topo{display:flex;align-items:center;justify-content:space-between;padding:18px 26px;border-bottom:1px solid var(--divisor);background:#fff}
+  .etqs{display:flex;gap:8px}
+  .etq{display:inline-flex;align-items:center;gap:6px;padding:5px 12px;border-radius:999px;font-size:13px;font-weight:700;background:var(--fundo);color:var(--grafite-2)}
+  .etq b{color:var(--grafite)}
+  .tres{display:grid;grid-template-columns:1fr 1fr 1.15fr}
+  .col{padding:24px 26px;border-right:1px solid var(--divisor)}
+  .col:last-child{border-right:0}
+  .col-h{display:flex;align-items:center;gap:10px;margin-bottom:12px}
+  .num-etapa{width:28px;height:28px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:800;color:#fff;background:var(--c)}
+  .col-h b{font-size:15px;letter-spacing:.06em;text-transform:uppercase;color:var(--c)}
+  .col p, .col li{font-size:16px;line-height:1.55;color:var(--texto)}
+  .col p + p{margin-top:10px}
+  .fonte{margin-top:12px;font-size:13px;color:var(--grafite-2)}
+  .fonte code{font-family:Consolas,monospace;background:var(--fundo);padding:1px 6px;border-radius:4px;color:var(--grafite)}
+  .lacuna{margin-top:12px;padding:10px 12px;border-radius:10px;background:#FFF8DB;font-size:14px;line-height:1.5;color:#5C4A00}
+  .passos{list-style:none;display:flex;flex-direction:column;gap:10px}
+  .passos li{display:grid;grid-template-columns:26px 1fr;gap:10px}
+  .passos .n{width:24px;height:24px;border-radius:50%;background:var(--azul-fundo);color:var(--azul-tinta);font-size:13px;font-weight:800;display:flex;align-items:center;justify-content:center;margin-top:1px}
+  .passos .meta{display:block;font-size:13px;color:var(--grafite-2);margin-top:2px}
+  .rodape-cartao{display:grid;grid-template-columns:1.1fr 1fr 1fr;border-top:1px solid var(--divisor);background:var(--fundo)}
+  .rodape-cartao > div{padding:20px 26px;border-right:1px solid var(--divisor)}
+  .rodape-cartao > div:last-child{border-right:0}
+  .mini-h{font-size:12px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--grafite-2);margin-bottom:10px}
+  .tbl-sm td,.tbl-sm th{padding:6px 8px;font-size:14px}
+  .tbl-sm th{background:transparent;padding-left:0}
+  .tbl-sm td:first-child{padding-left:0}
+  .conf{display:inline-block;padding:2px 8px;border-radius:999px;font-size:12px;font-weight:700}
+  .conf.m{background:#FFF4CC;color:#8A6400}.conf.b{background:#EFEFED;color:#5E5E5E}.conf.a{background:var(--verde-fundo);color:var(--verde-escuro)}
+  .cenarios{display:flex;gap:8px}
+  .cen{flex:1;padding:10px 12px;border-radius:10px;background:#fff;border:1px solid var(--borda)}
+  .cen small{display:block;font-size:12px;color:var(--grafite-2)}
+  .cen b{font-size:18px}
+  .gatilho{margin-top:10px;font-size:14px;line-height:1.5;color:var(--texto)}
+</style>
+</head>
+<body>
+
+<!-- ================= ACHADO COM CARTÃO DE DECISÃO ================= -->
+<section style="padding-top:36px">
+  <div class="wrap">
+    <div class="sec-head"><div>
+      <span class="lbl">02 · Cancelamentos</span>
+      <h2>A taxa de cancelamento está 3,3× acima da meta e custa R$ 1,47 Mi <span class="anot">ƒ título dinâmico</span></h2>
+      <p>Os gráficos do achado (taxa por mês e por região) ficam aqui, acima do cartão de decisão.</p>
+    </div><span class="badge alta">Prioridade alta · R$ 1,47 Mi</span></div>
+
+    <div class="card cartao">
+      <div class="cartao-topo">
+        <div style="font-size:19px;font-weight:700">Cartão de decisão · Cancelamentos acima da meta</div>
+        <div class="etqs"><span class="etq">Prioridade <b style="color:#C41F1F">Alta</b></span><span class="etq">Esforço <b>Médio</b></span><span class="etq">Confiança na causa <b>Média</b></span><span class="etq">Dono <b>Operações / Logística</b></span></div>
+      </div>
+
+      <div class="tres">
+        <!-- 1. FATO -->
+        <div class="col" style="--c:var(--azul-tinta)">
+          <div class="col-h"><span class="num-etapa" style="--c:var(--azul)">1</span><b>Fato</b></div>
+          <p><b>9,8%</b> dos pedidos de 2025 foram cancelados, contra uma meta de <b>3,0%</b> (3,3× acima).</p>
+          <p>A taxa é maior no <b>Norte (12,4%)</b> e no <b>Nordeste (10,9%)</b> e sobe para <b>11,9% em novembro</b>, mês de maior demanda.</p>
+          <p>Receita dos pedidos cancelados: <b>R$ 1,47 Mi</b>.</p>
+          <div class="fonte">Fonte: <code>[Taxa Cancelamento]</code> · <code>[Receita Perdida]</code> · visual "Taxa de cancelamento por mês"</div>
+        </div>
+
+        <!-- 2. INTERPRETAÇÃO -->
+        <div class="col" style="--c:#8A6400">
+          <div class="col-h"><span class="num-etapa" style="--c:#E0A800">2</span><b>Interpretação</b></div>
+          <p>É a <b>maior perda identificada: 70%</b> dos R$ 2,10 Mi de receita perdida.</p>
+          <p>Diferente de uma venda que não aconteceu, aqui <b>o cliente já tinha decidido comprar</b>: a demanda existe e está sendo desperdiçada.</p>
+          <p>Como a taxa <b>sobe junto com a demanda</b> (nov–dez) e nas regiões mais distantes dos centros de distribuição, o padrão é compatível com <b>falta de produto</b>, e não com desistência do cliente.</p>
+          <div class="lacuna"><b>O que ainda não sabemos:</b> o motivo de cada cancelamento não é registrado no sistema. A causa é uma hipótese até a validação.</div>
+        </div>
+
+        <!-- 5. AÇÃO -->
+        <div class="col" style="--c:var(--verde-escuro)">
+          <div class="col-h"><span class="num-etapa" style="--c:var(--verde-escuro)">3</span><b>Ação</b></div>
+          <ol class="passos">
+            <li><span class="n">1</span><div><b>Validar a causa:</b> cruzar cada pedido cancelado com o saldo de estoque da loja no mesmo dia.<span class="meta">Dados · 1 semana · confirma se ≥ 60% dos cancelados tinham estoque zerado</span></div></li>
+            <li><span class="n">2</span><div><b>Se confirmado,</b> transferir o excedente das 5 lojas com sobra para as 8 com maior taxa de cancelamento.<span class="meta">Logística · até 30 dias</span></div></li>
+            <li><span class="n">3</span><div><b>Antes do pico,</b> definir estoque mínimo de segurança para Eletro e Tecnologia nas lojas do Norte e Nordeste.<span class="meta">Compras · até 15/out</span></div></li>
+            <li><span class="n">4</span><div><b>Registrar o motivo</b> do cancelamento no sistema, para medir a causa daqui em diante.<span class="meta">TI / Operações · 60 dias</span></div></li>
+          </ol>
+        </div>
+      </div>
+
+      <div class="rodape-cartao">
+        <!-- 3. CAUSAS PROVÁVEIS -->
+        <div>
+          <div class="mini-h">Causas prováveis (hipóteses ranqueadas)</div>
+          <table class="tbl-sm"><thead><tr><th>Hipótese</th><th>Evidência a favor</th><th>Confiança</th></tr></thead><tbody>
+            <tr><td><b>Falta de estoque</b></td><td>Taxa sobe no pico de demanda</td><td><span class="conf m">Média</span></td></tr>
+            <tr><td>Prazo de entrega longo</td><td>Taxa maior no Norte e Nordeste</td><td><span class="conf b">Baixa</span></td></tr>
+            <tr><td>Preço / concorrência</td><td>Sem evidência nos dados</td><td><span class="conf b">Baixa</span></td></tr>
+          </tbody></table>
+        </div>
+        <!-- 6. RESULTADO ESPERADO -->
+        <div>
+          <div class="mini-h">Resultado esperado em 90 dias</div>
+          <div style="font-size:14px;color:var(--texto);margin-bottom:10px">Taxa de cancelamento: <b>9,8%</b> hoje → <b>5,0%</b> (meta final: 3,0%)</div>
+          <div class="cenarios">
+            <div class="cen"><small>Conservador · 7%</small><b>R$ 0,42 Mi</b></div>
+            <div class="cen" style="border-color:var(--azul);background:var(--azul-fundo)"><small>Provável · 5%</small><b>R$ 0,72 Mi</b></div>
+            <div class="cen"><small>Meta · 3%</small><b>R$ 1,02 Mi</b></div>
+          </div>
+          <div class="fonte">Receita recuperável estimada, proporcional à queda da taxa. Estimativa gerencial para priorização.</div>
+        </div>
+        <!-- 7. ACOMPANHAMENTO -->
+        <div>
+          <div class="mini-h">Acompanhamento</div>
+          <div class="gatilho"><b>KPI:</b> taxa de cancelamento semanal, por região e loja.</div>
+          <div class="gatilho"><b>Revisão:</b> 30 e 90 dias após o início.</div>
+          <div class="gatilho" style="padding:10px 12px;border-radius:10px;background:var(--vermelho-fundo);color:#7A1414"><b>Gatilho:</b> se em 30 dias a taxa não cair abaixo de <b>8,5%</b>, a hipótese de falta de estoque é descartada e a próxima (prazo de entrega) é investigada.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= PLANO DE AÇÃO: PEDIDO DE DECISÃO ================= -->
+<section style="padding-bottom:40px">
+  <div class="wrap">
+    <div style="border-radius:16px;padding:34px 36px;color:#fff;background:var(--azul)">
+      <span class="lbl" style="color:#CFE0FF">05 · Recomendação</span>
+      <h2 style="font-size:36px;font-weight:700;letter-spacing:-.025em;line-height:1.2;margin-top:6px;max-width:1500px">Recomendo começar pelos cancelamentos: é a maior perda, a validação leva uma semana e o retorno começa em 30 dias.</h2>
+      <p style="font-size:18px;color:#E6EEFF;margin-top:10px">As três frentes juntas podem recuperar entre <b style="color:#fff">R$ 0,6 Mi e R$ 1,4 Mi</b> em 90 dias (estimativa gerencial).</p>
+
+      <div class="grid" style="grid-template-columns:1fr 1.5fr;margin-top:24px">
+        <div class="card" style="padding:22px 24px;color:var(--grafite)">
+          <h3 style="font-size:18px;font-weight:600">Por que essa ordem</h3>
+          <div style="font-size:14px;color:var(--grafite-2);margin:3px 0 10px">Impacto × esforço · tamanho = valor recuperável</div>
+          <div id="g-matriz"></div>
+        </div>
+        <div class="card" style="padding:22px 24px;color:var(--grafite)">
+          <h3 style="font-size:18px;font-weight:600">Decisões pedidas à diretoria</h3>
+          <div style="font-size:14px;color:var(--grafite-2);margin:3px 0 14px">O que precisa ser aprovado para o plano andar</div>
+          <ol class="passos">
+            <li><span class="n">1</span><div><b>Aprovar a validação</b> de cancelamentos x estoque (1 semana, sem custo).</div></li>
+            <li><span class="n">2</span><div><b>Liberar orçamento de frete</b> para transferências entre lojas, se a causa for confirmada.<span class="meta">Custo a estimar com Logística</span></div></li>
+            <li><span class="n">3</span><div><b>Suspender novas compras</b> dos produtos com giro abaixo de 1× até o estoque normalizar.</div></li>
+            <li><span class="n">4</span><div><b>Autorizar diagnóstico individual</b> das 8 lojas abaixo da meta, com a página de detalhe por loja.</div></li>
+          </ol>
+        </div>
+      </div>
+
+      <div class="card" style="margin-top:20px;color:var(--grafite);overflow:hidden">
+        <table><thead><tr><th>Frente</th><th>Decisão</th><th>Dono</th><th>Prazo</th><th>KPI · hoje → meta</th><th class="num">Valor recuperável (faixa)</th><th>Esforço</th><th>Confiança</th></tr></thead><tbody>
+          <tr><td><b>Cancelamentos</b></td><td>Validar e redistribuir estoque</td><td>Operações / Logística</td><td>30–90 dias</td><td>Taxa · 9,8% → 5,0%</td><td class="num"><b>R$ 0,42–1,02 Mi</b></td><td>Médio</td><td><span class="conf m">Média</span></td></tr>
+          <tr><td><b>Estoque parado</b></td><td>Curva ABC, campanha e suspensão de compras</td><td>Estoque / Comercial</td><td>60 dias</td><td>Giro · 0,6× → 1,0×</td><td class="num"><b>R$ 143–250 mil</b> <span style="font-size:12px;color:var(--grafite-2)">em caixa</span></td><td>Baixo</td><td><span class="conf a">Alta</span></td></tr>
+          <tr><td><b>Lojas abaixo da meta</b></td><td>Diagnóstico e plano por loja</td><td>Gestão de lojas</td><td>60–90 dias</td><td>% da meta · 91% → 100%</td><td class="num"><b>R$ 82–164 mil</b></td><td>Alto</td><td><span class="conf b">Baixa</span></td></tr>
+        </tbody></table>
+      </div>
+      <p style="font-size:13px;color:#CFE0FF;margin-top:12px">Faixas: cenário conservador → meta. Valores de estoque são capital liberado, não receita. Estimativas gerenciais para priorização, a confirmar após a execução.</p>
+    </div>
+  </div>
+</section>
+
+<script src="graficos.js"></script>
+<script>
+(function(){
+  const el=document.getElementById("g-matriz"),W=el.clientWidth,H=330,p=40;
+  const x=e=>p+(W-p-10)*e, y=i=>H-p-(H-p-10)*i;
+  let s=`<svg width="${W}" height="${H}">`;
+  // quadrantes
+  s+=`<rect x="${x(0)}" y="${y(1)}" width="${(W-p-10)/2}" height="${(H-p-10)/2}" fill="#E3FAEF" rx="8"/>`;
+  s+=`<text x="${x(.02)}" y="${y(.94)}" font-size="13" font-weight="700" fill="#00995A">Fazer primeiro</text>`;
+  s+=`<text x="${x(.52)}" y="${y(.94)}" font-size="13" font-weight="700" fill="#5E5E5E">Projetos maiores</text>`;
+  s+=`<text x="${x(.02)}" y="${y(.44)}" font-size="13" font-weight="700" fill="#5E5E5E">Ganhos rápidos</text>`;
+  s+=`<text x="${x(.52)}" y="${y(.44)}" font-size="13" font-weight="700" fill="#5E5E5E">Reavaliar</text>`;
+  s+=`<line x1="${x(.5)}" x2="${x(.5)}" y1="${y(1)}" y2="${y(0)}" stroke="#EFEFED" stroke-width="2"/><line x1="${x(0)}" x2="${x(1)}" y1="${y(.5)}" y2="${y(.5)}" stroke="#EFEFED" stroke-width="2"/>`;
+  s+=`<line x1="${x(0)}" x2="${x(1)}" y1="${y(0)}" y2="${y(0)}" stroke="#DCDCD8"/><line x1="${x(0)}" x2="${x(0)}" y1="${y(0)}" y2="${y(1)}" stroke="#DCDCD8"/>`;
+  s+=`<text x="${x(1)}" y="${H-12}" text-anchor="end" font-size="12" fill="#5E5E5E">esforço →</text><text x="14" y="${y(.5)}" font-size="12" fill="#5E5E5E" transform="rotate(-90 14 ${y(.5)})">impacto →</text>`;
+  [["Cancelamentos",.32,.78,34,"#1A6BF5"],["Estoque parado",.2,.26,20,"#5AB0FF"],["Lojas abaixo da meta",.74,.24,17,"#CFE0FF"]].forEach(([n,e,i,r,c])=>{
+    // rótulo abaixo da bolha, centralizado, para não colidir com os nomes dos quadrantes nem sair do card
+    s+=`<circle cx="${x(e)}" cy="${y(i)}" r="${r}" fill="${c}" stroke="#fff" stroke-width="2"/><text x="${x(e)}" y="${y(i)+r+18}" text-anchor="middle" font-size="14" font-weight="700" fill="#111">${n}</text>`;
+  });
+  el.innerHTML=s+"</svg>";
+})();
+document.title="H="+document.documentElement.scrollHeight;
+</script>
+</body>
+</html>

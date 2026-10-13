@@ -1,0 +1,65 @@
+table 'DIM Lojas'
+	lineageTag: a37da317-0334-47de-b9e0-c7ac145d0ac9
+
+	column sk_loja
+		dataType: int64
+		formatString: 0
+		lineageTag: e438414a-2d1b-4f47-982e-d0e92485d4b0
+		summarizeBy: none
+		sourceColumn: sk_loja
+
+		annotation SummarizationSetBy = Automatic
+
+	column nome_loja
+		dataType: string
+		lineageTag: 790e25a1-da39-4b8b-b857-2f2fc457be46
+		summarizeBy: none
+		sourceColumn: nome_loja
+
+		annotation SummarizationSetBy = Automatic
+
+	column endereco
+		dataType: string
+		lineageTag: ae6e814b-0e27-46a5-974a-d2a7baf84306
+		summarizeBy: none
+		sourceColumn: endereco
+
+		annotation SummarizationSetBy = Automatic
+
+	column nome_estado
+		dataType: string
+		lineageTag: e668da76-25bd-4d60-ac83-c1edc70ecc10
+		dataCategory: StateOrProvince
+		summarizeBy: none
+		sourceColumn: nome_estado
+
+		annotation SummarizationSetBy = Automatic
+
+	column uf
+		dataType: string
+		lineageTag: 3231ec3f-6e37-4fd6-af30-112f6e563982
+		summarizeBy: none
+		sourceColumn: uf
+
+		annotation SummarizationSetBy = Automatic
+
+	column regiao
+		dataType: string
+		lineageTag: aa3e8652-d33a-4e15-b620-dbe0f95573b1
+		dataCategory: Country
+		summarizeBy: none
+		sourceColumn: regiao
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'DIM Lojas' = m
+		mode: import
+		source =
+				let
+				  Origem = MySQL.Database("localhost", "amplo_varejo_dw"),
+				  #"Navegação 1" = Origem{[Schema = "amplo_varejo_dw", Item = "dim_loja"]}[Data]
+				in
+				  #"Navegação 1"
+
+	annotation PBI_ResultType = Table
+

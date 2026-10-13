@@ -1,0 +1,93 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.13.0/schema.json",
+  "name": "1d6f4b2f02ea4b17b6b4",
+  "position": {
+    "x": 172,
+    "y": 4716,
+    "z": 13500,
+    "height": 104,
+    "width": 1576,
+    "tabOrder": 13500
+  },
+  "visual": {
+    "visualType": "textbox",
+    "objects": {
+      "general": [
+        {
+          "properties": {
+            "paragraphs": [
+              {
+                "textRuns": [
+                  {
+                    "value": "1. Aprovar o campo obrigatório de motivo de cancelamento (custo baixo).",
+                    "textStyle": {
+                      "fontSize": "11pt",
+                      "color": "#3F3F3F",
+                      "fontFamily": "Segoe UI"
+                    }
+                  }
+                ],
+                "horizontalTextAlignment": "left"
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "2. Autorizar a amostragem de 200 cancelamentos com a operação.",
+                    "textStyle": {
+                      "fontSize": "11pt",
+                      "color": "#3F3F3F",
+                      "fontFamily": "Segoe UI"
+                    }
+                  }
+                ],
+                "horizontalTextAlignment": "left"
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "3. Pausar as compras dos 10 produtos com mais excesso de estoque.",
+                    "textStyle": {
+                      "fontSize": "11pt",
+                      "color": "#3F3F3F",
+                      "fontFamily": "Segoe UI"
+                    }
+                  }
+                ],
+                "horizontalTextAlignment": "left"
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "4. Autorizar o diagnóstico individual das 19 lojas abaixo de 90% da meta.",
+                    "textStyle": {
+                      "fontSize": "11pt",
+                      "color": "#3F3F3F",
+                      "fontFamily": "Segoe UI"
+                    }
+                  }
+                ],
+                "horizontalTextAlignment": "left"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "visualContainerObjects": {
+      "background": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

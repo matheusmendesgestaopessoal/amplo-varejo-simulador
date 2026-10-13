@@ -1,0 +1,172 @@
+table 'DIM Calendario'
+	lineageTag: c8b264b5-318c-4080-ad95-e53c92e10b63
+	dataCategory: Time
+
+	column sk_calendario
+		dataType: int64
+		formatString: 0
+		lineageTag: 3c59d6d5-4688-4f95-8aa8-b4eaa46c405c
+		summarizeBy: none
+		sourceColumn: sk_calendario
+
+		annotation SummarizationSetBy = Automatic
+
+	column data
+		dataType: dateTime
+		isKey
+		formatString: Long Date
+		lineageTag: 77633083-4289-4aec-9e2d-aece1e948b1c
+		summarizeBy: none
+		sourceColumn: data
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column ano
+		dataType: int64
+		formatString: 0
+		lineageTag: 44040382-02aa-4e6b-9248-9852f4dd0b47
+		summarizeBy: sum
+		sourceColumn: ano
+
+		annotation SummarizationSetBy = Automatic
+
+	column mes
+		dataType: int64
+		formatString: 0
+		lineageTag: 7a7143f8-3aa9-4e81-babc-598d6d78d444
+		summarizeBy: sum
+		sourceColumn: mes
+
+		annotation SummarizationSetBy = Automatic
+
+	column nome_mes
+		dataType: string
+		lineageTag: 8b5a29c3-a334-4f18-97ba-52daaadb21f1
+		summarizeBy: none
+		sourceColumn: nome_mes
+
+		annotation SummarizationSetBy = Automatic
+
+	column trimestre
+		dataType: int64
+		formatString: 0
+		lineageTag: 4c772b31-4e75-4b62-9499-cee60fdf2f90
+		summarizeBy: sum
+		sourceColumn: trimestre
+
+		annotation SummarizationSetBy = Automatic
+
+	column semestre
+		dataType: int64
+		formatString: 0
+		lineageTag: 9b1b9060-2c71-400e-93c4-9cc8f39ec06a
+		summarizeBy: sum
+		sourceColumn: semestre
+
+		annotation SummarizationSetBy = Automatic
+
+	column dia
+		dataType: int64
+		formatString: 0
+		lineageTag: 2ba5cc00-e5dd-47b4-9fcd-a19de0f4d1c9
+		summarizeBy: sum
+		sourceColumn: dia
+
+		annotation SummarizationSetBy = Automatic
+
+	column dia_semana
+		dataType: string
+		lineageTag: b35a2162-0b5e-494d-a8af-8babbae43e36
+		summarizeBy: none
+		sourceColumn: dia_semana
+
+		annotation SummarizationSetBy = Automatic
+
+	column dia_util
+		dataType: int64
+		formatString: 0
+		lineageTag: 09392a9f-76f3-4885-bd8c-19b981607930
+		summarizeBy: sum
+		sourceColumn: dia_util
+
+		annotation SummarizationSetBy = Automatic
+
+	column final_de_semana
+		dataType: int64
+		formatString: 0
+		lineageTag: d5db2727-10cf-4ee7-a4cb-c3686a4e63df
+		summarizeBy: sum
+		sourceColumn: final_de_semana
+
+		annotation SummarizationSetBy = Automatic
+
+	column indice_sazonalidade
+		dataType: double
+		lineageTag: fe3692a6-d4a7-4f1f-8b49-f60d83603b6e
+		summarizeBy: sum
+		sourceColumn: indice_sazonalidade
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column classificacao_sazonalidade
+		dataType: string
+		lineageTag: 196126f4-3192-46af-91d1-0f77ac8f3378
+		summarizeBy: none
+		sourceColumn: classificacao_sazonalidade
+
+		annotation SummarizationSetBy = Automatic
+
+	column Nome_mes_pt
+		dataType: string
+		lineageTag: fa933ce2-ad63-4148-b770-dd79ef6249f3
+		summarizeBy: none
+		sourceColumn: Nome_mes_pt
+		sortByColumn: mes
+
+		changedProperty = SortByColumn
+
+		annotation SummarizationSetBy = Automatic
+
+	column Mes_Abrev =
+			
+			SWITCH(
+			    'DIM Calendario'[mes],
+			    1, "Jan",
+			    2, "Fev",
+			    3, "Mar",
+			    4, "Abr",
+			    5, "Mai",
+			    6, "Jun",
+			    7, "Jul",
+			    8, "Ago",
+			    9, "Set",
+			    10, "Out",
+			    11, "Nov",
+			    12, "Dez"
+			)
+		lineageTag: f35bbed4-f48d-4590-bdb7-7fd3d11e0b26
+		summarizeBy: none
+		sortByColumn: mes
+
+		changedProperty = SortByColumn
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'DIM Calendario' = m
+		mode: import
+		source =
+				let
+				  Origem = MySQL.Database("localhost", "amplo_varejo_dw"),
+				  #"Navegação 1" = Origem{[Schema = "amplo_varejo_dw", Item = "dim_calendario"]}[Data],
+				    #"Nome do Mês Inserido" = Table.AddColumn(#"Navegação 1", "Nome_mes_pt", each Date.MonthName([data]), type text)
+				in
+				    #"Nome do Mês Inserido"
+
+	annotation PBI_NavigationStepName = Navegação
+
+	annotation PBI_ResultType = Table
+

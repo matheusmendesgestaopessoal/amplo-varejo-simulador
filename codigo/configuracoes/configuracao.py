@@ -44,8 +44,15 @@ else:
     raise ValueError("Modo de execução inválido!")
 
 # ESTOQUE
-ESTOQUE_MINIMO = 20
-ESTOQUE_MAXIMO = 500
+# Estoque inicial = unidades vendidas no ano (loja/produto) + sobra equivalente a
+# COBERTURA meses de venda. Assim o estoque acompanha a escala de qualquer modo.
+COBERTURA_MINIMA_MESES = 0.5
+COBERTURA_MAXIMA_MESES = 6.0
+
+# METAS
+# Meta da loja no mês = venda média por loja da região no mês x fator de desafio.
+FATOR_META_MINIMO = 0.95
+FATOR_META_MAXIMO = 1.15
 
 # ITENS
 ITENS_MINIMOS_PEDIDO = 1

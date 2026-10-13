@@ -1,0 +1,68 @@
+table 'FATO Metas'
+	lineageTag: 0d13be8c-18e6-4a2b-ae6f-bab433fac318
+
+	column sk_meta
+		dataType: int64
+		formatString: 0
+		lineageTag: ff9a47cb-b6a6-496a-8ca2-13f4d588456c
+		summarizeBy: sum
+		sourceColumn: sk_meta
+
+		annotation SummarizationSetBy = Automatic
+
+	column mes
+		dataType: int64
+		formatString: 0
+		lineageTag: e07ff5db-365a-430a-a578-a6e0bd995192
+		summarizeBy: sum
+		sourceColumn: mes
+
+		annotation SummarizationSetBy = Automatic
+
+	column sk_loja
+		dataType: int64
+		formatString: 0
+		lineageTag: 565a6258-8ab3-4abb-a4a5-89013ec09cb1
+		summarizeBy: none
+		sourceColumn: sk_loja
+
+		annotation SummarizationSetBy = Automatic
+
+	column meta_faturamento
+		dataType: int64
+		formatString: 0
+		lineageTag: 8dd6cc2b-d40f-4038-8dcc-37e0b148adc2
+		summarizeBy: sum
+		sourceColumn: meta_faturamento
+
+		annotation SummarizationSetBy = Automatic
+
+	column meta_pedidos
+		dataType: int64
+		formatString: 0
+		lineageTag: ccbc734d-5085-4080-8974-dca433d9a4e5
+		summarizeBy: sum
+		sourceColumn: meta_pedidos
+
+		annotation SummarizationSetBy = Automatic
+
+	column meta_ticket_medio
+		dataType: int64
+		formatString: 0
+		lineageTag: 5a23e49a-810d-40fe-89ab-2ae86c0063f8
+		summarizeBy: sum
+		sourceColumn: meta_ticket_medio
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'FATO Metas' = m
+		mode: import
+		source =
+				let
+				  Origem = MySQL.Database("localhost", "amplo_varejo_dw"),
+				  #"Navegação 1" = Origem{[Schema = "amplo_varejo_dw", Item = "fato_metas"]}[Data]
+				in
+				  #"Navegação 1"
+
+	annotation PBI_ResultType = Table
+

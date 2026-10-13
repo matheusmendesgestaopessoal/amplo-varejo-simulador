@@ -1,0 +1,68 @@
+table 'DIM Produtos'
+	lineageTag: 6a4a0273-f729-494a-89a0-132e9549248f
+
+	column sk_produto
+		dataType: int64
+		formatString: 0
+		lineageTag: 93af54f5-699e-4db3-b68e-1c30098bbf1a
+		summarizeBy: none
+		sourceColumn: sk_produto
+
+		annotation SummarizationSetBy = Automatic
+
+	column nome_produto
+		dataType: string
+		lineageTag: 82cf4f58-2500-48f7-994e-4828bf11a245
+		summarizeBy: none
+		sourceColumn: nome_produto
+
+		annotation SummarizationSetBy = Automatic
+
+	column nome_categoria
+		dataType: string
+		lineageTag: b95d969d-a31a-4f47-ae6c-ec0c05fe93c8
+		summarizeBy: none
+		sourceColumn: nome_categoria
+
+		annotation SummarizationSetBy = Automatic
+
+	column preco
+		dataType: double
+		lineageTag: 098a2cde-ad55-4d81-bc10-8636171abee6
+		summarizeBy: sum
+		sourceColumn: preco
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column custo
+		dataType: double
+		lineageTag: 17bc4214-3377-407f-8ec0-9d49f7dff1f6
+		summarizeBy: sum
+		sourceColumn: custo
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column ativo
+		dataType: int64
+		formatString: 0
+		lineageTag: 287a7ae0-618f-4a27-8775-8f006e92f798
+		summarizeBy: sum
+		sourceColumn: ativo
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'DIM Produtos' = m
+		mode: import
+		source =
+				let
+				  Origem = MySQL.Database("localhost", "amplo_varejo_dw"),
+				  #"Navegação 1" = Origem{[Schema = "amplo_varejo_dw", Item = "dim_produto"]}[Data]
+				in
+				  #"Navegação 1"
+
+	annotation PBI_ResultType = Table
+

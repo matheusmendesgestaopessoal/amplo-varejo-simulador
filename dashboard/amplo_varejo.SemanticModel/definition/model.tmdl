@@ -1,0 +1,31 @@
+model Model
+	culture: pt-BR
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	sourceQueryCulture: pt-BR
+	valueFilterBehavior: independent
+	dataAccessOptions
+		legacyRedirects
+		returnErrorValuesAsNull
+
+annotation __PBI_TimeIntelligenceEnabled = 1
+
+annotation PBI_QueryOrder = ["DIM Calendario","DIM Cliente","DIM Lojas","DIM Produtos","DIM Status Pedido","DIM Vendedor","FATO Metas","FATO Movimentacão Estoque","FATO Vendas","_Metas"]
+
+annotation PBI_ProTooling = ["DevMode"]
+
+ref table 'DIM Calendario'
+ref table DateTableTemplate_e4e4a09b-826a-4c5d-927e-0d71a73c4eba
+ref table 'DIM Cliente'
+ref table 'DIM Lojas'
+ref table 'DIM Produtos'
+ref table 'DIM Status Pedido'
+ref table 'DIM Vendedor'
+ref table LocalDateTable_bbb22c18-2e73-4579-9b78-2cb13457ab82
+ref table 'FATO Metas'
+ref table 'FATO Movimentacão Estoque'
+ref table 'FATO Vendas'
+ref table _Metas
+ref table Plano_Prescritivo
+
+ref cultureInfo pt-BR
+

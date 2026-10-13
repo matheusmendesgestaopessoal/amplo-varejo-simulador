@@ -1,0 +1,54 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.13.0/schema.json",
+  "name": "23ad180582e842968d3b",
+  "position": {
+    "x": 904,
+    "y": 2850,
+    "z": 8900,
+    "height": 28,
+    "width": 882,
+    "tabOrder": 8900
+  },
+  "visual": {
+    "visualType": "textbox",
+    "objects": {
+      "general": [
+        {
+          "properties": {
+            "paragraphs": [
+              {
+                "textRuns": [
+                  {
+                    "value": "Prioridade Média  ·  Esforço Alto  ·  Confiança na causa Média  ·  Dono Gestão de lojas",
+                    "textStyle": {
+                      "fontSize": "10pt",
+                      "color": "#5E5E5E",
+                      "fontFamily": "Segoe UI"
+                    }
+                  }
+                ],
+                "horizontalTextAlignment": "right"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "visualContainerObjects": {
+      "background": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

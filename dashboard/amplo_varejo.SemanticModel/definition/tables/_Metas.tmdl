@@ -1,0 +1,506 @@
+table _Metas
+	lineageTag: 62d92791-83e9-4a5f-ab25-86a33195c68e
+
+	measure Clientes_Ativos = CALCULATE(DISTINCTCOUNT('FATO Vendas'[sk_cliente]),'FATO Vendas'[sk_status] <> 3)
+		formatString: 0
+		displayFolder: 01 Overview
+		lineageTag: 07bbf314-3f6f-47a6-95cb-76a9612f2799
+
+	measure Receita_Total = CALCULATE(SUM('FATO Vendas'[sub_total]), 'FATO Vendas'[sk_status] <> 3)
+		formatString: "R$"\ #,0.00;-"R$"\ #,0.00;"R$"\ #,0.00
+		displayFolder: 00 Medidas Base
+		lineageTag: a3b15597-8179-4697-8eef-11056e96abb0
+
+		annotation PBI_FormatHint = {"currencyCulture":"pt-BR"}
+
+	measure Custo_Total = CALCULATE(SUM('FATO Vendas'[custo_total]), 'FATO Vendas'[sk_status] <> 3)
+		formatString: "R$"\ #,0.00;-"R$"\ #,0.00;"R$"\ #,0.00
+		displayFolder: 00 Medidas Base
+		lineageTag: 82b098dc-cb8f-4ff9-af0a-d7b4c9d0b73a
+
+		annotation PBI_FormatHint = {"currencyCulture":"pt-BR"}
+
+	measure Lucro_Total = [Receita_Total] - [Custo_Total]
+		formatString: "R$"\ #,0.00;-"R$"\ #,0.00;"R$"\ #,0.00
+		displayFolder: 00 Medidas Base
+		lineageTag: 15cd537b-f8d6-4fbd-bbf0-449dc8e85b02
+
+		annotation PBI_FormatHint = {"currencyCulture":"pt-BR"}
+
+	measure 'Margem %' = DIVIDE([Lucro_Total], [Receita_Total])
+		formatString: 0.0%;-0.0%;0.0%
+		displayFolder: 00 Medidas Base
+		lineageTag: c37523e7-77d5-42f8-b813-d526fd24bd1f
+
+	measure Quantidade_Pedidos = CALCULATE(DISTINCTCOUNT('FATO Vendas'[id_pedido]),'FATO Vendas'[sk_status] <> 3)
+		formatString: 0
+		displayFolder: 00 Medidas Base
+		lineageTag: 060a5a7d-50e8-4493-bc87-259a2489ddb6
+
+	measure Quantidade_Vendida = CALCULATE(SUM('FATO Vendas'[quantidade]),'FATO Vendas'[sk_status] <> 3)
+		formatString: 0
+		displayFolder: 00 Medidas Base
+		lineageTag: 260b191a-f9ad-462b-b192-3243c98ab7b4
+
+	measure Ticket_Médio = DIVIDE([Receita_Total], [Quantidade_Pedidos])
+		formatString: "R$"\ #,0.00;-"R$"\ #,0.00;"R$"\ #,0.00
+		displayFolder: 00 Medidas Base
+		lineageTag: 558b4c12-51f3-4ad3-a85c-c057227699c2
+
+		annotation PBI_FormatHint = {"currencyCulture":"pt-BR"}
+
+	measure Meta_Faturamento = CALCULATE(SUM('FATO Metas'[meta_faturamento]), TREATAS(VALUES('DIM Calendario'[mes]), 'FATO Metas'[mes]))
+		formatString: "R$"\ #,0.00;-"R$"\ #,0.00;"R$"\ #,0.00
+		displayFolder: 01 Overview
+		lineageTag: 5c5a923d-b5a5-4596-aeb6-cdfb718b0b3c
+
+		annotation PBI_FormatHint = {"currencyCulture":"pt-BR"}
+
+	measure Meta_Pedidos = CALCULATE(SUM('FATO Metas'[meta_pedidos]), TREATAS(VALUES('DIM Calendario'[mes]), 'FATO Metas'[mes]))
+		formatString: 0
+		displayFolder: 01 Overview
+		lineageTag: d53c3964-6e2c-4aa5-8b65-a28fcdf7e82e
+
+	measure 'Meta x Realizado %' = DIVIDE([Receita_Total],[Meta_Faturamento])
+		formatString: 0.0%;-0.0%;0.0%
+		displayFolder: 01 Overview
+		lineageTag: 65815555-e8c4-4aca-87da-67e2df774d7c
+
+	measure 'Diferença Meta' = [Receita_Total] - [Meta_Faturamento]
+		formatString: "R$"\ #,0.00;-"R$"\ #,0.00;"R$"\ #,0.00
+		displayFolder: 01 Overview
+		lineageTag: 1ed2d3b2-5375-40ea-a3c9-162fbee43b15
+
+		annotation PBI_FormatHint = {"currencyCulture":"pt-BR"}
+
+	measure 'Falta para Meta %' = 1 - DIVIDE([Receita_Total],[Meta_Faturamento])
+		formatString: 0.0%;-0.0%;0.0%
+		displayFolder: 01 Overview
+		lineageTag: 2b475d76-26f9-46d2-a274-314a61ac2e5e
+
+	measure Produtos_Vendidos = CALCULATE(SUM('FATO Vendas'[quantidade]), 'FATO Vendas'[sk_status] <> 3)
+		formatString: 0
+		displayFolder: 02 Produtos
+		lineageTag: 828a7938-81df-4e68-b4e8-ae919e15e01d
+
+	measure Entradas = CALCULATE( SUM('FATO Movimentacão Estoque'[quantidade]), 'FATO Movimentacão Estoque'[tipo_movimentacao] = "Entrada")
+		formatString: 0
+		displayFolder: 02 Produtos
+		lineageTag: 4982d4e7-a279-45d1-a091-0a5f2355e757
+
+	measure Saidas = CALCULATE( SUM('FATO Movimentacão Estoque'[quantidade]), 'FATO Movimentacão Estoque'[tipo_movimentacao] = "Saída")
+		formatString: 0
+		displayFolder: 02 Produtos
+		lineageTag: 5dbd25cd-04ee-43ba-a869-7204a695b62e
+
+	measure Estoque_Atual = [Entradas] - [Saidas]
+		formatString: 0
+		displayFolder: 02 Produtos
+		lineageTag: 0d07eef5-0a7c-484a-a472-d0fa8e8e818f
+
+	measure Valor_Estoque =
+			SUMX(
+			    VALUES('DIM Produtos'[sk_produto]),
+			    [Estoque_Atual] * CALCULATE(MAX('DIM Produtos'[custo]))
+			)
+		formatString: "R$"\ #,0.00;-"R$"\ #,0.00;"R$"\ #,0.00
+		displayFolder: 02 Produtos
+		lineageTag: 715e6fda-b714-4785-afde-b1278e5951c4
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure Participacao_Produto = DIVIDE([Receita_Total],CALCULATE([Receita_Total], ALL('DIM Produtos')))
+		formatString: 0.0%;-0.0%;0.0%
+		displayFolder: 02 Produtos
+		lineageTag: 7a5bfb16-04f4-480a-ba14-70ab75e4a55d
+
+	measure Frequencia_Compra =
+			
+			DIVIDE(
+			    [Quantidade_Pedidos],
+			    DISTINCTCOUNT('DIM Cliente'[sk_cliente])
+			)
+		formatString: 0
+		displayFolder: 03 Clientes
+		lineageTag: d7592470-ccdc-4db1-a878-fc5816b4b265
+
+	measure 'Ranking Loja' =
+			
+			RANKX(
+			    ALLSELECTED('DIM Lojas'[nome_loja]),
+			    [Receita_Total],
+			    ,
+			    DESC,
+			    DENSE
+			)
+		formatString: 0
+		displayFolder: 01 Overview
+		lineageTag: f1001965-9691-49fa-bfd2-94263185013a
+
+	measure Lojas_Ativas =
+			
+			DISTINCTCOUNT('FATO Vendas'[sk_loja])
+		formatString: 0
+		displayFolder: 01 Overview
+		lineageTag: cedbe3b6-e0ca-4ed0-a22c-978f84177311
+
+	measure 'Pedidos Cancelados' = CALCULATE(DISTINCTCOUNT('FATO Vendas'[id_pedido]), 'FATO Vendas'[sk_status] = 3 )
+		formatString: 0
+		displayFolder: 04 Insights
+		lineageTag: 7a2f68ba-30a7-49cb-a90a-4979a11b9877
+
+	measure 'Taxa Cancelamento' = DIVIDE([Pedidos Cancelados], [Pedidos Totais], 0)
+		formatString: 0.0%;-0.0%;0.0%
+		displayFolder: 04 Insights
+		lineageTag: c25fa3b2-89c9-4c1b-ad4a-918c1418d191
+
+	measure 'Receita Perdida' = CALCULATE(SUM('FATO Vendas'[sub_total]), 'FATO Vendas'[sk_status] = 3)
+		displayFolder: 04 Insights
+		lineageTag: bb6fceb6-d25e-402c-9ddc-b6403686fefb
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Meta % Cancelamento' = 0.03
+		formatString: 0.0%;-0.0%;0.0%
+		displayFolder: 04 Insights
+		lineageTag: ca429f81-ff48-41f3-9c6f-e2dcf20b3673
+
+	measure 'Desvio Meta Cancelamento' = [Taxa Cancelamento] - [Meta % Cancelamento]
+		displayFolder: 04 Insights
+		lineageTag: d56a0156-112b-4fe7-a00e-5a18fa5297cb
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Desvio Meta Cancelamento (p.p.)' =
+			
+			([Taxa Cancelamento] - [Meta % Cancelamento]) * 100
+		displayFolder: 04 Insights
+		lineageTag: 069276af-2fb8-4c1b-ac41-4bc94ec48d35
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure '% Cancelamentos por Região' =
+			
+			DIVIDE(
+			    [Pedidos Cancelados],
+			    CALCULATE(
+			        [Pedidos Cancelados],
+			        ALL('DIM Lojas'[regiao])
+			    ),
+			    0
+			)
+		displayFolder: 04 Insights
+		lineageTag: 65297e91-1d53-4383-9a56-5e9dc93aa9b1
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Pedidos Totais' = DISTINCTCOUNT('FATO Vendas'[id_pedido])
+		formatString: #,0
+		displayFolder: 10 Diagnóstico
+		lineageTag: 40cd8b4f-a1b9-4719-a62e-4ef908350a2c
+
+	measure 'Cancelamento x Meta' = DIVIDE([Taxa Cancelamento], [Meta % Cancelamento])
+		formatString: 0.0
+		displayFolder: 10 Diagnóstico
+		lineageTag: 0a6fcf71-f288-4367-9121-1f71b697cada
+
+	measure 'Gap Meta Rede' = MAX(0, [Meta_Faturamento] - [Receita_Total])
+		formatString: "R$"\ #,0.00;-"R$"\ #,0.00;"R$"\ #,0.00
+		displayFolder: 10 Diagnóstico
+		lineageTag: b88f0014-d085-4e89-8167-dd466803acfc
+
+	measure 'Lojas Avaliadas' = COUNTROWS(FILTER(VALUES('DIM Lojas'[sk_loja]), NOT ISBLANK([Meta_Faturamento])))
+		formatString: 0
+		displayFolder: 10 Diagnóstico
+		lineageTag: 5bebe699-3d59-45fa-b50f-04d8b09c5ed6
+
+	measure 'Lojas Abaixo Meta' = COUNTROWS(FILTER(VALUES('DIM Lojas'[sk_loja]), [Meta x Realizado %] < 1))
+		formatString: 0
+		displayFolder: 10 Diagnóstico
+		lineageTag: a59ec80b-4477-4a90-b2be-1cdb715e96b5
+
+	measure 'Gap Lojas Abaixo Meta' =
+			SUMX(
+			    FILTER(VALUES('DIM Lojas'[sk_loja]), [Meta x Realizado %] < 1),
+			    [Meta_Faturamento] - [Receita_Total]
+			)
+		formatString: "R$"\ #,0.00;-"R$"\ #,0.00;"R$"\ #,0.00
+		displayFolder: 10 Diagnóstico
+		lineageTag: 242761ac-d055-4a6f-a670-d7c71d2521ea
+
+	measure 'Lojas Abaixo 90%' = COUNTROWS(FILTER(VALUES('DIM Lojas'[sk_loja]), [Meta x Realizado %] < 0.9))
+		formatString: 0
+		displayFolder: 10 Diagnóstico
+		lineageTag: 75d5abbf-b9c8-4393-8e7d-07c7a3711b6b
+
+	measure 'Gap Lojas Abaixo 90%' =
+			SUMX(
+			    FILTER(VALUES('DIM Lojas'[sk_loja]), [Meta x Realizado %] < 0.9),
+			    [Meta_Faturamento] - [Receita_Total]
+			)
+		formatString: "R$"\ #,0.00;-"R$"\ #,0.00;"R$"\ #,0.00
+		displayFolder: 10 Diagnóstico
+		lineageTag: d3c26ee4-bbf6-40a1-9815-bd8e5770d055
+
+	measure 'Cor Atingimento' = IF([Meta x Realizado %] < 1, "#FF3B3B", "#00D980")
+		displayFolder: 12 Formatação
+		lineageTag: d235fc16-b4f3-4dd2-904a-c2657cc17f14
+
+	measure 'Cor Cancelamento' = IF([Taxa Cancelamento] > [Taxa Cancelamento Rede], "#FF3B3B", "#CFE0FF")
+		displayFolder: 12 Formatação
+		lineageTag: e30728f0-6bc2-4e36-b685-bcd45ae98db5
+
+	measure 'Estoque Final (un)' = CALCULATE([Estoque_Atual], REMOVEFILTERS('DIM Calendario'))
+		formatString: #,0
+		displayFolder: 10 Diagnóstico
+		lineageTag: b4d6dc40-7966-47bb-b468-75cd3b1a5b5f
+
+	measure 'Vendas Ano (un)' = CALCULATE([Saidas], REMOVEFILTERS('DIM Calendario'))
+		formatString: #,0
+		displayFolder: 10 Diagnóstico
+		lineageTag: 2a125140-035c-4513-bdfe-a1b60a331d16
+
+	measure 'Valor Estoque Final' = CALCULATE([Valor_Estoque], REMOVEFILTERS('DIM Calendario'))
+		formatString: "R$"\ #,0.00;-"R$"\ #,0.00;"R$"\ #,0.00
+		displayFolder: 10 Diagnóstico
+		lineageTag: 9d27f8de-e613-4f31-b3e1-142cdd3db69c
+
+	measure 'Cobertura Estoque (meses)' = DIVIDE([Estoque Final (un)], DIVIDE([Vendas Ano (un)], 12))
+		formatString: 0.0
+		displayFolder: 10 Diagnóstico
+		lineageTag: 938be512-fbd9-47ce-86fd-9563a0ce41a3
+
+	measure 'Excesso Estoque' =
+			-- valor a custo acima de 3 meses de cobertura, por loja e produto
+			SUMX(
+			    CROSSJOIN(VALUES('DIM Lojas'[sk_loja]), VALUES('DIM Produtos'[sk_produto])),
+			    VAR _final = [Estoque Final (un)]
+			    VAR _vendaMes = DIVIDE([Vendas Ano (un)], 12)
+			    VAR _excesso = IF(_vendaMes > 0, MAX(0, _final - 3 * _vendaMes), MAX(0, _final))
+			    RETURN _excesso * CALCULATE(MAX('DIM Produtos'[custo]))
+			)
+		formatString: "R$"\ #,0.00;-"R$"\ #,0.00;"R$"\ #,0.00
+		displayFolder: 10 Diagnóstico
+		lineageTag: d7f230db-4b02-45fe-b633-9ff23c6324af
+
+	measure 'Excesso Estoque %' = DIVIDE([Excesso Estoque], [Valor Estoque Final])
+		formatString: 0.0%;-0.0%;0.0%
+		displayFolder: 10 Diagnóstico
+		lineageTag: d56c408b-277e-42ae-a04f-3b8b388e9b4f
+
+	measure 'Combinações Sem Venda' =
+			COUNTROWS(
+			    FILTER(
+			        CROSSJOIN(VALUES('DIM Lojas'[sk_loja]), VALUES('DIM Produtos'[sk_produto])),
+			        [Estoque Final (un)] > 0 && [Vendas Ano (un)] = 0
+			    )
+			)
+		formatString: #,0
+		displayFolder: 10 Diagnóstico
+		lineageTag: 9dbb5920-e3d6-4448-9028-ed0bc2d670d3
+
+	measure 'Pedidos Média por Loja' = CALCULATE(DIVIDE([Quantidade_Pedidos], DISTINCTCOUNT('FATO Vendas'[sk_loja])), REMOVEFILTERS('DIM Lojas'))
+		formatString: #,0
+		displayFolder: 10 Diagnóstico
+		lineageTag: 289b3160-0de4-47c4-9c8e-580954084752
+
+	measure 'Ticket Médio Rede' = CALCULATE([Ticket_Médio], REMOVEFILTERS('DIM Lojas'))
+		formatString: "R$"\ #,0.00;-"R$"\ #,0.00;"R$"\ #,0.00
+		displayFolder: 10 Diagnóstico
+		lineageTag: 8734a723-a760-4821-aa21-040137f4d87e
+
+	measure 'Taxa Cancelamento Rede' = CALCULATE([Taxa Cancelamento], REMOVEFILTERS('DIM Lojas'))
+		formatString: 0.0%;-0.0%;0.0%
+		displayFolder: 10 Diagnóstico
+		lineageTag: a41e55ee-d50d-4c50-8e2e-cc4f76d8962a
+
+	measure 'Pedidos vs Média' = DIVIDE([Quantidade_Pedidos], [Pedidos Média por Loja]) - 1
+		formatString: +0%;-0%;0%
+		displayFolder: 10 Diagnóstico
+		lineageTag: c174e9b6-b627-47b7-96de-a1f0d4528feb
+
+	measure 'Ticket vs Média' = DIVIDE([Ticket_Médio], [Ticket Médio Rede]) - 1
+		formatString: +0%;-0%;0%
+		displayFolder: 10 Diagnóstico
+		lineageTag: a9222f88-41e3-4d68-89c7-10027bb77eb1
+
+	measure 'Participação Receita' = DIVIDE([Receita_Total], CALCULATE([Receita_Total], ALLSELECTED()))
+		formatString: 0.0%;-0.0%;0.0%
+		displayFolder: 10 Diagnóstico
+		lineageTag: 48156939-298e-4d89-8d9a-973b0fe4e07a
+
+	measure 'Txt Resposta' =
+			VAR _receita = [Receita_Total]
+			VAR _ating = [Meta x Realizado %]
+			RETURN
+			    "A rede faturou " & "R$ " & FORMAT(_receita / 1000000, "0.00") & " Mi" & ", " & FORMAT(_ating, "0.0%") & " da meta. "
+			    & "O dinheiro em jogo está em três frentes: " & "R$ " & FORMAT([Receita Perdida] / 1000000, "0.00") & " Mi" & " em pedidos cancelados, "
+			    & "R$ " & FORMAT([Gap Lojas Abaixo Meta] / 1000000, "0.00") & " Mi" & " de gap em " & [Lojas Abaixo Meta] & " lojas abaixo da meta e "
+			    & "R$ " & FORMAT([Excesso Estoque] / 1000000, "0.00") & " Mi" & " em estoque acima de 3 meses de cobertura."
+		displayFolder: 11 Textos
+		lineageTag: 9131e2b7-5e2a-4f4b-a15d-f6c2cea4ee8f
+
+	measure 'Txt KPI Receita' = "R$ " & FORMAT([Receita_Total] / 1000000, "0.00") & " Mi"
+		displayFolder: 11 Textos
+		lineageTag: e437deff-8cf2-469a-9675-45fea5c30441
+
+	measure 'Txt Ctx Receita' = "Meta " & "R$ " & FORMAT([Meta_Faturamento] / 1000000, "0.00") & " Mi" & " · " & FORMAT([Meta x Realizado %], "0.0%") & " atingido"
+		displayFolder: 11 Textos
+		lineageTag: c41ba23d-08fb-484d-aed6-7779dc233ddf
+
+	measure 'Txt KPI Lucro' = "R$ " & FORMAT([Lucro_Total] / 1000000, "0.00") & " Mi"
+		displayFolder: 11 Textos
+		lineageTag: f706855e-6c47-44ca-9999-d617fbfb0e12
+
+	measure 'Txt Ctx Lucro' = "Margem de " & FORMAT([Margem %], "0.0%")
+		displayFolder: 11 Textos
+		lineageTag: 723b30d7-7dc4-42c7-9110-d0074b651b07
+
+	measure 'Txt KPI Pedidos' = FORMAT([Quantidade_Pedidos], "#,0")
+		displayFolder: 11 Textos
+		lineageTag: a9800427-6982-4020-822c-b5cfb989b17c
+
+	measure 'Txt Ctx Pedidos' = "Ticket médio R$ " & FORMAT([Ticket_Médio], "#,0")
+		displayFolder: 11 Textos
+		lineageTag: 48cbc1c4-9723-4cdd-8d8a-ca6251a09b56
+
+	measure 'Txt KPI Cancelamento' = FORMAT([Taxa Cancelamento], "0.0%")
+		displayFolder: 11 Textos
+		lineageTag: e8d4a977-19bf-4787-bc9d-47b896e00ada
+
+	measure 'Txt Ctx Cancelamento' = "Meta 3,0% · " & FORMAT([Cancelamento x Meta], "0.0") & "× a meta"
+		displayFolder: 11 Textos
+		lineageTag: 0d858fc2-e369-48a9-84b5-3f1e2dcff064
+
+	measure 'Txt KPI Lojas' = [Lojas Abaixo Meta] & " de " & [Lojas Avaliadas]
+		displayFolder: 11 Textos
+		lineageTag: b7de9945-2228-4bec-b599-e2f4b2692aec
+
+	measure 'Txt Ctx Lojas' = "lojas abaixo da meta · gap " & "R$ " & FORMAT([Gap Lojas Abaixo Meta] / 1000000, "0.00") & " Mi"
+		displayFolder: 11 Textos
+		lineageTag: 43b090ce-2444-4afe-98e3-ed764fdb9fc8
+
+	measure 'Txt Receita Perdida' = "R$ " & FORMAT([Receita Perdida] / 1000000, "0.00") & " Mi"
+		displayFolder: 11 Textos
+		lineageTag: ee76ce4c-64e2-4b88-bbf2-6f3794b35a72
+
+	measure 'Txt Gap Lojas' = "R$ " & FORMAT([Gap Lojas Abaixo Meta] / 1000000, "0.00") & " Mi"
+		displayFolder: 11 Textos
+		lineageTag: 729e7482-163c-42df-a1ce-b4c0cccbc8d6
+
+	measure 'Txt Excesso Estoque' = "R$ " & FORMAT([Excesso Estoque] / 1000000, "0.00") & " Mi"
+		displayFolder: 11 Textos
+		lineageTag: 6b700b32-6e12-41f4-a685-7bfb0a5bb350
+
+	measure 'Txt Titulo Contexto' =
+			VAR _topRegiao = TOPN(1, VALUES('DIM Lojas'[regiao]), [Receita_Total])
+			VAR _topCategorias = TOPN(2, VALUES('DIM Produtos'[nome_categoria]), [Receita_Total])
+			VAR _nomeRegiao = MAXX(_topRegiao, 'DIM Lojas'[regiao])
+			VAR _shareRegiao = DIVIDE(CALCULATE([Receita_Total], _topRegiao), [Receita_Total])
+			VAR _shareCategorias = DIVIDE(CALCULATE([Receita_Total], _topCategorias), [Receita_Total])
+			VAR _nomesCategorias = CONCATENATEX(_topCategorias, 'DIM Produtos'[nome_categoria], " e ", [Receita_Total], DESC)
+			RETURN
+			    _nomesCategorias & " somam " & FORMAT(_shareCategorias, "0%") & " da receita, e o " & _nomeRegiao & " sozinho gera " & FORMAT(_shareRegiao, "0%")
+		displayFolder: 11 Textos
+		lineageTag: 5fe980d0-c2f6-4b4e-adc3-82afb7a52b5d
+
+	measure 'Txt Titulo Cancelamento' = "A taxa de cancelamento é " & FORMAT([Taxa Cancelamento], "0.0%") & ", " & FORMAT([Cancelamento x Meta], "0.0") & "× a meta, e custa " & "R$ " & FORMAT([Receita Perdida] / 1000000, "0.00") & " Mi"
+		displayFolder: 11 Textos
+		lineageTag: 8e925de8-6579-4998-936b-9ed533e43507
+
+	measure 'Txt Titulo Lojas' = [Lojas Abaixo Meta] & " de " & [Lojas Avaliadas] & " lojas estão abaixo da meta, com gap de " & "R$ " & FORMAT([Gap Lojas Abaixo Meta] / 1000000, "0.00") & " Mi"
+		displayFolder: 11 Textos
+		lineageTag: fab596d4-8160-469a-992d-3c5f7484fd62
+
+	measure 'Txt Titulo Estoque' = "R$ " & FORMAT([Excesso Estoque] / 1000000, "0.00") & " Mi" & " (" & FORMAT([Excesso Estoque %], "0%") & " do estoque) estão acima de 3 meses de cobertura"
+		displayFolder: 11 Textos
+		lineageTag: e5f32805-b3a2-410c-8b62-a33a704d2f3e
+
+	measure 'Txt Titulo Loja' = SELECTEDVALUE('DIM Lojas'[nome_loja], "Selecione uma loja") & " · " & SELECTEDVALUE('DIM Lojas'[nome_estado]) & " · " & SELECTEDVALUE('DIM Lojas'[regiao])
+		displayFolder: 11 Textos
+		lineageTag: 7768a0e9-ffa8-411a-b588-25f57d225a5e
+
+	measure 'Txt KPI Loja Receita' = "R$ " & FORMAT([Receita_Total] / 1000, "#,0") & " mil"
+		displayFolder: 11 Textos
+		lineageTag: 16ae52e8-6db4-452a-8bff-974e433841fd
+
+	measure 'Txt Ctx Loja Receita' = "Meta R$ " & FORMAT([Meta_Faturamento] / 1000, "#,0") & " mil · " & FORMAT([Meta x Realizado %], "0%")
+		displayFolder: 11 Textos
+		lineageTag: e47c55d3-b92f-4170-ba37-bed2451e4fde
+
+	measure 'Txt Ctx Loja Pedidos' = "Média das lojas: " & FORMAT([Pedidos Média por Loja], "#,0") & " · " & FORMAT([Pedidos vs Média], "+0%;-0%;0%")
+		displayFolder: 11 Textos
+		lineageTag: 3831a1cb-7df4-4264-a358-189e08352b44
+
+	measure 'Txt Ctx Loja Ticket' = "Média da rede: R$ " & FORMAT([Ticket Médio Rede], "#,0") & " · " & FORMAT([Ticket vs Média], "+0%;-0%;0%")
+		displayFolder: 11 Textos
+		lineageTag: 8354637b-d79c-4714-bdbe-2a09fd453110
+
+	measure 'Txt Ctx Loja Cancelamento' = "Rede: " & FORMAT([Taxa Cancelamento Rede], "0.0%")
+		displayFolder: 11 Textos
+		lineageTag: 4165a6a8-6ab8-498e-bfeb-13a54727249e
+
+	measure 'Txt KPI Ticket' = "R$ " & FORMAT([Ticket_Médio], "#,0")
+		displayFolder: 11 Textos
+		lineageTag: 7020f816-21bd-476d-bdd5-7c8649498435
+
+	measure 'Txt Diagnostico Loja' =
+			VAR _ating = [Meta x Realizado %]
+			VAR _pedidos = [Pedidos vs Média]
+			VAR _ticket = [Ticket vs Média]
+			VAR _cancel = [Taxa Cancelamento] - [Taxa Cancelamento Rede]
+			VAR _causa =
+			    SWITCH(
+			        TRUE(),
+			        _ating >= 1, "Loja na meta: usar como referência para as outras lojas da região.",
+			        _pedidos < -0.05 && _pedidos <= _ticket, "Causa dominante: baixo fluxo, com " & FORMAT(ABS(_pedidos), "0%") & " menos pedidos que a média das lojas.",
+			        _ticket < -0.05, "Causa dominante: ticket baixo, " & FORMAT(ABS(_ticket), "0%") & " abaixo do ticket médio da rede.",
+			        "Pedidos e ticket próximos da média: a meta pode estar acima do potencial da loja."
+			    )
+			VAR _agravante = IF(_cancel > 0.01, " Agravante: cancelamento " & FORMAT(_cancel * 100, "0.0") & " p.p. acima da rede.", "")
+			RETURN
+			    "Atingimento de " & FORMAT(_ating, "0%") & ". " & _causa & _agravante
+		displayFolder: 11 Textos
+		lineageTag: 284641b8-ceaa-49de-a08e-1c6a4199eb92
+
+	measure 'Txt Acao Loja' =
+			VAR _ating = [Meta x Realizado %]
+			VAR _pedidos = [Pedidos vs Média]
+			VAR _ticket = [Ticket vs Média]
+			RETURN
+			    SWITCH(
+			        TRUE(),
+			        _ating >= 1, "Ação: documentar as práticas da loja e replicar na região.",
+			        _pedidos < -0.05 && _pedidos <= _ticket, "Ação: campanha local de atração e revisão de horário e equipe.",
+			        _ticket < -0.05, "Ação: treinar a equipe em venda de maior valor e revisar o mix.",
+			        "Ação: revisar a meta com a gestão regional."
+			    )
+		displayFolder: 11 Textos
+		lineageTag: 880a796c-2900-4805-8959-bfe950897c75
+
+	measure 'Txt Tooltip Regiao' = SELECTEDVALUE('DIM Lojas'[regiao]) & ": " & "R$ " & FORMAT([Receita_Total] / 1000000, "0.00") & " Mi" & " · " & FORMAT([Participação Receita], "0%") & " da receita"
+		displayFolder: 11 Textos
+		lineageTag: f785a40c-ef5e-4f01-a4b8-3cc702e89558
+
+	column 'Coluna 1'
+		dataType: int64
+		formatString: 0
+		lineageTag: 14e43ac5-70ae-4f17-a0d2-6447938bcf07
+		summarizeBy: sum
+		sourceColumn: Coluna 1
+
+		annotation SummarizationSetBy = Automatic
+
+	partition _Metas = m
+		mode: import
+		source =
+				let
+				  Origem = Table.FromRows(Json.Document(Binary.Decompress(Binary.FromText("i45WMlSKjQUA", BinaryEncoding.Base64), Compression.Deflate)), let _t = ((type nullable text) meta [Serialized.Text = true]) in type table [#"Coluna 1" = _t]),
+				  #"Tipo de coluna alterado" = Table.TransformColumnTypes(Origem, {{"Coluna 1", Int64.Type}})
+				in
+				  #"Tipo de coluna alterado"
+
+	annotation PBI_NavigationStepName = Navegação
+
+	annotation PBI_ResultType = Table
+

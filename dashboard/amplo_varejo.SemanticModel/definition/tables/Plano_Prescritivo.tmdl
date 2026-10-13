@@ -1,0 +1,97 @@
+table Plano_Prescritivo
+	lineageTag: 183f3e34-ebc0-4905-96ae-96adb0c2cb4d
+
+	column 'Ordem'
+		formatString: 0
+		lineageTag: 04ad3bcb-56a6-44be-b62c-96b259e4abbd
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Ordem]
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Frente'
+		lineageTag: 030408f8-2acd-4f68-b10f-e8869b8b22f5
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Frente]
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Decisão'
+		lineageTag: b0acb4f8-f273-47ea-b8f7-ca63f07bc97e
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Decisão]
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Dono'
+		lineageTag: 122cf806-8a1b-4a7b-bca9-ca55f5dcec9d
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Dono]
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Prazo'
+		lineageTag: 6caef79d-2962-47f3-8b98-a86b6a3a69db
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Prazo]
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Indicador'
+		lineageTag: bffe8ffb-65b4-491a-95c4-6a70d692833c
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Indicador]
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Valor recuperável'
+		lineageTag: 538636f1-38aa-43f9-b9c2-a400bcd5f7b1
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Valor recuperável]
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Esforço'
+		lineageTag: a9800a57-9948-46d1-96c1-a4cdc508fc63
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Esforço]
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Confiança'
+		lineageTag: 90f9f2d3-5b81-4879-aa95-0db0e9da2b1d
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Confiança]
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Prioridade'
+		lineageTag: 84fde807-d42a-4188-ab79-be6635da9705
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Prioridade]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Plano_Prescritivo = calculated
+		mode: import
+		source =
+				DATATABLE(
+				    "Ordem", INTEGER, "Frente", STRING, "Decisão", STRING, "Dono", STRING, "Prazo", STRING, "Indicador", STRING, "Valor recuperável", STRING, "Esforço", STRING, "Confiança", STRING, "Prioridade", STRING,
+				    {
+				        { 1, "Cancelamentos", "Registrar o motivo, auditar o fluxo do pedido e corrigir a causa nº 1", "Operações + TI", "30 a 90 dias", "Taxa 8,9% → 5,0%", "R$ 0,69 a 1,39 Mi", "Médio", "Média", "Alta" },
+				        { 2, "Estoque excedente", "Redistribuir entre lojas, pausar compras e promover os 10 itens com mais excesso", "Estoque + Compras", "60 dias", "Excesso R$ 1,56 Mi → R$ 0,6 Mi", "R$ 0,63 a 1,09 Mi em caixa", "Baixo", "Alta", "Média" },
+				        { 3, "Lojas abaixo da meta", "Diagnóstico individual das 19 lojas abaixo de 90% da meta", "Gestão de lojas", "60 a 90 dias", "Atingimento 95,5% → 100%", "R$ 0,40 a 0,80 Mi", "Alto", "Média", "Média" }
+				    }
+				)
+
+	annotation PBI_Id = f55199b14b8a45949285d0b9557ff1b8

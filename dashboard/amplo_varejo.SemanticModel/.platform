@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "SemanticModel",
+    "displayName": "amplo_varejo"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "6773e4b3-eeae-4e0d-8500-3350857688fd"
+  }
+}

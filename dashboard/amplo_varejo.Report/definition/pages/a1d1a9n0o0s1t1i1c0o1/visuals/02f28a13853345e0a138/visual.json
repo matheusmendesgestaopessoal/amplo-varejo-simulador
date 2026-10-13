@@ -1,0 +1,54 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.13.0/schema.json",
+  "name": "02f28a13853345e0a138",
+  "position": {
+    "x": 104,
+    "y": 4890,
+    "z": 13600,
+    "height": 48,
+    "width": 1712,
+    "tabOrder": 13600
+  },
+  "visual": {
+    "visualType": "textbox",
+    "objects": {
+      "general": [
+        {
+          "properties": {
+            "paragraphs": [
+              {
+                "textRuns": [
+                  {
+                    "value": "Dados: sintéticos, gerados em Python com regras de negócio (jan–dez/2025)  ·  Modelo: MySQL → ETL → Star Schema (6 dimensões, 3 fatos)  ·  Métricas: DAX documentadas no repositório  ·  Matheus Mendes, Analista de Dados",
+                    "textStyle": {
+                      "fontSize": "9pt",
+                      "color": "#5E5E5E",
+                      "fontFamily": "Segoe UI"
+                    }
+                  }
+                ],
+                "horizontalTextAlignment": "left"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "visualContainerObjects": {
+      "background": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>Protótipo v2 · Página 2 · Detalhe da loja</title>
+<link rel="stylesheet" href="base.css">
+<style>body{height:1080px;overflow:hidden}.insight{padding:12px 16px}.insight p{font-size:15px;margin-top:4px}.vis{padding:18px 22px}.kpi{padding:16px 20px}.kpi .k-val{font-size:34px}td{padding:9px 14px}</style>
+</head>
+<body>
+<!-- Página de detalhe (drill-through): abre com o botão direito numa loja, em qualquer visual -->
+<header>
+  <div class="wrap">
+    <div class="marca">
+      <span style="display:flex;align-items:center;gap:8px;padding:10px 14px;border-radius:10px;background:var(--azul-fundo);color:var(--azul-tinta);font-weight:600;font-size:14px"><span data-i="voltar"></span> Voltar ao diagnóstico</span>
+      <div style="margin-left:8px"><div class="s">Diagnóstico de faturamento / Detalhe da loja</div><div class="t">Loja MA 021 · São Luís (MA) · Nordeste <span class="anot">ƒ título dinâmico</span></div></div>
+    </div>
+    <div class="filtros"><div class="filtro"><small>Período</small><b>2025 <span>▾</span></b></div><span class="anot">valores ilustrativos</span></div>
+  </div>
+</header>
+
+<section style="padding-top:22px">
+  <div class="wrap grid" style="grid-template-columns:repeat(5,1fr)">
+    <div class="card kpi"><div class="k-lbl">Receita <span class="ico" data-i="receita"></span></div><div class="k-val">R$ 3,9 Mi</div><div class="k-ctx">Meta R$ 4,8 Mi <span class="delta ruim">82%</span></div></div>
+    <div class="card kpi"><div class="k-lbl">Pedidos <span class="ico" data-i="pedidos"></span></div><div class="k-val">612</div><div class="k-ctx">Média das lojas: 759 <span class="delta ruim">−19%</span></div></div>
+    <div class="card kpi"><div class="k-lbl">Ticket médio <span class="ico" data-i="ticket"></span></div><div class="k-val">R$ 6.370</div><div class="k-ctx">Média: R$ 6.880 <span class="delta ruim">−7%</span></div></div>
+    <div class="card kpi"><div class="k-lbl">Cancelamento <span class="ico" data-i="cancelamento" data-c="#FF3B3B" style="background:var(--vermelho-fundo)"></span></div><div class="k-val" style="color:var(--vermelho)">13,1%</div><div class="k-ctx">Empresa: 9,8% <span class="delta ruim">+3,3 p.p.</span></div></div>
+    <div class="card kpi"><div class="k-lbl">Estoque parado <span class="ico" data-i="estoque"></span></div><div class="k-val">R$ 21 mil</div><div class="k-ctx">Giro &lt; 1× ao ano</div></div>
+  </div>
+
+  <div class="wrap grid" style="grid-template-columns:1.6fr 1fr;margin-top:16px">
+    <div class="card vis"><h3>Receita mensal x meta da loja</h3><div class="sub">R$ mil · linha tracejada = meta</div><div id="g-loja-mes"></div></div>
+    <div class="card vis"><h3>Diagnóstico da loja</h3><div class="sub">Causa dominante calculada pelos indicadores</div>
+      <div class="insight" style="--c:var(--vermelho);--c2:#C41F1F;margin-top:4px"><div class="lbl">Causa dominante</div><p><b>Baixo fluxo de clientes:</b> 19% menos pedidos que a média, com ticket próximo do normal.</p></div>
+      <div class="insight" style="--c:var(--amarelo);--c2:#8A6400;margin-top:10px"><div class="lbl">Fator agravante</div><p>Cancelamento 3,3 p.p. acima da média da empresa, concentrado em Tecnologia.</p></div>
+      <div class="insight" style="--c:var(--verde);--c2:var(--verde-escuro);margin-top:10px"><div class="lbl">Ação recomendada</div><p>Campanha local de atração e revisão do estoque de Tecnologia antes de novembro.</p></div>
+    </div>
+  </div>
+
+  <div class="wrap grid" style="grid-template-columns:1fr 1fr 1fr;margin-top:16px">
+    <div class="card vis"><h3>Receita por categoria</h3><div class="sub">R$ mil</div><div id="g-loja-cat"></div></div>
+    <div class="card vis"><h3>Cancelamento por categoria</h3><div class="sub">% · vermelho = acima da média da empresa</div><div id="g-loja-cancel"></div></div>
+    <div class="card vis"><h3>Vendedores</h3><div class="sub">% da meta individual</div>
+      <table><thead><tr><th>Vendedor</th><th class="num">Receita</th><th class="num">% meta</th></tr></thead><tbody>
+        <tr><td>Ana Ribeiro</td><td class="num">R$ 1,2 Mi</td><td class="num" style="color:var(--verde-escuro);font-weight:700">101%</td></tr>
+        <tr><td>Carlos Lima</td><td class="num">R$ 1,0 Mi</td><td class="num" style="color:#C41F1F;font-weight:700">84%</td></tr>
+        <tr><td>Júlia Santos</td><td class="num">R$ 0,9 Mi</td><td class="num" style="color:#C41F1F;font-weight:700">76%</td></tr>
+        <tr><td>Rafael Costa</td><td class="num">R$ 0,8 Mi</td><td class="num" style="color:#C41F1F;font-weight:700">69%</td></tr>
+      </tbody></table></div>
+  </div>
+</section>
+
+<script src="graficos.js"></script>
+<script>
+icones();
+setTimeout(()=>{document.title="H="+document.documentElement.scrollHeight},0);
+colunas(document.getElementById("g-loja-mes"), {labels:["Jan","Fev","Mar","Abr","Mai","Jun","Jul","Ago","Set","Out","Nov","Dez"], valores:[290,262,281,270,330,268,312,259,288,301,402,436], linhaMeta:[360,360,360,360,380,360,380,360,380,380,480,520], destaque:[10,11], decimais:0, altura:232});
+barrasH(document.getElementById("g-loja-cat"), {itens:[["Eletro",1850],["Tecnologia",1490],["Escritório",380],["Casa",180]], altura:38, lw:100, decimais:0, cor:(v,i)=>i<2?AZ:SEL});
+barrasH(document.getElementById("g-loja-cancel"), {itens:[["Tecnologia",17.2],["Eletro",12.1],["Escritório",8.4],["Casa",6.9]], altura:38, lw:100, sufixo:"%", cor:(v)=>v>9.8?VERM:"#FFC9C9"});
+</script>
+</body>
+</html>

@@ -1,0 +1,80 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.13.0/schema.json",
+  "name": "0d6c1b35af4245d38c18",
+  "position": {
+    "x": 1254,
+    "y": 2932,
+    "z": 9600,
+    "height": 150,
+    "width": 533,
+    "tabOrder": 9600
+  },
+  "visual": {
+    "visualType": "textbox",
+    "objects": {
+      "general": [
+        {
+          "properties": {
+            "paragraphs": [
+              {
+                "textRuns": [
+                  {
+                    "value": "1. Abrir o detalhe das 19 lojas e classificar a causa dominante. Gestão de lojas · 2 semanas",
+                    "textStyle": {
+                      "fontSize": "11pt",
+                      "color": "#3F3F3F",
+                      "fontFamily": "Segoe UI"
+                    }
+                  }
+                ],
+                "horizontalTextAlignment": "left"
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "2. Aplicar a ação de cada causa: campanha local (fluxo), treino de venda (ticket) ou revisão da meta.",
+                    "textStyle": {
+                      "fontSize": "11pt",
+                      "color": "#3F3F3F",
+                      "fontFamily": "Segoe UI"
+                    }
+                  }
+                ],
+                "horizontalTextAlignment": "left"
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "3. Acompanhar o atingimento mensal de cada loja.",
+                    "textStyle": {
+                      "fontSize": "11pt",
+                      "color": "#3F3F3F",
+                      "fontFamily": "Segoe UI"
+                    }
+                  }
+                ],
+                "horizontalTextAlignment": "left"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "visualContainerObjects": {
+      "background": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

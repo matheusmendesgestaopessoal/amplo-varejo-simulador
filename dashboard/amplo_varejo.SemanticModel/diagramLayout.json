@@ -1,0 +1,164 @@
+{
+  "version": "1.1.0",
+  "diagrams": [
+    {
+      "ordinal": 0,
+      "scrollPosition": {
+        "x": 736.99999999999886,
+        "y": 0
+      },
+      "nodes": [
+        {
+          "location": {
+            "x": 601.71958079325987,
+            "y": 0
+          },
+          "nodeIndex": "DIM Calendario",
+          "nodeLineageTag": "c8b264b5-318c-4080-ad95-e53c92e10b63",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 13
+        },
+        {
+          "location": {
+            "x": 839.033709881168,
+            "y": 966.31891408836827
+          },
+          "nodeIndex": "DIM Cliente",
+          "nodeLineageTag": "04100fa9-b1be-4ebd-bc29-ca42cf3d6142",
+          "size": {
+            "height": 224,
+            "width": 234
+          },
+          "zIndex": 2
+        },
+        {
+          "location": {
+            "x": 401.60738593357979,
+            "y": 824.812799544199
+          },
+          "nodeIndex": "DIM Lojas",
+          "nodeLineageTag": "a37da317-0334-47de-b9e0-c7ac145d0ac9",
+          "size": {
+            "height": 224,
+            "width": 234
+          },
+          "zIndex": 3
+        },
+        {
+          "location": {
+            "x": 921.73986067930036,
+            "y": 673.1230892831968
+          },
+          "nodeIndex": "DIM Produtos",
+          "nodeLineageTag": "6a4a0273-f729-494a-89a0-132e9549248f",
+          "size": {
+            "height": 224,
+            "width": 234
+          },
+          "zIndex": 14
+        },
+        {
+          "location": {
+            "x": 62.320756980601345,
+            "y": 856.96855582424894
+          },
+          "nodeIndex": "DIM Status Pedido",
+          "nodeLineageTag": "40a9e469-524c-4a77-ab8a-c3ebb9ac5c6d",
+          "size": {
+            "height": 128,
+            "width": 234
+          },
+          "zIndex": 4
+        },
+        {
+          "location": {
+            "x": 829.7187872924361,
+            "y": 1257.9133302087394
+          },
+          "nodeIndex": "DIM Vendedor",
+          "nodeLineageTag": "ad995969-6715-45e8-aeb5-9daa9b190714",
+          "size": {
+            "height": 224,
+            "width": 234
+          },
+          "zIndex": 5
+        },
+        {
+          "location": {
+            "x": 424.48397220684916,
+            "y": 1145.6058694703549
+          },
+          "nodeIndex": "FATO Metas",
+          "nodeLineageTag": "0d13be8c-18e6-4a2b-ae6f-bab433fac318",
+          "size": {
+            "height": 224,
+            "width": 234
+          },
+          "zIndex": 6
+        },
+        {
+          "location": {
+            "x": 852.3532614038337,
+            "y": 355.52275842422375
+          },
+          "nodeIndex": "FATO Movimentacão Estoque",
+          "nodeLineageTag": "791c7274-9c1e-485a-9d48-77ef14daed69",
+          "size": {
+            "height": 248,
+            "width": 234
+          },
+          "zIndex": 15
+        },
+        {
+          "location": {
+            "x": 206.10715468747571,
+            "y": 247.09331440111993
+          },
+          "nodeIndex": "FATO Vendas",
+          "nodeLineageTag": "724cebfb-dd77-4d4f-9b8b-a7791e74f3cc",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 7
+        },
+        {
+          "location": {
+            "x": 1247.0286902237065,
+            "y": 0
+          },
+          "nodeIndex": "_Metas",
+          "nodeLineageTag": "62d92791-83e9-4a5f-ab25-86a33195c68e",
+          "size": {
+            "height": 516.72849647837643,
+            "width": 373.91062059797105
+          },
+          "zIndex": 1
+        },
+        {
+          "location": {
+            "x": 1656.6185538410762,
+            "y": 640.95666510436968
+          },
+          "nodeIndex": "Plano_Prescritivo",
+          "size": {
+            "height": 200,
+            "width": 234
+          },
+          "zIndex": 0
+        }
+      ],
+      "name": "Todas as tabelas",
+      "zoomValue": 100.00000000000016,
+      "pinKeyFieldsToTop": false,
+      "showExtraHeaderInfo": false,
+      "hideKeyFieldsWhenCollapsed": false,
+      "tablesLocked": false
+    }
+  ],
+  "selectedDiagram": "Todas as tabelas",
+  "defaultDiagram": "Todas as tabelas"
+}
