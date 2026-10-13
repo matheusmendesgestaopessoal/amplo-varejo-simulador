@@ -209,9 +209,11 @@ class Pagina:
         o["zoom"] = [{"properties": {"show": lit("false")}}]
 
     @staticmethod
-    def _rotulos(extra=None):
+    def _rotulos(extra=None, casas=None):
         p = {"show": lit("true"), "color": cor(GRAFITE), "fontSize": lit(f"{pt(13)}D"), "fontFamily": lit(FONTES[600]),
              "enableBackground": lit("false"), "labelDisplayUnits": lit("1D")}  # número cheio, sem "Mil"/"Mi" automático
+        if casas is not None:
+            p["labelPrecision"] = lit(f"{casas}L")
         r = [{"properties": p}]
         if extra:
             r += extra
@@ -219,7 +221,7 @@ class Pagina:
 
     # ---------------- barras horizontais (ou colunas)
     def barras(self, vaga, categoria, nome_medida, ordem="Descending", c=AZUL, c_medida=None, topn=None, dica=None,
-               espaco=30, colunas=False):
+               espaco=30, colunas=False, casas=None):
         v = self._base("bar", vaga)
         vis = v["visual"]
         vis["visualType"] = "clusteredColumnChart" if colunas else "clusteredBarChart"
@@ -236,7 +238,7 @@ class Pagina:
             dp.append({"properties": {"fill": cor_medida(c_medida)},
                        "selector": {"data": [{"dataViewWildcard": {"matchingOption": 1}}]}})
         o["dataPoint"] = dp
-        o["labels"] = self._rotulos()
+        o["labels"] = self._rotulos(casas=casas)
         self._limpo(vis, dica)
         if topn:
             v["filterConfig"] = {"filters": [filtro_topn(categoria, topn[2] if len(topn) > 2 else nome_medida, topn[0], topn[1])]}
@@ -265,7 +267,7 @@ class Pagina:
         return v
 
     # ---------------- colunas + linha tracejada (realizado x meta)
-    def combo(self, vaga, categoria, medida_col, medida_linha, c_col=AZUL_SEL, c_medida=None):
+    def combo(self, vaga, categoria, medida_col, medida_linha, c_col=AZUL_SEL, c_medida=None, casas=None):
         v = self._base("combo", vaga)
         vis = v["visual"]
         mc, ml = medida(medida_col), medida(medida_linha)
@@ -286,7 +288,7 @@ class Pagina:
                                            "showMarker": lit("false")}}]
         self._eixos(o)
         o["valueAxis"][0]["properties"]["alignZeros"] = lit("true")
-        o["labels"] = self._rotulos([{"properties": {"show": lit("false")}, "selector": {"metadata": f"_Metas.{medida_linha}"}}])
+        o["labels"] = self._rotulos([{"properties": {"show": lit("false")}, "selector": {"metadata": f"_Metas.{medida_linha}"}}], casas)
         self._limpo(vis)
         return v
 
@@ -403,20 +405,20 @@ def pagina_diagnostico():
 
     # 01 · contexto
     p.texto("h_contexto", "Txt Titulo Contexto", px=34, c=GRAFITE, peso=700)
-    p.combo("g_receita_mes", MES, "Receita Mi", "Meta Mi", c_medida="Cor Receita Mes")
-    p.barras("g_receita_regiao", REGIAO, "Receita Mi", dica=ID_DICA, espaco=45)
-    p.barras("g_receita_categoria", CATEGORIA, "Receita Mi", c_medida="Cor Receita Categoria", espaco=45)
+    p.combo("g_receita_mes", MES, "Receita Mi", "Meta Mi", c_medida="Cor Receita Mes", casas=1)
+    p.barras("g_receita_regiao", REGIAO, "Receita Mi", dica=ID_DICA, espaco=45, casas=1)
+    p.barras("g_receita_categoria", CATEGORIA, "Receita Mi", c_medida="Cor Receita Categoria", espaco=45, casas=1)
 
     # 02 · cancelamentos
     p.texto("h_cancel", "Txt Titulo Cancelamento", px=34, c=GRAFITE, peso=700)
     p.texto("s_cancel", "Txt Badge Cancelamento", px=14, c=VERM_ESC, peso=700, alinhar="center", vertical="middle")
-    p.combo("g_cancel_mes", MES, "Taxa Cancelamento", "Meta % Cancelamento")
-    p.barras("g_cancel_regiao", REGIAO, "Taxa Cancelamento", c_medida="Cor Cancelamento", espaco=45)
+    p.combo("g_cancel_mes", MES, "Taxa Cancelamento", "Meta % Cancelamento", casas=1)
+    p.barras("g_cancel_regiao", REGIAO, "Taxa Cancelamento", c_medida="Cor Cancelamento", espaco=45, casas=1)
 
     # 03 · estoque
     p.texto("h_estoque", "Txt Titulo Estoque", px=34, c=GRAFITE, peso=700)
     p.texto("s_estoque", "Txt Badge Estoque", px=14, c="#8A6400", peso=700, alinhar="center", vertical="middle")
-    p.barras("g_excesso_produto", PRODUTO, "Excesso mil", topn=(10, 2, "Excesso Estoque"), espaco=35)
+    p.barras("g_excesso_produto", PRODUTO, "Excesso mil", topn=(10, 2, "Excesso Estoque"), espaco=35, casas=0)
     p.tabela("t_excesso", [(PRODUTO, "PRODUTO"), (medida("Estoque mil"), "EM ESTOQUE (R$ MIL)"),
                            (medida("Excesso mil"), "EXCESSO (R$ MIL)"), (medida("Cobertura Estoque (meses)"), "COBERTURA (MESES)")],
              ordenar=medida("Excesso mil"), topn=(PRODUTO, "Excesso Estoque", 10, 2), linha=5)
@@ -425,7 +427,7 @@ def pagina_diagnostico():
     p.texto("h_lojas", "Txt Titulo Lojas", px=34, c=GRAFITE, peso=700)
     p.texto("s_lojas", "Txt Badge Lojas", px=14, c="#8A6400", peso=700, alinhar="center", vertical="middle")
     p.barras("g_lojas", LOJA, "Meta x Realizado %", ordem="Ascending", c_medida="Cor Atingimento",
-             topn=(20, 1, "Meta x Realizado %"), espaco=30)
+             topn=(20, 1, "Meta x Realizado %"), espaco=30, casas=1)
     return p
 
 
@@ -450,13 +452,13 @@ def pagina_loja():
                 c_medida=f"Cor Pill Loja {pill}")
     p.texto("k_excesso", "Txt KPI Loja Excesso", px=34, c=GRAFITE, peso=900)
 
-    p.combo("g_loja_mes", MES, "Receita mil", "Meta mil", c_medida="Cor Receita Mes")
+    p.combo("g_loja_mes", MES, "Receita mil", "Meta mil", c_medida="Cor Receita Mes", casas=0)
     p.texto("t_causa", "Txt Causa Loja", px=15, c=TEXTO, quebra=True)
     p.texto("t_agravante", "Txt Agravante Loja", px=15, c=TEXTO, quebra=True)
     p.texto("t_acao", "Txt Acao Loja", px=15, c=TEXTO, quebra=True)
 
-    p.barras("g_loja_categoria", CATEGORIA, "Receita mil", c_medida="Cor Receita Categoria", espaco=45)
-    p.barras("g_loja_cancel", CATEGORIA, "Taxa Cancelamento", c_medida="Cor Cancelamento", espaco=45)
+    p.barras("g_loja_categoria", CATEGORIA, "Receita mil", c_medida="Cor Receita Categoria", espaco=45, casas=0)
+    p.barras("g_loja_cancel", CATEGORIA, "Taxa Cancelamento", c_medida="Cor Cancelamento", espaco=45, casas=1)
     p.tabela("t_vendedores", [(VENDEDOR, "VENDEDOR"), (medida("Receita mil"), "RECEITA (R$ MIL)"),
                               (medida("Quantidade_Pedidos"), "PEDIDOS"), (medida("Taxa Cancelamento"), "CANCELAMENTO")],
              ordenar=medida("Receita mil"))
@@ -469,7 +471,7 @@ def pagina_dica():
                binding={"name": novo_id(), "type": "Tooltip", "parameters": []})
     p.texto("h_regiao", "Txt Tooltip Regiao", px=16, c=GRAFITE, peso=700)
     p.texto("t_sub", "Txt Tooltip Sub", px=12, c=GRAFITE2)
-    p.barras("g_categorias", CATEGORIA, "Receita Mi", c_medida="Cor Receita Categoria", espaco=35)
+    p.barras("g_categorias", CATEGORIA, "Receita Mi", c_medida="Cor Receita Categoria", espaco=35, casas=1)
     p.texto("t_cancel", "Txt Tooltip Cancel", px=13, c=VERMELHO, peso=700, vertical="middle")
     return p
 

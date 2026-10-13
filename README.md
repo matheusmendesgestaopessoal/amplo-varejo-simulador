@@ -10,7 +10,7 @@
 ![MySQL](https://img.shields.io/badge/MySQL-8.x-4479A1?logo=mysql&logoColor=white)
 ![Power BI](https://img.shields.io/badge/Power%20BI-DAX-F2C811?logo=powerbi&logoColor=black)
 
-**[📊 Dashboard interativo](LINK_PUBLICO_POWER_BI)** · **[📄 Portfólio](https://portfolio-phi-lilac-19.vercel.app/)** · **[📁 Documentação](docs/)**
+**[📊 Dashboard (página completa)](dashboard/prints/00_diagnostico_completo.png)** · **[📄 Portfólio](https://portfolio-phi-lilac-19.vercel.app/)** · **[📁 Documentação](docs/)**
 
 ---
 
@@ -24,6 +24,8 @@
 | **Resultado** | 3 frentes de perda com **R$ 1,7 a 3,3 Mi recuperáveis**. A maior é o cancelamento (8,9% contra meta de 3%, R$ 2,10 Mi), que é igual em todas as regiões e lojas: o problema está no processo do pedido. |
 
 ![Página Diagnóstico do dashboard](dashboard/prints/01_diagnostico.png)
+
+<sub>Primeira tela da página Diagnóstico. [Ver a página inteira](dashboard/prints/00_diagnostico_completo.png): contexto, cancelamentos, estoque, lojas, cartões de decisão e plano de ação.</sub>
 
 ---
 
@@ -74,6 +76,12 @@ O banco operacional `amplo_varejo` segue o MER de 4 grupos (cadastros, operaçõ
 3. **R$ 1,56 Mi em estoque acima de 3 meses de cobertura (34% do estoque).** Dez produtos de alto valor concentram metade do excesso, e 273 combinações de loja e produto não venderam nada no ano.
 
 ![Detalhe da loja (drill-through)](dashboard/prints/02_detalhe_loja.png)
+
+<sub>Botão direito numa loja → Detalhar: a página calcula a causa dominante da loja (aqui, PA 051: baixo fluxo, 64% menos pedidos que a média) e sugere a ação.</sub>
+
+![Dica de ferramenta da região](dashboard/prints/03_dica_regiao.png)
+
+<sub>Ao passar o mouse numa região, a dica mostra a receita por categoria e a taxa de cancelamento da região.</sub>
 
 ## 5. Ação
 

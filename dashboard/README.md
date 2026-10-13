@@ -2,7 +2,7 @@
 
 - `amplo_varejo.pbip`: projeto do Power BI (abre no Power BI Desktop). O relatório fica em `amplo_varejo.Report/` e o modelo semântico em `amplo_varejo.SemanticModel/`.
 - `tema_matheus.json`: tema da identidade visual (já aplicado no relatório; para outro arquivo: Exibir → Temas → Procurar temas).
-- `prints/`: imagens das páginas, numeradas pela ordem (`01_diagnostico.png`, `02_detalhe_loja.png`).
+- `prints/`: imagens tiradas do Power BI: `00_diagnostico_completo.png` (página inteira), `01_diagnostico.png` (primeira tela), `02_detalhe_loja.png` (drill-through) e `03_dica_regiao.png` (dica de ferramenta).
 - `prototipo/`: protótipos de layout em HTML aprovados antes da construção. Os números deles são ilustrativos.
 - `gerador_pbir/`: gera as páginas do relatório a partir do layout aprovado (ver abaixo).
 
@@ -33,4 +33,4 @@ python gerador_pbir/gerar_paginas.py amplo_varejo.Report gerador_pbir/modelos
 
 Com o Power BI aberto, aparece "Apply external changes": basta aplicar e clicar em **Atualizar**.
 
-**Link público:** LINK_PUBLICO_POWER_BI
+**Link público:** será adicionado após a publicação no Power BI Service (Publicar na Web).
