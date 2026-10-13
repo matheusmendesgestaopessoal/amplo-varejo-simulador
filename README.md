@@ -3,14 +3,15 @@
 
 # Amplo Varejo S.A. · Onde a empresa perde faturamento
 
-> Simulei a operação de uma rede varejista nacional, do banco de dados ao dashboard, para responder onde a empresa perde faturamento, quanto isso vale e por onde começar a recuperar.
+> Simulei a operação de uma rede varejista nacional, do banco de dados ao dashboard, para responder **onde a empresa perde faturamento, quanto isso vale e por onde começar a recuperar**.
 
 ![Python](https://img.shields.io/badge/Python-3.12-3776AB?logo=python&logoColor=white)
 ![Pandas](https://img.shields.io/badge/Pandas-2.x-150458?logo=pandas&logoColor=white)
 ![MySQL](https://img.shields.io/badge/MySQL-8.x-4479A1?logo=mysql&logoColor=white)
 ![Power BI](https://img.shields.io/badge/Power%20BI-DAX-F2C811?logo=powerbi&logoColor=black)
+![Status](https://img.shields.io/badge/status-conclu%C3%ADdo-1A6BF5)
 
-**[📊 Dashboard em uso (GIF)](dashboard/prints/demo_dashboard.gif)** · **[🖼️ Página completa](dashboard/prints/00_diagnostico_completo.png)** · **[📄 Portfólio](https://portfolio-phi-lilac-19.vercel.app/)** · **[📁 Documentação](docs/)**
+**[📊 Ver o dashboard](#-o-dashboard)** · **[📥 Abrir no Power BI](#como-abrir-o-dashboard)** · **[📄 Análise e recomendações](docs/05_analise_e_recomendacoes.md)** · **[🌐 Portfólio](https://portfolio-phi-lilac-19.vercel.app/)**
 
 ---
 
@@ -22,10 +23,54 @@
 | **Pergunta** | Onde a Amplo Varejo está perdendo faturamento em 2025, quanto isso vale e por onde começar a recuperar? |
 | **O que fiz** | Gerei os dados com regras de negócio em Python, modelei um banco operacional e um Data Warehouse em MySQL, construí o dashboard em Power BI e testei as causas com estatística. |
 | **Resultado** | 3 frentes de perda com **R$ 1,7 a 3,3 Mi recuperáveis**. A maior é o cancelamento (8,9% contra meta de 3%, R$ 2,10 Mi), que é igual em todas as regiões e lojas: o problema está no processo do pedido. |
+| **Recomendação** | Começar pelos cancelamentos: a primeira ação custa pouco (registrar o motivo de cada cancelamento) e o retorno começa em 30 dias. |
 
-![Dashboard em uso no Power BI](dashboard/prints/demo_dashboard.gif)
+![Primeira tela do dashboard](dashboard/prints/01_diagnostico.png)
 
-<sub>Gravado no Power BI Desktop: filtro por região (números e títulos se recalculam), dica de ferramenta da região e drill-through até o detalhe de uma loja. [Ver a página inteira](dashboard/prints/00_diagnostico_completo.png): contexto, cancelamentos, estoque, lojas, cartões de decisão e plano de ação.</sub>
+<sub>Primeira tela da página Diagnóstico: a pergunta, a resposta e o dinheiro em jogo antes de qualquer rolagem. Todos os números e títulos são medidas DAX e mudam com os filtros.</sub>
+
+---
+
+## 📊 O dashboard
+
+Uma página de diagnóstico em rolagem (contada como história: contexto → achados → decisão), uma página de detalhe por loja e uma dica de ferramenta por região. O layout segue a mesma identidade visual do meu portfólio, em versão de ferramenta de trabalho.
+
+**01 · Contexto.** Onde, quando e com o quê a Amplo fatura. Os 2 meses de maior receita ficam em azul; a linha tracejada é a meta.
+
+![Contexto: receita por mês, região e categoria](dashboard/prints/02_contexto.png)
+
+**02 · Cancelamentos, com o cartão de decisão.** Cada achado termina num cartão com fato, interpretação, ação, causas prováveis, resultado esperado e gatilho de acompanhamento.
+
+![Cancelamentos e cartão de decisão](dashboard/prints/03_cancelamentos.png)
+
+<table>
+<tr>
+<td width="50%"><b>03 · Estoque.</b> Os 10 produtos com mais excesso e a cobertura de cada um.<br><br><img src="dashboard/prints/04_estoque.png" alt="Estoque acima de 3 meses de cobertura"></td>
+<td width="50%"><b>04 · Lojas.</b> As 20 lojas com menor atingimento e a ação para cada causa.<br><br><img src="dashboard/prints/05_lojas.png" alt="Lojas abaixo da meta"></td>
+</tr>
+</table>
+
+**05 · Recomendação.** O fechamento: por que essa ordem, as decisões pedidas à diretoria e o plano com dono, prazo e valor.
+
+![Recomendação e plano de ação](dashboard/prints/06_recomendacao.png)
+
+<table>
+<tr>
+<td width="62%"><b>Detalhe da loja (drill-through).</b> Botão direito numa loja → Detalhar. A página compara a loja com a rede e calcula a causa dominante (aqui, PA 051: 64% menos pedidos que a média).<br><br><img src="dashboard/prints/07_detalhe_loja.png" alt="Detalhe da loja PA 051"></td>
+<td width="38%"><b>Dica da região.</b> Ao passar o mouse numa região: receita por categoria e taxa de cancelamento.<br><br><img src="dashboard/prints/08_dica_regiao.png" alt="Dica de ferramenta da região"></td>
+</tr>
+</table>
+
+📄 [Página Diagnóstico inteira](dashboard/prints/00_diagnostico_completo.png) · [Como o layout foi construído](dashboard/README.md)
+
+### Como abrir o dashboard
+
+O relatório vem com os dados, então não precisa instalar banco nenhum:
+
+1. Baixe o repositório: botão verde **Code → Download ZIP** (ou `git clone`) e extraia.
+2. Instale o [Power BI Desktop](https://www.microsoft.com/pt-br/power-platform/products/power-bi/desktop) (gratuito, Windows).
+3. Abra `dashboard/amplo_varejo.pbip`.
+4. Use os filtros do topo, passe o mouse nas barras de região e clique com o botão direito numa loja → **Detalhar**. No Power BI Desktop, os botões (Limpar filtros, Voltar) funcionam com **Ctrl + clique**.
 
 ---
 
@@ -57,15 +102,19 @@
 
 ## 3. Modelo
 
-![Arquitetura](assets/arquitetura.png)
+**Arquitetura.** Oito etapas, do parâmetro de simulação à recomendação. Se alguma validação falha, o pipeline para e nada é exportado.
 
-```
-Configurações → Geração (Python/Faker) → Validação → CSV → MySQL (OLTP) → ETL → Data Warehouse (Star Schema) → Power BI
-```
+![Arquitetura do pipeline](assets/arquitetura.png)
 
-O banco operacional `amplo_varejo` segue o MER de 4 grupos (cadastros, operações comerciais, logística, gestão). O ETL carrega o `amplo_varejo_dw` em estrela: **3 fatos** (`fato_vendas` por item de pedido, `fato_movimentacao_estoque` por movimentação, `fato_metas` por loja e mês) e **6 dimensões** (calendário, loja, produto, cliente, vendedor, status). Esse desenho deixa as medidas simples e permite cruzar venda, meta e estoque pela mesma loja e produto.
+**Banco operacional (OLTP).** 15 tabelas em 4 grupos: cadastros mestres, operações comerciais, operações logísticas e gestão e apoio. O banco é abastecido só pelo simulador, nunca à mão.
+
+![Modelo físico do banco operacional](assets/mer_oltp.png)
+
+**Data Warehouse em estrela.** 3 fatos (`fato_vendas` por item de pedido, `fato_movimentacao_estoque` por movimentação, `fato_metas` por loja e mês) e 6 dimensões desnormalizadas. Esse desenho deixa as medidas DAX simples e permite cruzar venda, meta e estoque pela mesma loja e produto.
 
 ![Modelo dimensional](assets/modelo_dimensional.png)
+
+<sub>Os diagramas são gerados a partir do próprio SQL (`assets/fontes/gerar_diagramas.py`): tabelas, tipos, chaves e relacionamentos não são desenhados à mão.</sub>
 
 📄 [Requisitos](docs/03_requisitos.md) · [SQL](sql/) · [Código](codigo/)
 
@@ -75,13 +124,7 @@ O banco operacional `amplo_varejo` segue o MER de 4 grupos (cadastros, operaçõ
 2. **35 de 54 lojas abaixo da meta, com gap de R$ 1,64 Mi.** As 19 lojas abaixo de 90% concentram 82% do gap, então o diagnóstico pode ser dirigido.
 3. **R$ 1,56 Mi em estoque acima de 3 meses de cobertura (34% do estoque).** Dez produtos de alto valor concentram metade do excesso, e 273 combinações de loja e produto não venderam nada no ano.
 
-![Detalhe da loja (drill-through)](dashboard/prints/02_detalhe_loja.png)
-
-<sub>Botão direito numa loja → Detalhar: a página calcula a causa dominante da loja (aqui, PA 051: baixo fluxo, 64% menos pedidos que a média) e sugere a ação.</sub>
-
-![Dica de ferramenta da região](dashboard/prints/03_dica_regiao.png)
-
-<sub>Ao passar o mouse numa região, a dica mostra a receita por categoria e a taxa de cancelamento da região.</sub>
+Todos os números podem ser recalculados com `python -m codigo.analises.diagnostico`.
 
 ## 5. Ação
 
@@ -106,9 +149,9 @@ Cada frente tem um cartão de decisão com fato, interpretação, causas, valida
 | Dados | Python, Pandas, NumPy, Faker |
 | Modelo | MySQL (OLTP e Data Warehouse), SQL, SQLAlchemy |
 | Análise | Python (teste qui-quadrado, diagnóstico reprodutível) |
-| Visualização | Power BI (PBIP), DAX |
+| Visualização | Power BI (PBIP), DAX, layout em HTML/CSS gerado por script |
 
-## Como executar
+## Como executar o projeto
 
 ```bash
 git clone https://github.com/matheusmendesgestaopessoal/amplo-varejo-simulador.git
@@ -135,8 +178,7 @@ Para gerar **uma simulação nova** (reprodutível com `SEMENTE_ALEATORIA`, mas 
 python -m codigo.pipeline
 ```
 
-**Só quer ver o dashboard?** Baixe o repositório e abra `dashboard/amplo_varejo.pbip` no [Power BI Desktop](https://www.microsoft.com/pt-br/power-platform/products/power-bi/desktop) (gratuito). Os dados já vêm junto: filtros, dica de ferramenta e drill-through funcionam sem instalar o MySQL. Clique em **Atualizar** só depois de carregar o banco com os comandos acima.
-Volume, período e semente ficam em `codigo/configuracoes/configuracao.py`.
+Volume, período e semente ficam em `codigo/configuracoes/configuracao.py`. Depois de recarregar o banco, clique em **Atualizar** no Power BI.
 
 ## Estrutura
 
@@ -155,13 +197,13 @@ amplo-varejo-simulador/
 │   └── pipeline.py
 ├── dados/brutos_csv/      # dados publicados (15 tabelas)
 ├── dashboard/
-│   ├── amplo_varejo.pbip  # projeto Power BI (relatório + modelo semântico)
-│   ├── gerador_pbir/      # script que gera as páginas do relatório
-│   ├── prints/            # imagens das páginas
-│   └── prototipo/         # protótipos de layout aprovados antes do Power BI
+│   ├── amplo_varejo.pbip  # projeto Power BI (relatório + modelo semântico + dados)
+│   ├── gerador_pbir/      # gera as páginas do relatório a partir do layout em HTML
+│   ├── prints/            # imagens das páginas, tiradas do Power BI
+│   └── prototipo/         # protótipo de layout aprovado antes do Power BI
 ├── docs/                  # 01 abertura · 02 regras · 03 requisitos · 04 dicionário · 05 análise · 06 correções
 ├── sql/                   # modelo físico, star schema, joins e views
-├── assets/                # diagramas usados no README
+├── assets/                # diagramas do README (fontes/ gera as imagens a partir do SQL)
 ├── .env.example
 └── requirements.txt
 ```
@@ -177,6 +219,25 @@ amplo-varejo-simulador/
 
 ## Autor
 
-**Matheus Mendes** · Analista de Dados
+<table>
+<tr>
+<td width="170" valign="top"><img src="assets/autor.png" width="150" alt="Foto de Matheus Mendes"></td>
+<td valign="top">
 
-[Portfólio](https://portfolio-phi-lilac-19.vercel.app/) · [LinkedIn](https://www.linkedin.com/in/matheusmendes-dados) · [GitHub](https://github.com/matheusmendesgestaopessoal)
+### Matheus Mendes
+**Analista de Dados** · SQL · Python · Power BI
+
+Antes dos dados, passei mais de três anos na operação: programação, medição e faturamento em empresas de engenharia e manutenção, acompanhando cerca de 3 mil ordens de serviço por mês e transformando planilhas em relatórios de indicadores. Foi digitalizando a emissão de ordens de serviço, que antes era em papel, que vi o impacto de dados bem organizados.
+
+Hoje curso Análise e Desenvolvimento de Sistemas e uso cada projeto para praticar o ciclo completo, da pergunta de negócio à recomendação. Neste, fiz tudo de ponta a ponta: regras de negócio, simulação, modelagem, ETL, DAX, design do dashboard e análise.
+
+**Busco minha primeira vaga como analista de dados.** Se este projeto fez sentido para você, vamos conversar.
+
+[![Portfólio](https://img.shields.io/badge/Portf%C3%B3lio-1A6BF5?style=for-the-badge&logo=googlechrome&logoColor=white)](https://portfolio-phi-lilac-19.vercel.app/)
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/matheusmendes-dados)
+[![GitHub](https://img.shields.io/badge/GitHub-111111?style=for-the-badge&logo=github&logoColor=white)](https://github.com/matheusmendesgestaopessoal)
+[![E-mail](https://img.shields.io/badge/E--mail-5E5E5E?style=for-the-badge&logo=gmail&logoColor=white)](mailto:matheus.mendesgestao@gmail.com)
+
+</td>
+</tr>
+</table>

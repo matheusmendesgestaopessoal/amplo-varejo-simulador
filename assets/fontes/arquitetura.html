@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>Arquitetura do pipeline</title>
+<link rel="stylesheet" href="diagramas.css">
+<style>
+  body{width:1760px;padding-bottom:44px}
+  .fluxo{display:grid;grid-template-columns:repeat(4,1fr);gap:56px 64px;padding:34px 48px 0;position:relative}
+  .etapa{position:relative;padding:20px 22px 18px;min-height:250px;display:flex;flex-direction:column;gap:8px}
+  .etapa .cab{display:flex;align-items:center;justify-content:space-between}
+  .num{width:30px;height:30px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:800;color:#fff;background:var(--azul)}
+  .ico{width:36px;height:36px;border-radius:10px;display:flex;align-items:center;justify-content:center;background:var(--azul-fundo)}
+  .etapa h3{font-size:18px;font-weight:700;margin-top:4px}
+  .etapa .tec{font-size:13px;font-weight:600;color:var(--azul-tinta)}
+  .etapa p{font-size:14px;line-height:1.5;color:var(--texto)}
+  .etapa code{margin-top:auto;align-self:flex-start;font-family:Consolas,monospace;font-size:12px;background:var(--fundo);border:1px solid var(--borda);border-radius:6px;padding:3px 8px;color:var(--grafite)}
+  .etapa.destaque{background:var(--azul);border-color:var(--azul);color:#fff}
+  .etapa.destaque .tec,.etapa.destaque p{color:#E6EEFF}
+  .etapa.destaque .num{background:#fff;color:var(--azul)}
+  .etapa.destaque .ico{background:rgba(255,255,255,.18)}
+  .etapa.destaque code{background:rgba(255,255,255,.14);border-color:rgba(255,255,255,.25);color:#fff}
+  .seta{position:absolute;top:50%;right:-50px;width:36px;height:24px;transform:translateY(-50%)}
+  .desce{position:absolute;left:50%;bottom:-48px;transform:translateX(-50%)}
+  .falha{position:absolute;left:calc(50% - 150px);bottom:-46px;font-size:12.5px;font-weight:600;color:#7A1414;background:var(--vermelho-fundo);border-radius:999px;padding:4px 12px;white-space:nowrap}
+  .rodape{display:grid;grid-template-columns:repeat(5,1fr);gap:16px;margin:34px 48px 0}
+  .rodape .card{padding:14px 18px}
+  .rodape b{display:block;font-size:24px;font-weight:800;letter-spacing:-.02em}
+  .rodape span{font-size:13px;color:var(--grafite-2)}
+</style>
+</head>
+<body>
+<div class="topo">
+  <span class="lbl">Arquitetura · do dado à decisão</span>
+  <h1>Pipeline de dados da Amplo Varejo S.A.</h1>
+  <p>Oito etapas, do parâmetro de simulação à recomendação. Cada etapa é um módulo do repositório; o pipeline inteiro roda com <code style="font-family:Consolas,monospace;font-size:14px">python -m codigo.pipeline</code> e é reprodutível pela semente.</p>
+</div>
+
+<div class="fluxo">
+  <div class="card etapa"><div class="cab"><span class="num">1</span><span class="ico" data-i="config"></span></div>
+    <h3>Configuração</h3><span class="tec">Python</span>
+    <p>Modo de execução, período (jan–dez/2025), volumes e semente aleatória fixa.</p>
+    <code>codigo/configuracoes/</code>
+    <svg class="seta" viewBox="0 0 36 24"><path d="M2 12h28M22 4l8 8-8 8" stroke="#1A6BF5" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+
+  <div class="card etapa"><div class="cab"><span class="num">2</span><span class="ico" data-i="motor"></span></div>
+    <h3>Geração dos dados</h3><span class="tec">Python · Pandas · Faker</span>
+    <p>Dados mestres → sazonalidade, campanhas e eventos → pedidos e itens → metas e estoque na escala das vendas.</p>
+    <code>codigo/geradores/ · codigo/simulacao/</code>
+    <svg class="seta" viewBox="0 0 36 24"><path d="M2 12h28M22 4l8 8-8 8" stroke="#1A6BF5" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+
+  <div class="card etapa"><div class="cab"><span class="num">3</span><span class="ico" data-i="valida"></span></div>
+    <h3>Validação</h3><span class="tec">Regras de qualidade</span>
+    <p>Cobertura (27 estados com lojas, vendedores e pedidos), integridade referencial e estoque sem saldo negativo.</p>
+    <code>codigo/validacoes/</code>
+    <span class="falha">✕ falhou: o pipeline para e nada é exportado</span>
+    <svg class="seta" viewBox="0 0 36 24"><path d="M2 12h28M22 4l8 8-8 8" stroke="#1A6BF5" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+
+  <div class="card etapa"><div class="cab"><span class="num">4</span><span class="ico" data-i="csv"></span></div>
+    <h3>Staging em CSV</h3><span class="tec">Arquivos versionados</span>
+    <p>15 tabelas exportadas; são os dados publicados que embasam a análise.</p>
+    <code>dados/brutos_csv/</code>
+    <svg class="desce" width="24" height="40" viewBox="0 0 24 40"><path d="M12 2v32M4 26l8 8 8-8" stroke="#1A6BF5" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+
+  <div class="card etapa"><div class="cab"><span class="num">5</span><span class="ico" data-i="banco"></span></div>
+    <h3>Banco operacional</h3><span class="tec">MySQL · OLTP</span>
+    <p>Modelo físico em 4 grupos (cadastros, comercial, logística, gestão), com chaves e restrições.</p>
+    <code>sql/01_modelo_fisico_bd.sql</code>
+    <svg class="seta" viewBox="0 0 36 24" style="right:auto;left:-50px;transform:translateY(-50%) rotate(180deg)"><path d="M2 12h28M22 4l8 8-8 8" stroke="#1A6BF5" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+
+  <div class="card etapa"><div class="cab"><span class="num">6</span><span class="ico" data-i="estrela"></span></div>
+    <h3>ETL e Data Warehouse</h3><span class="tec">Python · SQLAlchemy · MySQL</span>
+    <p>Star Schema com 3 fatos e 6 dimensões desnormalizadas, carregado a partir do OLTP.</p>
+    <code>codigo/dw/ · sql/02_star_schema.sql</code>
+    <svg class="seta" viewBox="0 0 36 24" style="right:auto;left:-50px;transform:translateY(-50%) rotate(180deg)"><path d="M2 12h28M22 4l8 8-8 8" stroke="#1A6BF5" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+
+  <div class="card etapa"><div class="cab"><span class="num">7</span><span class="ico" data-i="grafico"></span></div>
+    <h3>Dashboard</h3><span class="tec">Power BI · DAX</span>
+    <p>114 medidas, títulos dinâmicos, drill-through por loja e dica de ferramenta por região.</p>
+    <code>dashboard/amplo_varejo.pbip</code>
+    <svg class="seta" viewBox="0 0 36 24" style="right:auto;left:-50px;transform:translateY(-50%) rotate(180deg)"><path d="M2 12h28M22 4l8 8-8 8" stroke="#1A6BF5" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+
+  <div class="card etapa destaque"><div class="cab"><span class="num">8</span><span class="ico" data-i="decisao" data-c="#fff"></span></div>
+    <h3>Análise e decisão</h3><span class="tec">Estatística · cartões de decisão</span>
+    <p>Teste qui-quadrado das causas, 3 frentes priorizadas e R$ 1,7 a 3,3 Mi recuperáveis.</p>
+    <code>codigo/analises/ · docs/05</code>
+</div>
+</div>
+
+<div class="rodape">
+  <div class="card"><b>10.708</b><span>pedidos simulados em 2025</span></div>
+  <div class="card"><b>15</b><span>tabelas no banco operacional</span></div>
+  <div class="card"><b>3 + 6</b><span>fatos e dimensões no DW</span></div>
+  <div class="card"><b>114</b><span>medidas DAX documentadas</span></div>
+  <div class="card"><b>42</b><span>semente aleatória: mesma execução, mesmos dados</span></div>
+</div>
+
+<script>
+const ICONES = {
+  config: '<circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 0 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 0 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 0 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 0 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1Z"/>',
+  motor: '<path d="m18 16 4-4-4-4"/><path d="m6 8-4 4 4 4"/><path d="m14.5 4-5 16"/>',
+  valida: '<path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10"/><path d="m9 12 2 2 4-4"/>',
+  csv: '<path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="M8 13h8M8 17h8"/>',
+  banco: '<ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M3 5v14a9 3 0 0 0 18 0V5"/><path d="M3 12a9 3 0 0 0 18 0"/>',
+  estrela: '<circle cx="12" cy="12" r="3"/><circle cx="4" cy="5" r="2"/><circle cx="20" cy="5" r="2"/><circle cx="4" cy="19" r="2"/><circle cx="20" cy="19" r="2"/><path d="m6 6.5 3.7 3.5M18 6.5 14.3 10M6 17.5l3.7-3.5M18 17.5 14.3 14"/>',
+  grafico: '<path d="M3 3v18h18"/><rect x="7" y="12" width="3" height="5" rx="1"/><rect x="12" y="8" width="3" height="9" rx="1"/><rect x="17" y="5" width="3" height="12" rx="1"/>',
+  decisao: '<circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/>',
+};
+document.querySelectorAll("[data-i]").forEach((e) => {
+  e.innerHTML = `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="${e.dataset.c || "#1A6BF5"}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">${ICONES[e.dataset.i]}</svg>`;
+});
+// segunda linha corre da direita para a esquerda (serpentina): 5 fica embaixo do 4
+const f = document.querySelector(".fluxo"), c = [...f.children];
+[c[7], c[6], c[5], c[4]].forEach((e) => f.appendChild(e));
+</script>
+<script src="ligacoes.js"></script>
+<script>marcarAltura();</script>
+</body>
+</html>
