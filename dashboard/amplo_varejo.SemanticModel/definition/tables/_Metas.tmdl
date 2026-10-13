@@ -398,8 +398,14 @@ table _Metas
 			VAR _shareRegiao = DIVIDE(CALCULATE([Receita_Total], _topRegiao), [Receita_Total])
 			VAR _shareCategorias = DIVIDE(CALCULATE([Receita_Total], _topCategorias), [Receita_Total])
 			VAR _nomesCategorias = CONCATENATEX(_topCategorias, 'DIM Produtos'[nome_categoria], " e ", [Receita_Total], DESC)
+			VAR _categorias = _nomesCategorias & " somam " & FORMAT(_shareCategorias, "0%") & " da receita"
 			RETURN
-			    _nomesCategorias & " somam " & FORMAT(_shareCategorias, "0%") & " da receita, e o " & _nomeRegiao & " sozinho gera " & FORMAT(_shareRegiao, "0%")
+			    SWITCH(
+			        TRUE(),
+			        HASONEVALUE('DIM Lojas'[Loja]), _categorias & " da loja " & SELECTEDVALUE('DIM Lojas'[Loja]),
+			        HASONEVALUE('DIM Lojas'[regiao]), _categorias & " do " & _nomeRegiao,
+			        _categorias & ", e o " & _nomeRegiao & " sozinho gera " & FORMAT(_shareRegiao, "0%")
+			    )
 		displayFolder: 11 Textos
 		lineageTag: 5fe980d0-c2f6-4b4e-adc3-82afb7a52b5d
 

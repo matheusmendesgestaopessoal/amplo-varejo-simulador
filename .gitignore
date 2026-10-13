@@ -20,7 +20,7 @@ dados/processados/
 
 # Power BI Project: cache de dados e configurações locais
 **/.pbi/localSettings.json
-**/.pbi/cache.abf
+# cache.abf fica no Git de propósito: são os dados do relatório (sintéticos), para o .pbip abrir sem o MySQL
 *.pbix.bak
 
 # Lixo do sistema

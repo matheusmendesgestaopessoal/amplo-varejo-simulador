@@ -10,7 +10,7 @@
 ![MySQL](https://img.shields.io/badge/MySQL-8.x-4479A1?logo=mysql&logoColor=white)
 ![Power BI](https://img.shields.io/badge/Power%20BI-DAX-F2C811?logo=powerbi&logoColor=black)
 
-**[📊 Dashboard (página completa)](dashboard/prints/00_diagnostico_completo.png)** · **[📄 Portfólio](https://portfolio-phi-lilac-19.vercel.app/)** · **[📁 Documentação](docs/)**
+**[📊 Dashboard em uso (GIF)](dashboard/prints/demo_dashboard.gif)** · **[🖼️ Página completa](dashboard/prints/00_diagnostico_completo.png)** · **[📄 Portfólio](https://portfolio-phi-lilac-19.vercel.app/)** · **[📁 Documentação](docs/)**
 
 ---
 
@@ -23,9 +23,9 @@
 | **O que fiz** | Gerei os dados com regras de negócio em Python, modelei um banco operacional e um Data Warehouse em MySQL, construí o dashboard em Power BI e testei as causas com estatística. |
 | **Resultado** | 3 frentes de perda com **R$ 1,7 a 3,3 Mi recuperáveis**. A maior é o cancelamento (8,9% contra meta de 3%, R$ 2,10 Mi), que é igual em todas as regiões e lojas: o problema está no processo do pedido. |
 
-![Página Diagnóstico do dashboard](dashboard/prints/01_diagnostico.png)
+![Dashboard em uso no Power BI](dashboard/prints/demo_dashboard.gif)
 
-<sub>Primeira tela da página Diagnóstico. [Ver a página inteira](dashboard/prints/00_diagnostico_completo.png): contexto, cancelamentos, estoque, lojas, cartões de decisão e plano de ação.</sub>
+<sub>Gravado no Power BI Desktop: filtro por região (números e títulos se recalculam), dica de ferramenta da região e drill-through até o detalhe de uma loja. [Ver a página inteira](dashboard/prints/00_diagnostico_completo.png): contexto, cancelamentos, estoque, lojas, cartões de decisão e plano de ação.</sub>
 
 ---
 
@@ -135,7 +135,7 @@ Para gerar **uma simulação nova** (reprodutível com `SEMENTE_ALEATORIA`, mas 
 python -m codigo.pipeline
 ```
 
-O dashboard fica em `dashboard/amplo_varejo.pbip`: abra no Power BI Desktop e clique em **Atualizar**.
+**Só quer ver o dashboard?** Baixe o repositório e abra `dashboard/amplo_varejo.pbip` no [Power BI Desktop](https://www.microsoft.com/pt-br/power-platform/products/power-bi/desktop) (gratuito). Os dados já vêm junto: filtros, dica de ferramenta e drill-through funcionam sem instalar o MySQL. Clique em **Atualizar** só depois de carregar o banco com os comandos acima.
 Volume, período e semente ficam em `codigo/configuracoes/configuracao.py`.
 
 ## Estrutura
