@@ -2,7 +2,8 @@
 
 - mer_oltp.png            banco operacional (lido de sql/01_modelo_fisico_bd.sql)
 - modelo_dimensional.png  Data Warehouse em estrela (lido de sql/02_star_schema.sql)
-- arquitetura.png         fluxo do pipeline (arquitetura.html, escrito à mão)
+- banner, stack, arquitetura, jornada, motor_simulacao, gerador_pbir: páginas escritas à mão (*.html)
+  com os logos de logos/ embutidos na cor da marca
 
 As tabelas, tipos, chaves e relacionamentos saem do próprio SQL; só a posição de cada card é definida aqui.
 Uso (na raiz do projeto):  python assets/fontes/gerar_diagramas.py
@@ -150,12 +151,31 @@ def chrome(*args):
                           capture_output=True, text=True, encoding="utf-8", timeout=180)
 
 
+def preparar(html):
+    """Cópia para render: logos embutidos (cor da marca) e medição de altura no fim da página."""
+    t = html.read_text(encoding="utf-8")
+
+    def logo(m):
+        svg = (AQUI / "logos" / f"{m.group(1)}.svg").read_text(encoding="utf-8")
+        if m.group(2):
+            svg = svg.replace("<svg ", f'<svg fill="{m.group(2)}" ', 1)
+        return f'<i class="logo">{svg}</i>'
+    t = re.sub(r'<i class="logo" data-logo="([\w]+)"(?: data-cor="(#[0-9A-Fa-f]{6})")?></i>', logo, t)
+    if "marcarAltura" not in t:
+        t = t.replace("</body>", '<script src="ligacoes.js"></script><script>marcarAltura();</script></body>')
+    tmp = html.with_name(f"_render_{html.name}")
+    tmp.write_text(t, encoding="utf-8")
+    return tmp
+
+
 def fotografar(html, png):
+    html = preparar(html)
     dom = chrome("--window-size=1900,1200", "--dump-dom", html.resolve().as_uri()).stdout
     m = re.search(r'<pre id="posicoes"[^>]*>(.*?)</pre>', dom, re.S)
     tam = json.loads(html_lib.unescape(m.group(1)))
     chrome(f"--window-size={tam['largura']},{tam['altura']}", "--force-device-scale-factor=2",
            f"--screenshot={png.resolve()}", html.resolve().as_uri())
+    html.unlink()
     print(f"{png.name}: {tam['largura']}×{tam['altura']} (2x)")
 
 
@@ -164,5 +184,6 @@ if __name__ == "__main__":
         sys.exit("Chrome ou Edge não encontrado.")
     (AQUI / "mer_oltp.html").write_text(oltp(), encoding="utf-8")
     (AQUI / "modelo_dimensional.html").write_text(dw(), encoding="utf-8")
-    for nome in ["mer_oltp", "modelo_dimensional", "arquitetura"]:
+    nomes = sys.argv[1:] or ["banner", "stack", "arquitetura", "jornada", "motor_simulacao", "mer_oltp", "modelo_dimensional", "gerador_pbir"]
+    for nome in nomes:
         fotografar(AQUI / f"{nome}.html", AQUI.parent / f"{nome}.png")

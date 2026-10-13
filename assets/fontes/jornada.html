@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>Jornada</title>
+<link rel="stylesheet" href="diagramas.css">
+<style>
+  body{width:1600px;padding-bottom:40px}
+  .fases{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;padding:30px 48px 0}
+  .fase{padding:0;overflow:hidden}
+  .fase .cab{padding:14px 18px;background:var(--c);color:#fff;display:flex;justify-content:space-between;align-items:center}
+  .fase .cab b{font-size:16px}
+  .fase .cab span{font-size:12px;font-weight:700;opacity:.9;letter-spacing:.06em;text-transform:uppercase}
+  .passo{display:grid;grid-template-columns:30px 1fr;gap:12px;padding:14px 18px;border-top:1px solid var(--divisor)}
+  .passo:first-of-type{border-top:0}
+  .passo h4{font-size:15px;font-weight:700}
+  .passo p{font-size:13.5px;line-height:1.45;color:var(--texto);margin:3px 0 7px}
+  .linha{display:flex;align-items:center;gap:10px;padding:22px 48px 0;font-size:14px;color:var(--grafite-2)}
+  .linha i{flex:1;height:2px;background:linear-gradient(90deg,var(--azul-selecao),var(--azul))}
+</style>
+</head>
+<body>
+<div class="topo">
+  <span class="lbl">Método · como eu trabalho</span>
+  <h1>Do problema à recomendação, em 4 fases</h1>
+  <p>Antes de escrever código, defini o problema, as regras e os requisitos. Cada passo deixou uma entrega no repositório, que é a forma como gosto de trabalhar: decisões escritas e conferíveis.</p>
+</div>
+<div class="linha"><span>Entender</span><i></i><span>Modelar</span><i></i><span>Construir</span><i></i><span>Analisar e entregar</span></div>
+<div class="fases">
+  <div class="card fase" style="--c:#0F4FD1">
+    <div class="cab"><b>Entender o negócio</b><span>Fase 1</span></div>
+    <div class="passo"><span class="num">1</span><div><h4>Abertura do projeto</h4><p>Problema, pergunta central, escopo e premissas, como um project charter.</p><span class="arquivo">docs/01_abertura.md</span></div></div>
+    <div class="passo"><span class="num">2</span><div><h4>Regras de negócio</h4><p>Entidades e restrições: 27 estados com lojas, CPF único, estoque só sai de pedido finalizado.</p><span class="arquivo">docs/02_regras_de_negocio.md</span></div></div>
+    <div class="passo"><span class="num">3</span><div><h4>Requisitos</h4><p>17 requisitos funcionais e 8 não funcionais (reprodutibilidade, modos de execução, validação).</p><span class="arquivo">docs/03_requisitos.md</span></div></div>
+  </div>
+  <div class="card fase" style="--c:#1A6BF5">
+    <div class="cab"><b>Modelar os dados</b><span>Fase 2</span></div>
+    <div class="passo"><span class="num">4</span><div><h4>Modelo operacional</h4><p>MER em 4 grupos e modelo físico com chaves e restrições.</p><span class="arquivo">sql/01_modelo_fisico_bd.sql</span></div></div>
+    <div class="passo"><span class="num">5</span><div><h4>Modelo dimensional</h4><p>Grão de cada fato, dimensões desnormalizadas e dimensão de status.</p><span class="arquivo">sql/02_star_schema.sql</span></div></div>
+    <div class="passo"><span class="num">6</span><div><h4>Dicionário de dados</h4><p>Tabelas, colunas e regras das medidas num só lugar.</p><span class="arquivo">docs/04_dicionario_de_dados.md</span></div></div>
+  </div>
+  <div class="card fase" style="--c:#5AB0FF">
+    <div class="cab" style="color:#0B2E66"><b>Construir</b><span>Fase 3</span></div>
+    <div class="passo"><span class="num">7</span><div><h4>Simulador em Python</h4><p>Demanda diária com sazonalidade, campanhas e eventos; metas e estoque derivados das vendas.</p><span class="arquivo">codigo/geradores · simulacao</span></div></div>
+    <div class="passo"><span class="num">8</span><div><h4>Validação e carga</h4><p>Cobertura, integridade e estoque antes de exportar; CSV → MySQL → DW.</p><span class="arquivo">codigo/validacoes · dw</span></div></div>
+    <div class="passo"><span class="num">9</span><div><h4>Modelo semântico e dashboard</h4><p>114 medidas DAX; protótipo em HTML aprovado e relatório PBIR gerado por script.</p><span class="arquivo">dashboard/</span></div></div>
+  </div>
+  <div class="card fase" style="--c:#111111">
+    <div class="cab"><b>Analisar e entregar</b><span>Fase 4</span></div>
+    <div class="passo"><span class="num">10</span><div><h4>Diagnóstico</h4><p>Números recalculados em Python e teste qui-quadrado para separar causa local de causa de processo.</p><span class="arquivo">codigo/analises/diagnostico.py</span></div></div>
+    <div class="passo"><span class="num">11</span><div><h4>Recomendação</h4><p>Cartões de decisão com fato, interpretação, causa, validação, ação, resultado e gatilho.</p><span class="arquivo">docs/05_analise_e_recomendacoes.md</span></div></div>
+    <div class="passo"><span class="num">12</span><div><h4>Revisão crítica</h4><p>Auditoria do próprio projeto: escala de metas e estoque, semente e 5 medidas DAX corrigidas.</p><span class="arquivo">docs/06_registro_de_correcoes.md</span></div></div>
+  </div>
+</div>
+</body>
+</html>

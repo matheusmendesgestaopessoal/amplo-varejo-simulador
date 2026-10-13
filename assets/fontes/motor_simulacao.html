@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>Motor de simulação</title>
+<link rel="stylesheet" href="diagramas.css">
+<style>
+  body{width:1600px;padding-bottom:40px}
+  .etapas{display:grid;grid-template-columns:repeat(4,1fr);gap:46px;padding:30px 48px 0;position:relative}
+  .etapa{padding:18px 20px;position:relative}
+  .etapa h3{font-size:17px;font-weight:700;display:flex;align-items:center;gap:10px}
+  .etapa p{font-size:13.5px;color:var(--grafite-2);margin:6px 0 12px}
+  .tabs{display:flex;flex-wrap:wrap;gap:6px}
+  .tabs span{font-family:Consolas,monospace;font-size:12.5px;padding:3px 8px;border-radius:6px;background:var(--azul-fundo);color:var(--azul-tinta)}
+  .seta{position:absolute;right:-40px;top:50%;width:34px;height:22px;transform:translateY(-50%)}
+  .formula{margin:26px 48px 0;padding:24px 28px;display:grid;grid-template-columns:1.7fr 1fr;gap:28px}
+  .eq{display:flex;align-items:center;flex-wrap:nowrap;gap:7px;margin-top:12px;font-size:16px}
+  .eq .t{padding:9px 10px;white-space:nowrap;border-radius:12px;background:var(--fundo);border:1px solid var(--borda);text-align:center;line-height:1.3}
+  .eq .t b{display:block;font-size:15px}
+  .eq .t small{font-size:12.5px;color:var(--grafite-2)}
+  .eq .t.r{background:var(--azul);border-color:var(--azul);color:#fff}
+  .eq .t.r small{color:#DCE8FF}
+  .eq .op{font-size:19px;font-weight:700;color:var(--azul)}
+  .regras{display:flex;flex-direction:column;gap:10px}
+  .regra{display:grid;grid-template-columns:150px 1fr;gap:12px;align-items:start;font-size:14px;line-height:1.45;color:var(--texto)}
+  .regra b{color:var(--grafite)}
+  .ex{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
+</style>
+</head>
+<body>
+<div class="topo">
+  <span class="lbl">Python · motor de simulação</span>
+  <h1>Como os dados nascem</h1>
+  <p>Cada tabela é gerada por um módulo próprio e guardada num objeto <code>DadosSimulacao</code>. A ordem importa: o que depende de vendas (metas e estoque) só é gerado depois dos pedidos.</p>
+</div>
+<div class="etapas">
+  <div class="card etapa"><h3><span class="num">1</span>Apoio</h3><p>O calendário e o que move a demanda</p>
+    <div class="tabs"><span>calendario</span><span>sazonalidade</span><span>campanhas</span><span>eventos</span></div>
+    <svg class="seta" viewBox="0 0 34 22"><path d="M2 11h26M20 3l8 8-8 8" stroke="#1A6BF5" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+  <div class="card etapa"><h3><span class="num">2</span>Dados mestres</h3><p>A fotografia da empresa</p>
+    <div class="tabs"><span>estados</span><span>lojas</span><span>clientes</span><span>vendedores</span><span>categorias</span><span>produtos</span></div>
+    <svg class="seta" viewBox="0 0 34 22"><path d="M2 11h26M20 3l8 8-8 8" stroke="#1A6BF5" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+  <div class="card etapa"><h3><span class="num">3</span>Operações</h3><p>Dia a dia, região a região</p>
+    <div class="tabs"><span>pedidos</span><span>itens_pedido</span></div>
+    <svg class="seta" viewBox="0 0 34 22"><path d="M2 11h26M20 3l8 8-8 8" stroke="#1A6BF5" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+  <div class="card etapa"><h3><span class="num">4</span>Derivados das vendas</h3><p>Na escala do que foi vendido</p>
+    <div class="tabs"><span>metas</span><span>estoque</span><span>movimentacao_estoque</span></div></div>
+</div>
+
+<div class="card formula">
+  <div>
+    <span class="lbl">Demanda de cada dia, em cada região</span>
+    <div class="eq">
+      <div class="t r"><b>pedidos</b><small>no dia e na região</small></div><span class="op">=</span>
+      <div class="t"><b>base sorteada</b><small>20 a 35 por dia</small></div><span class="op">×</span>
+      <div class="t"><b>peso da região</b><small>Sudeste maior</small></div><span class="op">×</span>
+      <div class="t"><b>sazonalidade</b><small>0,90 a 1,15</small></div><span class="op">×</span>
+      <div class="t"><b>campanhas</b><small>ativas no dia</small></div><span class="op">×</span>
+      <div class="t"><b>1 + eventos</b><small>da região</small></div>
+    </div>
+    <div class="ex">
+      <span class="pilula p-azul">Black Friday ×1,20</span><span class="pilula p-azul">Natal ×1,20</span><span class="pilula p-azul">Dia das Mães ×1,10</span>
+      <span class="pilula p-verde">Produto viral +15%</span><span class="pilula p-verm">Problema logístico −15%</span><span class="pilula p-verm">Crise regional −10%</span>
+    </div>
+    <p style="font-size:13.5px;color:var(--grafite-2);margin-top:14px">Campanhas de uma categoria mudam o mix de produtos do pedido, não o volume. Função <code>calcular_demanda_dia()</code> em <code>codigo/simulacao/demanda.py</code>.</p>
+  </div>
+  <div class="regras">
+    <span class="lbl">Regras derivadas</span>
+    <div class="regra"><b>Status do pedido</b><span>pago 81% · cancelado 9% · pendente 5% · enviado 5%</span></div>
+    <div class="regra"><b>Meta da loja</b><span>venda média por loja da região no mês × fator de desafio de 0,95 a 1,15</span></div>
+    <div class="regra"><b>Estoque inicial</b><span>vendido no ano + sobra de 0,5 a 6 meses de cobertura</span></div>
+    <div class="regra"><b>Saída de estoque</b><span>só para pedidos pagos ou enviados (nunca cancelados)</span></div>
+    <div class="regra"><b>Reprodutível</b><span><code>random</code>, <code>numpy</code> e Faker com semente 42: mesma execução, mesmos dados</span></div>
+  </div>
+</div>
+</body>
+</html>

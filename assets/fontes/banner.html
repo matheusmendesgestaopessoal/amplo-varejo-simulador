@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>Banner</title>
+<link rel="stylesheet" href="diagramas.css">
+<style>
+  body{width:1600px;padding:36px}
+  .faixa{display:grid;grid-template-columns:1.25fr 1fr;gap:28px;padding:44px 48px;align-items:center}
+  h1{font-size:58px;line-height:1.08;font-weight:800;letter-spacing:-.04em;margin-top:12px}
+  .sub{font-size:19px;line-height:1.55;color:var(--texto);margin-top:18px;max-width:720px}
+  .chips{display:flex;flex-wrap:wrap;gap:10px;margin-top:26px}
+  .numeros{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  .n{padding:18px 20px;background:var(--fundo);border:1px solid var(--borda);border-radius:14px}
+  .n b{display:block;font-size:34px;font-weight:800;letter-spacing:-.03em}
+  .n span{font-size:14px;color:var(--grafite-2)}
+  .n.dest{background:var(--azul);border-color:var(--azul);color:#fff}
+  .n.dest span{color:#DCE8FF}
+  .marca{display:flex;align-items:center;gap:12px}
+  .av{width:44px;height:44px;border-radius:11px;background:var(--azul);color:#fff;font-weight:800;font-size:16px;display:flex;align-items:center;justify-content:center}
+</style>
+</head>
+<body>
+<div class="card faixa">
+  <div>
+    <div class="marca"><div class="av">AV</div><span class="lbl">Projeto de dados · ponta a ponta · Amplo Varejo S.A.</span></div>
+    <h1>Do dado à <span class="sel">decisão</span>,<br>construído de ponta a ponta</h1>
+    <p class="sub">Simulador em Python com regras de negócio, banco operacional e Data Warehouse em estrela no MySQL, modelo semântico com DAX e um dashboard em Power BI gerado por código.</p>
+    <div class="chips">
+      <span class="chip"><i class="logo" data-logo="python"></i>Python</span>
+      <span class="chip"><i class="logo" data-logo="pandas" data-cor="#150458"></i>Pandas</span>
+      <span class="chip"><i class="logo" data-logo="mysql" data-cor="#4479A1"></i>MySQL</span>
+      <span class="chip"><i class="logo" data-logo="sqlalchemy" data-cor="#D71F00"></i>SQLAlchemy</span>
+      <span class="chip"><i class="logo" data-logo="powerbi"></i>Power BI · DAX</span>
+      <span class="chip"><i class="logo" data-logo="git" data-cor="#F05032"></i>Git</span>
+    </div>
+  </div>
+  <div class="numeros">
+    <div class="n dest"><b>2,6 mil</b><span>linhas de Python (simulação, validação, ETL e automação)</span></div>
+    <div class="n"><b>690</b><span>linhas de SQL (DDL, carga do DW e views)</span></div>
+    <div class="n"><b>15 → 9</b><span>tabelas no OLTP → fatos e dimensões no DW</span></div>
+    <div class="n"><b>114</b><span>medidas DAX em 9 pastas</span></div>
+    <div class="n"><b>64</b><span>visuais gerados por script (PBIR)</span></div>
+    <div class="n"><b>6</b><span>documentos: abertura, regras, requisitos, dicionário, análise e correções</span></div>
+  </div>
+</div>
+</body>
+</html>

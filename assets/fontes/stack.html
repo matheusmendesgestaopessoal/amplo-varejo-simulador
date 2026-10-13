@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>Stack</title>
+<link rel="stylesheet" href="diagramas.css">
+<style>
+  body{width:1600px;padding-bottom:40px}
+  .grade{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;padding:28px 48px 0}
+  .grupo{grid-column:1/-1;display:flex;align-items:center;gap:12px;margin-top:10px}
+  .grupo .lbl{color:var(--azul-tinta)}
+  .grupo hr{flex:1;border:0;border-top:1px solid var(--borda)}
+  .item{padding:20px 20px 18px;display:flex;flex-direction:column;gap:10px}
+  .item .cab{display:flex;align-items:center;gap:12px}
+  .item .logo{width:38px;height:38px}
+  .item .selo{width:38px;height:38px;font-size:15px}
+  .item h3{font-size:18px;font-weight:700}
+  .item h3 small{display:block;font-size:12.5px;font-weight:600;color:var(--grafite-2)}
+  .item p{font-size:14px;line-height:1.5;color:var(--texto)}
+</style>
+</head>
+<body>
+<div class="topo">
+  <span class="lbl">Stack</span>
+  <h1>O que usei e para quê</h1>
+  <p>Uma ferramenta por camada, cada uma escolhida pelo papel que cumpre no fluxo, do dado gerado ao dashboard.</p>
+</div>
+<div class="grade">
+  <div class="grupo"><span class="lbl">Geração e qualidade dos dados</span><hr></div>
+  <div class="card item"><div class="cab"><i class="logo" data-logo="python"></i><h3>Python 3.12<small>linguagem principal</small></h3></div>
+    <p>Motor de simulação em módulos (mestres, simulação, operações), validações, exportação, ETL e automação do relatório.</p></div>
+  <div class="card item"><div class="cab"><i class="logo" data-logo="pandas" data-cor="#150458"></i><h3>Pandas<small>manipulação de dados</small></h3></div>
+    <p>Cada uma das 15 tabelas vive como DataFrame: merges para regras entre tabelas, agregações para metas e estoque.</p></div>
+  <div class="card item"><div class="cab"><i class="logo" data-logo="numpy" data-cor="#013243"></i><h3>NumPy<small>sorteio e cálculo</small></h3></div>
+    <p>Semente fixa junto com o <code>random</code> para a simulação ser reprodutível; cálculos vetorizados no diagnóstico.</p></div>
+  <div class="card item"><div class="cab"><span class="selo" style="background:#5E5E5E">Fk</span><h3>Faker<small>dados cadastrais</small></h3></div>
+    <p>Nomes, CPFs, e-mails, endereços e cidades fictícios em pt-BR, com semente própria.</p></div>
+
+  <div class="grupo"><span class="lbl">Armazenamento e modelagem</span><hr></div>
+  <div class="card item"><div class="cab"><i class="logo" data-logo="mysql" data-cor="#4479A1"></i><h3>MySQL 8<small>OLTP e Data Warehouse</small></h3></div>
+    <p>Banco operacional normalizado (15 tabelas, chaves e restrições) e DW em estrela (3 fatos, 6 dimensões).</p></div>
+  <div class="card item"><div class="cab"><span class="selo" style="background:#1A6BF5">SQL</span><h3>SQL<small>DDL, ETL e views</small></h3></div>
+    <p>Modelo físico, carga das dimensões e fatos com <code>JOIN</code> entre bancos e views analíticas de conferência.</p></div>
+  <div class="card item"><div class="cab"><i class="logo" data-logo="sqlalchemy" data-cor="#D71F00"></i><h3>SQLAlchemy<small>conexão Python ↔ MySQL</small></h3></div>
+    <p>Carga dos CSVs no OLTP e execução do script do DW numa única transação (<code>engine.begin()</code>).</p></div>
+  <div class="card item"><div class="cab"><span class="selo" style="background:#00995A">.env</span><h3>python-dotenv<small>credenciais</small></h3></div>
+    <p>Usuário e senha do banco fora do código; o repositório só traz o <code>.env.example</code>.</p></div>
+
+  <div class="grupo"><span class="lbl">Análise, visualização e entrega</span><hr></div>
+  <div class="card item"><div class="cab"><i class="logo" data-logo="powerbi"></i><h3>Power BI · DAX<small>modelo semântico</small></h3></div>
+    <p>114 medidas: <code>CALCULATE</code>, transição de contexto, <code>TREATAS</code>, <code>RANKX</code>, textos e cores dinâmicos.</p></div>
+  <div class="card item"><div class="cab"><i class="logo" data-logo="powerbi"></i><h3>PBIP · PBIR · TMDL<small>relatório como código</small></h3></div>
+    <p>Relatório e modelo em arquivos de texto: versionados no Git e gerados por script, validados no JSON Schema da Microsoft.</p></div>
+  <div class="card item"><div class="cab"><i class="logo" data-logo="googlechrome" data-cor="#4285F4"></i><h3>HTML · CSS · Chrome<small>layout e diagramas</small></h3></div>
+    <p>Layout do dashboard e diagramas desenhados em HTML/CSS; o Chrome sem janela mede posições e gera as imagens.</p></div>
+  <div class="card item"><div class="cab"><i class="logo" data-logo="git" data-cor="#F05032"></i><h3>Git · GitHub<small>versionamento</small></h3></div>
+    <p>Histórico do projeto, commits descritivos, <code>.gitignore</code> para ambiente virtual e segredos.</p></div>
+</div>
+</body>
+</html>
