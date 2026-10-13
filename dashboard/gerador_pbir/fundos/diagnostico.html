@@ -1,0 +1,369 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>Fundo · Diagnóstico</title>
+<link rel="stylesheet" href="base.css">
+</head>
+<body>
+
+<!-- CABEÇALHO: identificação + filtros que valem para a página toda -->
+<header>
+  <div class="wrap">
+    <div class="marca">
+      <div class="av">AV</div>
+      <div><div class="t">Amplo Varejo · Diagnóstico de faturamento</div><div class="s">Dados sintéticos · jan–dez/2025 · análise de Matheus Mendes</div></div>
+    </div>
+    <div class="filtros">
+      <div class="filtro"><small>Mês</small><div data-v="f_mes"></div></div>
+      <div class="filtro"><small>Região</small><div data-v="f_regiao"></div></div>
+      <div class="filtro"><small>Loja</small><div data-v="f_loja"></div></div>
+      <div class="filtro"><small>Categoria</small><div data-v="f_categoria"></div></div>
+      <span class="btn-limpar" data-v="b_limpar">Limpar filtros</span>
+    </div>
+  </div>
+</header>
+
+<!-- PERGUNTA + RESPOSTA -->
+<section style="padding-top:40px">
+  <div class="wrap grid" style="grid-template-columns:1.25fr 1fr;align-items:stretch">
+    <div class="card" style="padding:34px 38px;height:350px">
+      <div class="lbl">Pergunta central</div>
+      <h1 style="font-size:50px;font-weight:700;letter-spacing:-.035em;line-height:1.12;margin-top:10px">Onde a Amplo Varejo está <span class="sel">perdendo</span> faturamento?</h1>
+      <div class="lbl" style="color:var(--azul-tinta);margin-top:22px">Resposta</div>
+      <div data-v="t_resposta" style="height:84px;margin-top:6px;width:860px"></div>
+    </div>
+    <div class="card vis" style="padding:28px 30px;height:350px">
+      <h3>Dinheiro em jogo por frente</h3>
+      <div class="sub">R$ · estimativa gerencial para priorização</div>
+      <div data-v="g_composicao" style="flex:none;height:28px;margin:16px -6px 14px"></div>
+      <table style="margin-top:10px"><tbody>
+        <tr><td style="border:0;padding:8px 0"><span style="display:inline-block;width:12px;height:12px;border-radius:3px;background:#1A6BF5;margin-right:8px"></span><span class="prio" style="background:var(--vermelho-fundo);color:#C41F1F">Alta</span>&nbsp; Cancelamentos acima da meta</td><td style="border:0;padding:8px 0;width:150px"><div data-v="v_comp_cancel" style="height:22px"></div></td></tr>
+        <tr><td style="padding:8px 0"><span style="display:inline-block;width:12px;height:12px;border-radius:3px;background:#5AB0FF;margin-right:8px"></span><span class="prio" style="background:#FFF4CC;color:#8A6400">Média</span>&nbsp; Estoque acima de 3 meses de cobertura</td><td style="padding:8px 0"><div data-v="v_comp_estoque" style="height:22px"></div></td></tr>
+        <tr><td style="padding:8px 0"><span style="display:inline-block;width:12px;height:12px;border-radius:3px;background:#CFE0FF;margin-right:8px"></span><span class="prio" style="background:#FFF4CC;color:#8A6400">Média</span>&nbsp; Lojas abaixo da meta (gap)</td><td style="padding:8px 0"><div data-v="v_comp_lojas" style="height:22px"></div></td></tr>
+      </tbody></table>
+    </div>
+  </div>
+
+  <div class="wrap grid" style="grid-template-columns:repeat(5,1fr);margin-top:20px">
+    <div class="card kpi destaque"><div class="k-lbl">Receita válida <span class="ico" data-i="receita" data-c="#fff"></span></div><div class="k-val" data-v="k_receita"></div><div class="k-ctx"><div data-v="c_receita" style="width:150px;height:22px"></div><span class="delta claro" data-v="p_receita" style="width:70px"></span></div></div>
+    <div class="card kpi"><div class="k-lbl">Lucro <span class="ico" data-i="lucro"></span></div><div class="k-val" data-v="k_lucro"></div><div class="k-ctx"><div data-v="c_lucro" style="width:240px;height:22px"></div></div></div>
+    <div class="card kpi"><div class="k-lbl">Pedidos válidos <span class="ico" data-i="pedidos"></span></div><div class="k-val" data-v="k_pedidos"></div><div class="k-ctx"><div data-v="c_pedidos" style="width:240px;height:22px"></div></div></div>
+    <div class="card kpi"><div class="k-lbl">Taxa de cancelamento <span class="ico" data-i="cancelamento" data-c="#FF3B3B" style="background:var(--vermelho-fundo)"></span></div><div class="k-val" data-v="k_cancel"></div><div class="k-ctx"><div data-v="c_cancel" style="width:84px;height:22px"></div><span class="delta ruim" data-v="p_cancel" style="width:84px"></span></div></div>
+    <div class="card kpi"><div class="k-lbl">Lojas na meta <span class="ico" data-i="meta"></span></div><div class="k-val" data-v="k_lojas"></div><div class="k-ctx"><div data-v="c_lojas" style="width:132px;height:22px"></div><span class="delta ruim" data-v="p_lojas" style="width:100px"></span></div></div>
+  </div>
+  <p class="wrap" style="font-size:13px;color:var(--grafite-2);margin-top:10px">Receita válida = pedidos não cancelados. Ticket médio = receita válida ÷ pedidos válidos. Taxa de cancelamento = cancelados ÷ total de pedidos. Todos os valores mudam com os filtros.</p>
+</section>
+
+<!-- 01 · CONTEXTO -->
+<section>
+  <div class="wrap">
+    <div class="sec-head"><div>
+      <span class="lbl">01 · Contexto</span>
+      <div class="h2v" data-v="h_contexto"></div>
+      <p>Onde, quando e com o quê a Amplo fatura: perdas nesses pontos pesam mais no resultado.</p>
+    </div></div>
+    <div class="grid" style="grid-template-columns:2fr 1fr 1fr">
+      <div class="card vis" style="height:400px"><h3>Receita mensal x meta</h3><div class="sub">R$ milhões · em azul, os 2 meses de maior receita · linha tracejada = meta</div><div data-v="g_receita_mes"></div></div>
+      <div class="card vis" style="height:400px"><h3>Receita por região</h3><div class="sub">R$ milhões · passe o mouse para detalhar</div><div data-v="g_receita_regiao"></div></div>
+      <div class="card vis" style="height:400px"><h3>Receita por categoria</h3><div class="sub">R$ milhões</div><div data-v="g_receita_categoria"></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- 02 · CANCELAMENTOS -->
+<section>
+  <div class="wrap">
+    <div class="sec-head"><div>
+      <span class="lbl">02 · Cancelamentos</span>
+      <div class="h2v" data-v="h_cancel"></div>
+      <p>Cada pedido cancelado é uma venda que o cliente já tinha decidido fazer.</p>
+    </div><span class="badge alta" data-v="s_cancel" style="width:280px"></span></div>
+    <div class="grid" style="grid-template-columns:2fr 1fr">
+      <div class="card vis" style="height:380px"><h3>Taxa de cancelamento por mês</h3><div class="sub">% dos pedidos · linha tracejada = meta de 3%</div><div data-v="g_cancel_mes"></div></div>
+      <div class="card vis" style="height:380px"><h3>Taxa por região</h3><div class="sub">% · em vermelho, acima da média da rede</div><div data-v="g_cancel_regiao"></div></div>
+    </div>
+
+    <div class="card cartao" style="margin-top:20px">
+      <div class="cartao-topo">
+        <div style="font-size:19px;font-weight:700">Cartão de decisão · Cancelamentos acima da meta</div>
+        <div class="etqs"><span class="etq">Prioridade <b style="color:#C41F1F">Alta</b></span><span class="etq">Esforço <b>Médio</b></span><span class="etq">Confiança na causa <b>Média</b></span><span class="etq">Dono <b>Operações + TI</b></span></div>
+      </div>
+      <div class="tres">
+        <div class="col" style="--c:var(--azul-tinta)">
+          <div class="col-h"><span class="num-etapa" style="--c:var(--azul)">1</span><b>Fato</b></div>
+          <p><b>957</b> dos 10.708 pedidos de 2025 foram cancelados: <b>8,9%</b>, contra a meta de <b>3,0%</b> (3,0× acima).</p>
+          <p>A receita desses pedidos soma <b>R$ 2,10 Mi</b>.</p>
+          <p>A taxa vai de 7,1% a 9,3% entre as regiões, de 7,2% a 10,9% entre os meses e de 3,0% a 13,0% entre as lojas.</p>
+          <div class="fonte">Fonte: <code>[Taxa Cancelamento]</code> · <code>[Receita Perdida]</code></div>
+        </div>
+        <div class="col" style="--c:#8A6400">
+          <div class="col-h"><span class="num-etapa" style="--c:#E0A800">2</span><b>Interpretação</b></div>
+          <p>É a <b>maior perda do ano</b>, e o cliente já tinha decidido comprar.</p>
+          <p>Os testes qui-quadrado <b>não mostram diferença significativa</b> entre regiões (p = 0,12), meses (p = 0,38), lojas (p = 0,64) e categorias (p = 0,94).</p>
+          <p>O cancelamento é igual em todo lugar: o problema está no <b>processo do pedido</b>, não em uma loja ou região.</p>
+          <div class="lacuna"><b>O que ainda não sabemos:</b> o motivo de cada cancelamento, que não é registrado no sistema.</div>
+        </div>
+        <div class="col" style="--c:var(--verde-escuro)">
+          <div class="col-h"><span class="num-etapa" style="--c:var(--verde-escuro)">3</span><b>Ação</b></div>
+          <ol class="passos">
+            <li><span class="n">1</span><div><b>Tornar obrigatório o motivo</b> do cancelamento no sistema.<span class="meta">TI · 30 dias</span></div></li>
+            <li><span class="n">2</span><div><b>Classificar a causa</b> de uma amostra de 200 cancelamentos com a operação.<span class="meta">Operações + Dados · 2 semanas · a causa com 40% ou mais da amostra vira prioridade</span></div></li>
+            <li><span class="n">3</span><div><b>Corrigir a causa nº 1</b> e medir a taxa toda semana.<span class="meta">Operações + TI · 90 dias</span></div></li>
+          </ol>
+        </div>
+      </div>
+      <div class="rodape-cartao">
+        <div>
+          <div class="mini-h">Causas prováveis (hipóteses ranqueadas)</div>
+          <table class="tbl-sm"><thead><tr><th>Hipótese</th><th>Evidência</th><th>Confiança</th></tr></thead><tbody>
+            <tr><td><b>Falha no pagamento ou na aprovação</b></td><td>Taxa uniforme: etapa comum a todos os pedidos</td><td><span class="conf m">Média</span></td></tr>
+            <tr><td>Prazo de entrega longo</td><td>O Norte não difere das demais regiões</td><td><span class="conf b">Baixa</span></td></tr>
+            <tr><td>Desistência do cliente</td><td>Sem dado de motivo para confirmar</td><td><span class="conf b">Baixa</span></td></tr>
+            <tr><td>Falta de estoque</td><td>Havia saldo em todas as lojas e produtos</td><td><span class="conf x">Descartada</span></td></tr>
+          </tbody></table>
+        </div>
+        <div>
+          <div class="mini-h">Resultado esperado em 90 dias</div>
+          <div style="font-size:14px;color:var(--texto);margin-bottom:10px">Taxa de cancelamento: <b>8,9%</b> hoje → <b>5,0%</b> (meta final: 3,0%)</div>
+          <div class="cenarios">
+            <div class="cen"><small>Conservador · 6%</small><b>R$ 0,69 Mi</b></div>
+            <div class="cen prov"><small>Provável · 5%</small><b>R$ 0,92 Mi</b></div>
+            <div class="cen"><small>Meta · 3%</small><b>R$ 1,39 Mi</b></div>
+          </div>
+          <div class="fonte">Receita recuperável = receita dos cancelados × (taxa atual − taxa alvo) ÷ taxa atual.</div>
+        </div>
+        <div>
+          <div class="mini-h">Acompanhamento</div>
+          <div class="gatilho"><b>KPI:</b> taxa de cancelamento semanal, por região e loja.</div>
+          <div class="gatilho"><b>Revisão:</b> 30 e 90 dias após o início.</div>
+          <div class="gatilho alerta"><b>Gatilho:</b> se em 60 dias a taxa não ficar abaixo de <b>8%</b>, a causa priorizada é revista.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 03 · ESTOQUE -->
+<section>
+  <div class="wrap">
+    <div class="sec-head"><div>
+      <span class="lbl">03 · Estoque</span>
+      <div class="h2v" data-v="h_estoque"></div>
+      <p>Capital parado em itens caros, que ocupa espaço e perde valor com o tempo.</p>
+    </div><span class="badge media" data-v="s_estoque" style="width:290px"></span></div>
+    <div class="grid" style="grid-template-columns:3fr 2fr">
+      <div class="card vis" style="height:500px"><h3>Os 10 produtos com mais excesso de estoque</h3><div class="sub">R$ mil a custo acima de 3 meses de cobertura</div><div data-v="g_excesso_produto"></div></div>
+      <div class="card vis" style="height:500px"><h3>Cobertura dos produtos com mais excesso</h3><div class="sub">Saudável: até 3 meses de venda</div><div data-v="t_excesso"></div></div>
+    </div>
+
+    <div class="card cartao" style="margin-top:20px">
+      <div class="cartao-topo">
+        <div style="font-size:19px;font-weight:700">Cartão de decisão · Estoque acima de 3 meses de cobertura</div>
+        <div class="etqs"><span class="etq">Prioridade <b style="color:#8A6400">Média</b></span><span class="etq">Esforço <b>Baixo</b></span><span class="etq">Confiança <b>Alta</b></span><span class="etq">Dono <b>Estoque + Compras</b></span></div>
+      </div>
+      <div class="tres">
+        <div class="col" style="--c:var(--azul-tinta)">
+          <div class="col-h"><span class="num-etapa" style="--c:var(--azul)">1</span><b>Fato</b></div>
+          <p>O estoque final vale <b>R$ 4,56 Mi</b> a custo, cerca de <b>4 meses de venda</b>.</p>
+          <p><b>R$ 1,56 Mi (34%)</b> está acima de 3 meses de cobertura.</p>
+          <p><b>10 dos 80 produtos</b> concentram metade do excesso, e <b>273 combinações</b> de loja e produto não venderam nada no ano (R$ 282 mil).</p>
+          <div class="fonte">Fonte: <code>[Excesso Estoque]</code> · <code>[Cobertura Estoque (meses)]</code></div>
+        </div>
+        <div class="col" style="--c:#8A6400">
+          <div class="col-h"><span class="num-etapa" style="--c:#E0A800">2</span><b>Interpretação</b></div>
+          <p>É <b>capital parado em itens caros</b> (MacBook, Desktop Gamer, TVs e notebooks).</p>
+          <p>Como o excesso está <b>concentrado em poucos produtos</b>, a ação é dirigida e pode começar já.</p>
+          <div class="lacuna"><b>Por que é a frente 2:</b> libera caixa, não receita. Tem o menor esforço e a maior confiança.</div>
+        </div>
+        <div class="col" style="--c:var(--verde-escuro)">
+          <div class="col-h"><span class="num-etapa" style="--c:var(--verde-escuro)">3</span><b>Ação</b></div>
+          <ol class="passos">
+            <li><span class="n">1</span><div><b>Transferir excedentes</b> entre lojas da mesma região.<span class="meta">Estoque · 30 dias</span></div></li>
+            <li><span class="n">2</span><div><b>Pausar compras</b> dos 10 itens até a cobertura voltar a 3 meses.<span class="meta">Compras · imediato</span></div></li>
+            <li><span class="n">3</span><div><b>Promoção dirigida</b> para os itens sem venda no ano.<span class="meta">Comercial · 60 dias</span></div></li>
+          </ol>
+        </div>
+      </div>
+      <div class="rodape-cartao">
+        <div>
+          <div class="mini-h">Causas prováveis (hipóteses ranqueadas)</div>
+          <table class="tbl-sm"><thead><tr><th>Hipótese</th><th>Evidência</th><th>Confiança</th></tr></thead><tbody>
+            <tr><td><b>Compra acima da demanda</b></td><td>Excesso concentrado em itens de ticket alto</td><td><span class="conf a">Alta</span></td></tr>
+            <tr><td>Reposição igual para todas as lojas</td><td>O mesmo produto tem cobertura muito diferente entre lojas</td><td><span class="conf m">Média</span></td></tr>
+          </tbody></table>
+        </div>
+        <div>
+          <div class="mini-h">Resultado esperado em 60 dias</div>
+          <div style="font-size:14px;color:var(--texto);margin-bottom:10px">Excesso: <b>R$ 1,56 Mi</b> hoje → <b>R$ 0,6 Mi</b></div>
+          <div class="cenarios">
+            <div class="cen"><small>Conservador · 40%</small><b>R$ 0,63 Mi</b></div>
+            <div class="cen prov"><small>Provável · 55%</small><b>R$ 0,86 Mi</b></div>
+            <div class="cen"><small>Meta · 70%</small><b>R$ 1,09 Mi</b></div>
+          </div>
+          <div class="fonte">Caixa liberado = excesso × parcela vendida ou transferida.</div>
+        </div>
+        <div>
+          <div class="mini-h">Acompanhamento</div>
+          <div class="gatilho"><b>KPI:</b> cobertura de estoque por produto e loja.</div>
+          <div class="gatilho"><b>Revisão:</b> 30 e 60 dias.</div>
+          <div class="gatilho alerta"><b>Gatilho:</b> item acima de <b>4 meses</b> de cobertura entra na lista de promoção.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 04 · LOJAS -->
+<section>
+  <div class="wrap">
+    <div class="sec-head"><div>
+      <span class="lbl">04 · Lojas</span>
+      <div class="h2v" data-v="h_lojas"></div>
+      <p>Cada loja tem uma causa diferente. Clique com o botão direito numa loja para abrir o detalhe.</p>
+    </div><span class="badge media" data-v="s_lojas" style="width:290px"></span></div>
+    <div class="grid" style="grid-template-columns:3fr 2fr">
+      <div class="card vis" style="height:640px"><h3>As 20 lojas com menor atingimento da meta</h3><div class="sub">% da meta de faturamento</div><div data-v="g_lojas"></div>
+        <div style="display:flex;align-items:center;gap:10px;margin-top:12px;padding:10px 14px;border-radius:10px;background:var(--azul-fundo);font-size:14px;color:var(--azul-tinta);font-weight:600"><span data-i="seta" data-t="16"></span> Botão direito numa loja → Detalhar → <u>Detalhe da loja</u></div>
+      </div>
+      <div class="card vis" style="height:640px"><h3>Causa dominante → ação</h3><div class="sub">A página de detalhe calcula a causa de cada loja</div>
+        <table><thead><tr><th>Causa</th><th>Como identificar</th><th>Ação</th></tr></thead><tbody>
+          <tr><td><b>Baixo fluxo</b></td><td>Pedidos abaixo da média das lojas</td><td>Campanha local de atração</td></tr>
+          <tr><td><b>Ticket baixo</b></td><td>Ticket abaixo da média da rede</td><td>Treino de venda de maior valor e revisão do mix</td></tr>
+          <tr><td><b>Meta alta</b></td><td>Pedidos e ticket na média</td><td>Revisar a meta com a gestão regional</td></tr>
+          <tr><td><b>Cancelamento</b></td><td>Taxa acima da média da rede</td><td>Tratar junto com a frente de cancelamentos</td></tr>
+        </tbody></table>
+        <div class="insight" style="--c:var(--azul);--c2:var(--azul-tinta);margin-top:auto"><div class="lbl">Onde está o gap</div><p style="font-size:15px;line-height:1.5;color:var(--texto);margin-top:4px">As <b>19 lojas abaixo de 90%</b> da meta concentram <b>82% do gap</b>. Tratar essas lojas resolve a maior parte do problema.</p></div>
+      </div>
+    </div>
+
+    <div class="card cartao" style="margin-top:20px">
+      <div class="cartao-topo">
+        <div style="font-size:19px;font-weight:700">Cartão de decisão · Lojas abaixo da meta</div>
+        <div class="etqs"><span class="etq">Prioridade <b style="color:#8A6400">Média</b></span><span class="etq">Esforço <b>Alto</b></span><span class="etq">Confiança na causa <b>Média</b></span><span class="etq">Dono <b>Gestão de lojas</b></span></div>
+      </div>
+      <div class="tres">
+        <div class="col" style="--c:var(--azul-tinta)">
+          <div class="col-h"><span class="num-etapa" style="--c:var(--azul)">1</span><b>Fato</b></div>
+          <p>A rede atingiu <b>95,5%</b> da meta: R$ 21,66 Mi de R$ 22,67 Mi.</p>
+          <p><b>35 de 54 lojas</b> ficaram abaixo, com gap de <b>R$ 1,64 Mi</b>.</p>
+          <p>As <b>19 lojas abaixo de 90%</b> concentram R$ 1,34 Mi (82% do gap). Menor atingimento: PA 051, com 72%.</p>
+          <div class="fonte">Fonte: <code>[Meta x Realizado %]</code> · <code>[Gap Lojas Abaixo Meta]</code></div>
+        </div>
+        <div class="col" style="--c:#8A6400">
+          <div class="col-h"><span class="num-etapa" style="--c:#E0A800">2</span><b>Interpretação</b></div>
+          <p>O gap está <b>concentrado</b>: tratar 19 lojas resolve a maior parte do problema.</p>
+          <p>Cada loja tem uma <b>causa diferente</b> (poucos pedidos, ticket baixo ou meta alta), por isso o diagnóstico é individual.</p>
+          <div class="lacuna"><b>O que ainda não sabemos:</b> o fluxo de clientes nas lojas (visitas), que separaria atração de conversão.</div>
+        </div>
+        <div class="col" style="--c:var(--verde-escuro)">
+          <div class="col-h"><span class="num-etapa" style="--c:var(--verde-escuro)">3</span><b>Ação</b></div>
+          <ol class="passos">
+            <li><span class="n">1</span><div><b>Abrir o detalhe</b> das 19 lojas e confirmar a causa com o gerente regional.<span class="meta">Gestão de lojas · 2 semanas</span></div></li>
+            <li><span class="n">2</span><div><b>Aplicar a ação de cada causa:</b> campanha local, treino de venda ou revisão da meta.<span class="meta">Marketing + Comercial · 60 dias</span></div></li>
+            <li><span class="n">3</span><div><b>Acompanhar o atingimento</b> mensal de cada loja.<span class="meta">Gestão de lojas · mensal</span></div></li>
+          </ol>
+        </div>
+      </div>
+      <div class="rodape-cartao">
+        <div>
+          <div class="mini-h">Causas prováveis (variam por loja)</div>
+          <table class="tbl-sm"><thead><tr><th>Hipótese</th><th>Evidência</th><th>Confiança</th></tr></thead><tbody>
+            <tr><td><b>Baixo fluxo de clientes</b></td><td>Pedidos abaixo da média das lojas</td><td><span class="conf m">Por loja</span></td></tr>
+            <tr><td>Ticket baixo</td><td>Ticket abaixo da média da rede</td><td><span class="conf m">Por loja</span></td></tr>
+            <tr><td>Meta acima do potencial</td><td>Pedidos e ticket na média</td><td><span class="conf b">Por loja</span></td></tr>
+          </tbody></table>
+        </div>
+        <div>
+          <div class="mini-h">Resultado esperado em 60 a 90 dias</div>
+          <div style="font-size:14px;color:var(--texto);margin-bottom:10px">Atingimento da rede: <b>95,5%</b> hoje → <b>100%</b></div>
+          <div class="cenarios">
+            <div class="cen"><small>Conservador · 30%</small><b>R$ 0,40 Mi</b></div>
+            <div class="cen prov"><small>Provável · 45%</small><b>R$ 0,60 Mi</b></div>
+            <div class="cen"><small>Meta · 60%</small><b>R$ 0,80 Mi</b></div>
+          </div>
+          <div class="fonte">Parcela do gap das 19 lojas abaixo de 90% (R$ 1,34 Mi) que é fechada.</div>
+        </div>
+        <div>
+          <div class="mini-h">Acompanhamento</div>
+          <div class="gatilho"><b>KPI:</b> atingimento mensal por loja.</div>
+          <div class="gatilho"><b>Revisão:</b> mensal, com o gerente regional.</div>
+          <div class="gatilho alerta"><b>Gatilho:</b> loja que não subir <b>5 p.p.</b> de atingimento em 60 dias tem a causa revista.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 05 · RECOMENDAÇÃO (o único bloco azul: fechamento) -->
+<section style="padding-bottom:20px">
+  <div class="wrap">
+    <div style="border-radius:16px;padding:34px 36px;color:#fff;background:var(--azul)">
+      <span class="lbl" style="color:#CFE0FF">05 · Recomendação</span>
+      <h2 style="font-size:36px;font-weight:700;letter-spacing:-.025em;line-height:1.2;margin-top:6px;max-width:1500px">Recomendo começar pelos cancelamentos: é a maior perda, a primeira ação custa pouco e o retorno começa em 30 dias.</h2>
+      <p style="font-size:18px;color:#E6EEFF;margin-top:10px">As três frentes juntas podem recuperar de <b style="color:#fff">R$ 1,7 a 3,3 Mi</b> em receita e caixa em até 90 dias (estimativa gerencial).</p>
+
+      <div class="grid" style="grid-template-columns:1fr 1.5fr;margin-top:24px">
+        <div class="card vis" style="color:var(--grafite)">
+          <h3>Por que essa ordem</h3>
+          <div class="sub">Impacto × esforço · tamanho = valor recuperável</div>
+          <div id="g-matriz"></div>
+        </div>
+        <div class="card vis" style="color:var(--grafite)">
+          <h3>Decisões pedidas à diretoria</h3>
+          <div class="sub" style="margin-bottom:16px">O que precisa ser aprovado para o plano andar</div>
+          <ol class="passos">
+            <li><span class="n">1</span><div><b>Aprovar o campo obrigatório</b> de motivo de cancelamento no sistema.<span class="meta">Custo baixo · TI · 30 dias</span></div></li>
+            <li><span class="n">2</span><div><b>Autorizar a amostragem</b> de 200 cancelamentos com a operação.<span class="meta">2 semanas · sem custo</span></div></li>
+            <li><span class="n">3</span><div><b>Pausar as compras</b> dos 10 produtos com mais excesso de estoque.<span class="meta">Compras · imediato</span></div></li>
+            <li><span class="n">4</span><div><b>Autorizar o diagnóstico individual</b> das 19 lojas abaixo de 90% da meta, com a página de detalhe por loja.<span class="meta">Gestão de lojas · 2 semanas</span></div></li>
+          </ol>
+        </div>
+      </div>
+
+      <div class="card" style="margin-top:20px;color:var(--grafite);overflow:hidden">
+        <table><thead><tr><th>Ordem</th><th>Frente</th><th>Decisão</th><th>Dono</th><th>Prazo</th><th>Indicador · hoje → meta</th><th class="num">Valor recuperável</th><th>Esforço</th><th>Confiança</th></tr></thead><tbody>
+          <tr><td><b>1</b></td><td><b>Cancelamentos</b></td><td>Registrar o motivo, auditar o fluxo e corrigir a causa nº 1</td><td>Operações + TI</td><td>30 a 90 dias</td><td>Taxa · 8,9% → 5,0%</td><td class="num"><b>R$ 0,69 a 1,39 Mi</b></td><td>Médio</td><td><span class="conf m">Média</span></td></tr>
+          <tr><td><b>2</b></td><td><b>Estoque excedente</b></td><td>Redistribuir, pausar compras e promover os 10 itens</td><td>Estoque + Compras</td><td>60 dias</td><td>Excesso · R$ 1,56 Mi → R$ 0,6 Mi</td><td class="num"><b>R$ 0,63 a 1,09 Mi</b> <span style="font-size:12px;color:var(--grafite-2)">em caixa</span></td><td>Baixo</td><td><span class="conf a">Alta</span></td></tr>
+          <tr><td><b>3</b></td><td><b>Lojas abaixo da meta</b></td><td>Diagnóstico individual das 19 lojas abaixo de 90%</td><td>Gestão de lojas</td><td>60 a 90 dias</td><td>Atingimento · 95,5% → 100%</td><td class="num"><b>R$ 0,40 a 0,80 Mi</b></td><td>Alto</td><td><span class="conf m">Média</span></td></tr>
+        </tbody></table>
+      </div>
+      <p style="font-size:13px;color:#CFE0FF;margin-top:12px">Faixas: cenário conservador → meta. Valores de estoque são capital liberado, não receita. Estimativas gerenciais para priorização, a confirmar após a execução.</p>
+    </div>
+  </div>
+</section>
+
+<!-- RODAPÉ: método -->
+<footer style="padding:18px 0 36px">
+  <div class="wrap" style="display:flex;gap:40px;font-size:14px;color:var(--grafite-2)">
+    <span><b style="color:var(--grafite)">Dados:</b> sintéticos, gerados em Python com regras de negócio · jan–dez/2025</span>
+    <span><b style="color:var(--grafite)">Modelo:</b> MySQL → ETL → Star Schema (6 dimensões, 3 fatos)</span>
+    <span><b style="color:var(--grafite)">Métricas:</b> DAX, documentadas no repositório</span>
+    <span style="margin-left:auto"><b style="color:var(--grafite)">Matheus Mendes</b> · Analista de Dados</span>
+  </div>
+</footer>
+
+<script src="base.js"></script>
+<script>
+(function(){
+  const el=document.getElementById("g-matriz"),W=el.clientWidth,H=330,p=40;
+  const x=e=>p+(W-p-10)*e, y=i=>H-p-(H-p-10)*i;
+  let s=`<svg width="${W}" height="${H}">`;
+  s+=`<rect x="${x(0)}" y="${y(1)}" width="${(W-p-10)/2}" height="${(H-p-10)/2}" fill="#E3FAEF" rx="8"/>`;
+  s+=`<text x="${x(.02)}" y="${y(.94)}" font-size="13" font-weight="700" fill="#00995A">Fazer primeiro</text>`;
+  s+=`<text x="${x(.52)}" y="${y(.94)}" font-size="13" font-weight="700" fill="#5E5E5E">Planejar</text>`;
+  s+=`<text x="${x(.02)}" y="${y(.44)}" font-size="13" font-weight="700" fill="#5E5E5E">Ganhos rápidos</text>`;
+  s+=`<text x="${x(.52)}" y="${y(.44)}" font-size="13" font-weight="700" fill="#5E5E5E">Fazer depois</text>`;
+  s+=`<line x1="${x(.5)}" x2="${x(.5)}" y1="${y(1)}" y2="${y(0)}" stroke="#EFEFED" stroke-width="2"/><line x1="${x(0)}" x2="${x(1)}" y1="${y(.5)}" y2="${y(.5)}" stroke="#EFEFED" stroke-width="2"/>`;
+  s+=`<line x1="${x(0)}" x2="${x(1)}" y1="${y(0)}" y2="${y(0)}" stroke="#DCDCD8"/><line x1="${x(0)}" x2="${x(0)}" y1="${y(0)}" y2="${y(1)}" stroke="#DCDCD8"/>`;
+  s+=`<text x="${x(1)}" y="${H-12}" text-anchor="end" font-size="12" fill="#5E5E5E">esforço →</text><text x="14" y="${y(.5)}" font-size="12" fill="#5E5E5E" transform="rotate(-90 14 ${y(.5)})">impacto →</text>`;
+  // raio proporcional ao valor recuperável provável (0,92 · 0,86 · 0,60 Mi)
+  [["Cancelamentos",.3,.76,32,"#1A6BF5"],["Estoque excedente",.17,.3,30,"#5AB0FF"],["Lojas abaixo da meta",.74,.3,25,"#CFE0FF"]].forEach(([n,e,i,r,c])=>{
+    s+=`<circle cx="${x(e)}" cy="${y(i)}" r="${r}" fill="${c}" stroke="#fff" stroke-width="2"/><text x="${x(e)}" y="${y(i)+r+18}" text-anchor="middle" font-size="14" font-weight="700" fill="#111">${n}</text>`;
+  });
+  el.innerHTML=s+"</svg>";
+})();
+medir();
+</script>
+</body>
+</html>

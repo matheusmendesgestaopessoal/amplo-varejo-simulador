@@ -9,12 +9,28 @@
     "background": [
       {
         "properties": {
-          "color": {
-            "solid": {
-              "color": {
+          "image": {
+            "image": {
+              "name": {
                 "expr": {
                   "Literal": {
-                    "Value": "'#F7F8FA'"
+                    "Value": "'fundo_detalhe_loja.png'"
+                  }
+                }
+              },
+              "url": {
+                "expr": {
+                  "ResourcePackageItem": {
+                    "PackageName": "RegisteredResources",
+                    "PackageType": 1,
+                    "ItemName": "fundo_detalhe_loja.png"
+                  }
+                }
+              },
+              "scaling": {
+                "expr": {
+                  "Literal": {
+                    "Value": "'Fit'"
                   }
                 }
               }
@@ -51,12 +67,12 @@
   "type": "Drillthrough",
   "visibility": "HiddenInViewMode",
   "pageBinding": {
-    "name": "21bb4754606142b39d5e",
+    "name": "a59980b45f20448f8587",
     "type": "Drillthrough",
     "parameters": [
       {
-        "name": "8e47054447b34c5c98ac",
-        "boundFilter": "7fa5fce207d449649826",
+        "name": "dfc038eeab824af39241",
+        "boundFilter": "07922e73c8574f44b639",
         "fieldExpr": {
           "Column": {
             "Expression": {
@@ -64,7 +80,7 @@
                 "Entity": "DIM Lojas"
               }
             },
-            "Property": "nome_loja"
+            "Property": "Loja"
           }
         }
       }
@@ -73,7 +89,7 @@
   "filterConfig": {
     "filters": [
       {
-        "name": "7fa5fce207d449649826",
+        "name": "07922e73c8574f44b639",
         "field": {
           "Column": {
             "Expression": {
@@ -81,7 +97,7 @@
                 "Entity": "DIM Lojas"
               }
             },
-            "Property": "nome_loja"
+            "Property": "Loja"
           }
         },
         "type": "Categorical",

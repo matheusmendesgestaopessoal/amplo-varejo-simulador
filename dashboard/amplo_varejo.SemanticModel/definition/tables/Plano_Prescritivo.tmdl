@@ -1,7 +1,15 @@
 table Plano_Prescritivo
 	lineageTag: 183f3e34-ebc0-4905-96ae-96adb0c2cb4d
 
-	column 'Ordem'
+	column Prioridade
+		lineageTag: 84fde807-d42a-4188-ab79-be6635da9705
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Prioridade]
+
+		annotation SummarizationSetBy = Automatic
+
+	column Ordem
 		formatString: 0
 		lineageTag: 04ad3bcb-56a6-44be-b62c-96b259e4abbd
 		summarizeBy: none
@@ -10,7 +18,7 @@ table Plano_Prescritivo
 
 		annotation SummarizationSetBy = Automatic
 
-	column 'Frente'
+	column Frente
 		lineageTag: 030408f8-2acd-4f68-b10f-e8869b8b22f5
 		summarizeBy: none
 		isNameInferred
@@ -18,7 +26,7 @@ table Plano_Prescritivo
 
 		annotation SummarizationSetBy = Automatic
 
-	column 'Decisão'
+	column Decisão
 		lineageTag: b0acb4f8-f273-47ea-b8f7-ca63f07bc97e
 		summarizeBy: none
 		isNameInferred
@@ -26,7 +34,7 @@ table Plano_Prescritivo
 
 		annotation SummarizationSetBy = Automatic
 
-	column 'Dono'
+	column Dono
 		lineageTag: 122cf806-8a1b-4a7b-bca9-ca55f5dcec9d
 		summarizeBy: none
 		isNameInferred
@@ -34,7 +42,7 @@ table Plano_Prescritivo
 
 		annotation SummarizationSetBy = Automatic
 
-	column 'Prazo'
+	column Prazo
 		lineageTag: 6caef79d-2962-47f3-8b98-a86b6a3a69db
 		summarizeBy: none
 		isNameInferred
@@ -42,7 +50,7 @@ table Plano_Prescritivo
 
 		annotation SummarizationSetBy = Automatic
 
-	column 'Indicador'
+	column Indicador
 		lineageTag: bffe8ffb-65b4-491a-95c4-6a70d692833c
 		summarizeBy: none
 		isNameInferred
@@ -58,7 +66,7 @@ table Plano_Prescritivo
 
 		annotation SummarizationSetBy = Automatic
 
-	column 'Esforço'
+	column Esforço
 		lineageTag: a9800a57-9948-46d1-96c1-a4cdc508fc63
 		summarizeBy: none
 		isNameInferred
@@ -66,19 +74,11 @@ table Plano_Prescritivo
 
 		annotation SummarizationSetBy = Automatic
 
-	column 'Confiança'
+	column Confiança
 		lineageTag: 90f9f2d3-5b81-4879-aa95-0db0e9da2b1d
 		summarizeBy: none
 		isNameInferred
 		sourceColumn: [Confiança]
-
-		annotation SummarizationSetBy = Automatic
-
-	column 'Prioridade'
-		lineageTag: 84fde807-d42a-4188-ab79-be6635da9705
-		summarizeBy: none
-		isNameInferred
-		sourceColumn: [Prioridade]
 
 		annotation SummarizationSetBy = Automatic
 
@@ -95,3 +95,4 @@ table Plano_Prescritivo
 				)
 
 	annotation PBI_Id = f55199b14b8a45949285d0b9557ff1b8
+

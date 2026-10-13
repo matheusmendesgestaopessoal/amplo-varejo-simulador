@@ -52,6 +52,13 @@ table 'DIM Lojas'
 
 		annotation SummarizationSetBy = Automatic
 
+	column Loja = SUBSTITUTE('DIM Lojas'[nome_loja], "Amplo Varejo - ", "")
+		dataType: string
+		lineageTag: 1b763933-c396-4189-a957-81281f4d10a1
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
 	partition 'DIM Lojas' = m
 		mode: import
 		source =

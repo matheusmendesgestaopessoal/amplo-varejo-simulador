@@ -1,0 +1,20 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>Fundo · Dica da região</title>
+<link rel="stylesheet" href="base.css">
+<style>html,body{width:320px;height:240px;overflow:hidden;background:#fff}</style>
+</head>
+<body>
+<!-- Página de dica (tooltip) da região: aparece ao passar o mouse nas barras de região -->
+<div style="padding:14px 16px">
+  <div data-v="h_regiao" style="height:24px"></div>
+  <div data-v="t_sub" style="height:18px;margin:2px 0 6px"></div>
+  <div data-v="g_categorias" style="height:132px;margin:0 -6px"></div>
+  <div style="display:flex;align-items:center;gap:6px;border-top:1px solid var(--divisor);padding-top:8px;font-size:13px;color:var(--grafite-2)">Taxa de cancelamento: <div data-v="t_cancel" style="width:60px;height:18px"></div></div>
+</div>
+<script src="base.js"></script>
+<script>medir();</script>
+</body>
+</html>

@@ -9,12 +9,28 @@
     "background": [
       {
         "properties": {
-          "color": {
-            "solid": {
-              "color": {
+          "image": {
+            "image": {
+              "name": {
                 "expr": {
                   "Literal": {
-                    "Value": "'#FFFFFF'"
+                    "Value": "'fundo_dica_regiao.png'"
+                  }
+                }
+              },
+              "url": {
+                "expr": {
+                  "ResourcePackageItem": {
+                    "PackageName": "RegisteredResources",
+                    "PackageType": 1,
+                    "ItemName": "fundo_dica_regiao.png"
+                  }
+                }
+              },
+              "scaling": {
+                "expr": {
+                  "Literal": {
+                    "Value": "'Fit'"
                   }
                 }
               }
@@ -51,7 +67,7 @@
   "type": "Tooltip",
   "visibility": "HiddenInViewMode",
   "pageBinding": {
-    "name": "f715048aa964492f8f35",
+    "name": "1a7fc6668eda492688f3",
     "type": "Tooltip",
     "parameters": []
   }

@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>Fundo · Detalhe da loja</title>
+<link rel="stylesheet" href="base.css">
+<style>body{height:1080px;overflow:hidden}.kpi{height:142px;padding:18px 20px}.kpi .k-val{height:46px}.vis{padding:20px 22px}</style>
+</head>
+<body>
+<!-- Página de detalhe (drill-through): abre com o botão direito numa loja, em qualquer visual -->
+<header>
+  <div class="wrap">
+    <div class="marca">
+      <span data-v="b_voltar" style="display:flex;align-items:center;gap:8px;height:44px;padding:0 16px;border-radius:10px;background:var(--azul-fundo);color:var(--azul-tinta);font-weight:600;font-size:14px"><span data-i="voltar"></span> Voltar ao diagnóstico</span>
+      <div style="margin-left:8px"><div class="s">Diagnóstico de faturamento / Detalhe da loja</div><div data-v="h_loja" style="height:30px;width:1100px"></div></div>
+    </div>
+    <div class="s" style="font-size:13px;color:var(--grafite-2);text-align:right">Os filtros da página de diagnóstico<br>continuam valendo aqui</div>
+  </div>
+</header>
+
+<section style="padding-top:22px">
+  <div class="wrap grid" style="grid-template-columns:repeat(5,1fr)">
+    <div class="card kpi"><div class="k-lbl">Receita válida <span class="ico" data-i="receita"></span></div><div class="k-val" data-v="k_receita"></div><div class="k-ctx"><div data-v="c_receita" style="width:150px;height:22px"></div><span class="delta neutro" data-v="p_receita" style="width:60px"></span></div></div>
+    <div class="card kpi"><div class="k-lbl">Pedidos válidos <span class="ico" data-i="pedidos"></span></div><div class="k-val" data-v="k_pedidos"></div><div class="k-ctx"><div data-v="c_pedidos" style="width:150px;height:22px"></div><span class="delta neutro" data-v="p_pedidos" style="width:60px"></span></div></div>
+    <div class="card kpi"><div class="k-lbl">Ticket médio <span class="ico" data-i="ticket"></span></div><div class="k-val" data-v="k_ticket"></div><div class="k-ctx"><div data-v="c_ticket" style="width:150px;height:22px"></div><span class="delta neutro" data-v="p_ticket" style="width:60px"></span></div></div>
+    <div class="card kpi"><div class="k-lbl">Cancelamento <span class="ico" data-i="cancelamento" data-c="#FF3B3B" style="background:var(--vermelho-fundo)"></span></div><div class="k-val" data-v="k_cancel"></div><div class="k-ctx"><div data-v="c_cancel" style="width:100px;height:22px"></div><span class="delta neutro" data-v="p_cancel" style="width:84px"></span></div></div>
+    <div class="card kpi"><div class="k-lbl">Estoque acima de 3 meses <span class="ico" data-i="estoque"></span></div><div class="k-val" data-v="k_excesso"></div><div class="k-ctx">Cobertura saudável: até 3 meses</div></div>
+  </div>
+
+  <div class="wrap grid" style="grid-template-columns:1.6fr 1fr;margin-top:16px">
+    <div class="card vis" style="height:446px"><h3>Receita mensal x meta da loja</h3><div class="sub">R$ mil · em azul, os 2 meses de maior receita · linha tracejada = meta</div><div data-v="g_loja_mes"></div></div>
+    <div class="card vis" style="height:446px"><h3>Diagnóstico da loja</h3><div class="sub">Causa dominante calculada pelos indicadores, comparados com a rede</div>
+      <div class="insight" style="--c:var(--vermelho);--c2:#C41F1F;margin-top:2px"><div class="lbl">Causa dominante</div><div data-v="t_causa" style="height:66px"></div></div>
+      <div class="insight" style="--c:var(--amarelo);--c2:#8A6400;margin-top:10px"><div class="lbl">Fator agravante</div><div data-v="t_agravante" style="height:66px"></div></div>
+      <div class="insight" style="--c:var(--verde);--c2:var(--verde-escuro);margin-top:10px"><div class="lbl">Ação recomendada</div><div data-v="t_acao" style="height:66px"></div></div>
+    </div>
+  </div>
+
+  <div class="wrap grid" style="grid-template-columns:1fr 1fr 1fr;margin-top:16px">
+    <div class="card vis" style="height:316px"><h3>Receita por categoria</h3><div class="sub">R$ mil</div><div data-v="g_loja_categoria"></div></div>
+    <div class="card vis" style="height:316px"><h3>Cancelamento por categoria</h3><div class="sub">% · em vermelho, acima da média da rede na categoria</div><div data-v="g_loja_cancel"></div></div>
+    <div class="card vis" style="height:316px"><h3>Vendedores</h3><div class="sub">Ordenado pela receita</div><div data-v="t_vendedores"></div></div>
+  </div>
+</section>
+
+<script src="base.js"></script>
+<script>medir();</script>
+</body>
+</html>

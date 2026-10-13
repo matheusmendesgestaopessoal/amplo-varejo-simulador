@@ -3,18 +3,34 @@
   "name": "a1d1a9n0o0s1t1i1c0o1",
   "displayName": "Diagnóstico",
   "displayOption": "FitToWidth",
-  "height": 4962,
+  "height": 6166,
   "width": 1920,
   "objects": {
     "background": [
       {
         "properties": {
-          "color": {
-            "solid": {
-              "color": {
+          "image": {
+            "image": {
+              "name": {
                 "expr": {
                   "Literal": {
-                    "Value": "'#F7F8FA'"
+                    "Value": "'fundo_diagnostico.png'"
+                  }
+                }
+              },
+              "url": {
+                "expr": {
+                  "ResourcePackageItem": {
+                    "PackageName": "RegisteredResources",
+                    "PackageType": 1,
+                    "ItemName": "fundo_diagnostico.png"
+                  }
+                }
+              },
+              "scaling": {
+                "expr": {
+                  "Literal": {
+                    "Value": "'Fit'"
                   }
                 }
               }

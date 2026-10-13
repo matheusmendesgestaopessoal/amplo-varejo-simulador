@@ -246,9 +246,9 @@ table _Metas
 		displayFolder: 12 Formatação
 		lineageTag: d235fc16-b4f3-4dd2-904a-c2657cc17f14
 
-	measure 'Cor Cancelamento' = IF([Taxa Cancelamento] > [Taxa Cancelamento Rede], "#FF3B3B", "#CFE0FF")
+	measure 'Cor Cancelamento' = IF([Taxa Cancelamento] > [Taxa Cancelamento Rede], "#FF3B3B", "#FFC9C9")
 		displayFolder: 12 Formatação
-		lineageTag: e30728f0-6bc2-4e36-b685-bcd45ae98db5
+		lineageTag: 0117d7ed-c764-45b8-8f8e-14d65ce10ee5
 
 	measure 'Estoque Final (un)' = CALCULATE([Estoque_Atual], REMOVEFILTERS('DIM Calendario'))
 		formatString: #,0
@@ -330,15 +330,14 @@ table _Metas
 		lineageTag: 48156939-298e-4d89-8d9a-973b0fe4e07a
 
 	measure 'Txt Resposta' =
-			VAR _receita = [Receita_Total]
-			VAR _ating = [Meta x Realizado %]
+			VAR _cancel = [Receita Perdida]
+			VAR _total = _cancel + [Gap Lojas Abaixo Meta] + [Excesso Estoque]
 			RETURN
-			    "A rede faturou " & "R$ " & FORMAT(_receita / 1000000, "0.00") & " Mi" & ", " & FORMAT(_ating, "0.0%") & " da meta. "
-			    & "O dinheiro em jogo está em três frentes: " & "R$ " & FORMAT([Receita Perdida] / 1000000, "0.00") & " Mi" & " em pedidos cancelados, "
-			    & "R$ " & FORMAT([Gap Lojas Abaixo Meta] / 1000000, "0.00") & " Mi" & " de gap em " & [Lojas Abaixo Meta] & " lojas abaixo da meta e "
-			    & "R$ " & FORMAT([Excesso Estoque] / 1000000, "0.00") & " Mi" & " em estoque acima de 3 meses de cobertura."
+			    "Três frentes somam R$ " & FORMAT(_total / 1000000, "0.00") & " Mi em jogo. A maior é o cancelamento: R$ "
+			    & FORMAT(_cancel / 1000000, "0.00") & " Mi (" & FORMAT(DIVIDE(_cancel, _total), "0%")
+			    & ") em pedidos que o cliente já tinha feito e não viraram venda."
 		displayFolder: 11 Textos
-		lineageTag: 9131e2b7-5e2a-4f4b-a15d-f6c2cea4ee8f
+		lineageTag: d0eed4cf-bd7d-4f44-9731-766680f56bef
 
 	measure 'Txt KPI Receita' = "R$ " & FORMAT([Receita_Total] / 1000000, "0.00") & " Mi"
 		displayFolder: 11 Textos
@@ -416,29 +415,29 @@ table _Metas
 		displayFolder: 11 Textos
 		lineageTag: e5f32805-b3a2-410c-8b62-a33a704d2f3e
 
-	measure 'Txt Titulo Loja' = SELECTEDVALUE('DIM Lojas'[nome_loja], "Selecione uma loja") & " · " & SELECTEDVALUE('DIM Lojas'[nome_estado]) & " · " & SELECTEDVALUE('DIM Lojas'[regiao])
+	measure 'Txt Titulo Loja' = "Loja " & SELECTEDVALUE('DIM Lojas'[Loja], "não selecionada") & " · " & SELECTEDVALUE('DIM Lojas'[nome_estado]) & " · " & SELECTEDVALUE('DIM Lojas'[regiao])
 		displayFolder: 11 Textos
-		lineageTag: 7768a0e9-ffa8-411a-b588-25f57d225a5e
+		lineageTag: 63432993-a9d7-431d-bcf4-15a5bcbdec23
 
 	measure 'Txt KPI Loja Receita' = "R$ " & FORMAT([Receita_Total] / 1000, "#,0") & " mil"
 		displayFolder: 11 Textos
-		lineageTag: 16ae52e8-6db4-452a-8bff-974e433841fd
+		lineageTag: c9d9f144-6daf-43e3-8575-3fae4cea8473
 
 	measure 'Txt Ctx Loja Receita' = "Meta R$ " & FORMAT([Meta_Faturamento] / 1000, "#,0") & " mil · " & FORMAT([Meta x Realizado %], "0%")
 		displayFolder: 11 Textos
 		lineageTag: e47c55d3-b92f-4170-ba37-bed2451e4fde
 
-	measure 'Txt Ctx Loja Pedidos' = "Média das lojas: " & FORMAT([Pedidos Média por Loja], "#,0") & " · " & FORMAT([Pedidos vs Média], "+0%;-0%;0%")
+	measure 'Txt Ctx Loja Pedidos' = "Média das lojas: " & FORMAT([Pedidos Média por Loja], "#,0")
 		displayFolder: 11 Textos
-		lineageTag: 3831a1cb-7df4-4264-a358-189e08352b44
+		lineageTag: 8a99aa35-884c-4d3a-981d-9f6fa77f5c04
 
-	measure 'Txt Ctx Loja Ticket' = "Média da rede: R$ " & FORMAT([Ticket Médio Rede], "#,0") & " · " & FORMAT([Ticket vs Média], "+0%;-0%;0%")
+	measure 'Txt Ctx Loja Ticket' = "Média: R$ " & FORMAT([Ticket Médio Rede], "#,0")
 		displayFolder: 11 Textos
-		lineageTag: 8354637b-d79c-4714-bdbe-2a09fd453110
+		lineageTag: c4a7fcb2-a1ac-4ff9-b94a-ceec45a86abe
 
 	measure 'Txt Ctx Loja Cancelamento' = "Rede: " & FORMAT([Taxa Cancelamento Rede], "0.0%")
 		displayFolder: 11 Textos
-		lineageTag: 4165a6a8-6ab8-498e-bfeb-13a54727249e
+		lineageTag: 44c1d1fa-5751-4ef2-af72-615926e88335
 
 	measure 'Txt KPI Ticket' = "R$ " & FORMAT([Ticket_Médio], "#,0")
 		displayFolder: 11 Textos
@@ -470,17 +469,184 @@ table _Metas
 			RETURN
 			    SWITCH(
 			        TRUE(),
-			        _ating >= 1, "Ação: documentar as práticas da loja e replicar na região.",
-			        _pedidos < -0.05 && _pedidos <= _ticket, "Ação: campanha local de atração e revisão de horário e equipe.",
-			        _ticket < -0.05, "Ação: treinar a equipe em venda de maior valor e revisar o mix.",
-			        "Ação: revisar a meta com a gestão regional."
+			        _ating >= 1, "Documentar as práticas da loja e replicar nas lojas da região.",
+			        _pedidos < -0.05 && _pedidos <= _ticket, "Campanha local de atração e revisão de horário e equipe.",
+			        _ticket < -0.05, "Treinar a equipe em venda de maior valor e revisar o mix de produtos.",
+			        "Revisar a meta com a gestão regional."
 			    )
 		displayFolder: 11 Textos
-		lineageTag: 880a796c-2900-4805-8959-bfe950897c75
+		lineageTag: d2255f13-567f-4eb3-9ba3-3fa27d94a638
 
-	measure 'Txt Tooltip Regiao' = SELECTEDVALUE('DIM Lojas'[regiao]) & ": " & "R$ " & FORMAT([Receita_Total] / 1000000, "0.00") & " Mi" & " · " & FORMAT([Participação Receita], "0%") & " da receita"
+	measure 'Txt Tooltip Regiao' = SELECTEDVALUE('DIM Lojas'[regiao], "Rede")
 		displayFolder: 11 Textos
-		lineageTag: f785a40c-ef5e-4f01-a4b8-3cc702e89558
+		lineageTag: 6f132a13-d25b-420e-8413-2fabd3bee264
+
+	measure 'Txt Meta Receita' = "Meta: R$ " & FORMAT([Meta_Faturamento] / 1000000, "0.00") & " Mi"
+		displayFolder: 11 Textos
+		lineageTag: 5fc8f5ff-316a-4f97-8c1f-950a2e988a54
+
+	measure 'Txt Pill Receita' = FORMAT([Meta x Realizado %], "0.0%")
+		displayFolder: 11 Textos
+		lineageTag: 5b490ca2-163c-4562-befe-86419130f722
+
+	measure 'Txt Ctx Cancel Meta' = "Meta: " & FORMAT([Meta % Cancelamento], "0.0%")
+		displayFolder: 11 Textos
+		lineageTag: 4fa29b07-8df7-4127-a035-1542c9e5abb2
+
+	measure 'Txt Pill Cancelamento' = FORMAT(([Taxa Cancelamento] - [Meta % Cancelamento]) * 100, "+0.0;-0.0;0.0") & " p.p."
+		displayFolder: 11 Textos
+		lineageTag: 4208cddd-431a-4197-acf2-0dbdfc2cc3d0
+
+	measure 'Txt KPI Lojas Meta' = ([Lojas Avaliadas] - [Lojas Abaixo Meta]) & " de " & [Lojas Avaliadas]
+		displayFolder: 11 Textos
+		lineageTag: d6a1cd4a-69c6-4321-9f8b-04f629df4a97
+
+	measure 'Txt Ctx Lojas Abaixo' = [Lojas Abaixo Meta] & " abaixo da meta"
+		displayFolder: 11 Textos
+		lineageTag: 58f6eddf-afb9-4426-8178-ad342ac8f05c
+
+	measure 'Txt Pill Lojas' = "−R$ " & FORMAT([Gap Lojas Abaixo Meta] / 1000000, "0.00") & " Mi"
+		displayFolder: 11 Textos
+		lineageTag: 4aef0ef7-8d1e-41d2-a2d0-52f07a207b26
+
+	measure 'Txt Ctx Margem' = "Margem " & FORMAT([Margem %], "0.0%")
+		displayFolder: 11 Textos
+		lineageTag: 3cad8c59-2dc4-4d0d-8a8a-4c253c686f10
+
+	measure 'Txt Ctx Ticket' = "Ticket médio R$ " & FORMAT([Ticket_Médio], "#,0")
+		displayFolder: 11 Textos
+		lineageTag: e5121b0c-171f-469a-882b-f8ebabd6de58
+
+	measure 'Txt Ctx Loja Meta' = "Meta R$ " & FORMAT([Meta_Faturamento] / 1000, "#,0") & " mil"
+		displayFolder: 11 Textos
+		lineageTag: 2507b491-9920-413c-8c5a-2f096f4e13e8
+
+	measure 'Txt Pill Loja Receita' = FORMAT([Meta x Realizado %], "0%")
+		displayFolder: 11 Textos
+		lineageTag: de8ed081-ba2c-43f2-963b-77d11a98343e
+
+	measure 'Txt Pill Loja Pedidos' = FORMAT([Pedidos vs Média], "+0%;-0%;0%")
+		displayFolder: 11 Textos
+		lineageTag: 40c622e1-3c2d-4174-a3a4-88e001a89e15
+
+	measure 'Txt Pill Loja Ticket' = FORMAT([Ticket vs Média], "+0%;-0%;0%")
+		displayFolder: 11 Textos
+		lineageTag: 014552da-ffc1-422d-9a5a-ca2c202192a5
+
+	measure 'Txt Pill Loja Cancelamento' = FORMAT(([Taxa Cancelamento] - [Taxa Cancelamento Rede]) * 100, "+0.0;-0.0;0.0") & " p.p."
+		displayFolder: 11 Textos
+		lineageTag: 07787a82-cafd-4f0c-b60e-323e8e1909ea
+
+	measure 'Txt KPI Loja Excesso' = "R$ " & FORMAT([Excesso Estoque] / 1000, "#,0") & " mil"
+		displayFolder: 11 Textos
+		lineageTag: c6998810-c657-4704-9e3f-5537733d1b4e
+
+	measure 'Txt Causa Loja' =
+			VAR _ating = [Meta x Realizado %]
+			VAR _pedidos = [Pedidos vs Média]
+			VAR _ticket = [Ticket vs Média]
+			VAR _ticketTxt = IF(ABS(_ticket) <= 0.05, "ticket próximo da média.", "ticket " & FORMAT(_ticket, "+0%;-0%") & " em relação à média.")
+			VAR _pedidosTxt = IF(ABS(_pedidos) <= 0.05, "pedidos próximos da média.", "pedidos " & FORMAT(_pedidos, "+0%;-0%") & " em relação à média.")
+			RETURN
+			    SWITCH(
+			        TRUE(),
+			        _ating >= 1, "Loja na meta (" & FORMAT(_ating, "0%") & "): usar como referência para as lojas da região.",
+			        _pedidos < -0.05 && _pedidos <= _ticket, "Baixo fluxo de clientes: " & FORMAT(ABS(_pedidos), "0%") & " menos pedidos que a média das lojas, com " & _ticketTxt,
+			        _ticket < -0.05, "Ticket baixo: " & FORMAT(ABS(_ticket), "0%") & " abaixo do ticket médio da rede, com " & _pedidosTxt,
+			        "Pedidos e ticket próximos da média, com " & FORMAT(_ating, "0%") & " da meta: a meta pode estar acima do potencial da loja."
+			    )
+		displayFolder: 11 Textos
+		lineageTag: 46be8b03-5a91-47eb-9ea8-a32c5bbcfcdf
+
+	measure 'Txt Agravante Loja' =
+			VAR _dif = [Taxa Cancelamento] - [Taxa Cancelamento Rede]
+			RETURN
+			    SWITCH(
+			        TRUE(),
+			        _dif > 0.01, "Cancelamento " & FORMAT(_dif * 100, "0.0") & " p.p. acima da média da rede (" & FORMAT([Taxa Cancelamento Rede], "0.0%") & ").",
+			        _dif < -0.01, "Cancelamento abaixo da média da rede: não pesa no resultado desta loja.",
+			        "Cancelamento na média da rede: é o mesmo problema de processo das outras lojas."
+			    )
+		displayFolder: 11 Textos
+		lineageTag: 43754369-7f24-4e19-8164-259b8ac07165
+
+	measure 'Txt Tooltip Sub' = "R$ " & FORMAT([Receita_Total] / 1000000, "0.00") & " Mi · " & FORMAT(DIVIDE([Receita_Total], CALCULATE([Receita_Total], REMOVEFILTERS('DIM Lojas'[regiao]))), "0%") & " da receita da rede"
+		displayFolder: 11 Textos
+		lineageTag: 27e4cb26-a67b-45f2-b057-dbdbfcd2be02
+
+	measure 'Txt Tooltip Cancel' = FORMAT([Taxa Cancelamento], "0.0%")
+		displayFolder: 11 Textos
+		lineageTag: 4157b4c0-4b43-4b17-9a6f-81d87e10d6da
+
+	measure 'Cor Receita Mes' =
+			VAR _posicao = RANKX(ALLSELECTED('DIM Calendario'[mes], 'DIM Calendario'[Mes_Abrev]), [Receita_Total])
+			RETURN IF(_posicao <= 2, "#1A6BF5", "#CFE0FF")
+		displayFolder: 12 Formatação
+		lineageTag: d063b61b-73ac-4728-bee7-16c941e14862
+
+	measure 'Cor Receita Categoria' =
+			VAR _limite = MINX(TOPN(2, ALLSELECTED('DIM Produtos'[nome_categoria]), [Receita_Total]), [Receita_Total])
+			RETURN IF([Receita_Total] >= _limite, "#1A6BF5", "#CFE0FF")
+		displayFolder: 12 Formatação
+		lineageTag: 6ddb9bfc-31c7-487d-a4c7-840cb156337a
+
+	measure 'Cor Pill Loja Receita' = IF([Meta x Realizado %] >= 1, "#00995A", "#C41F1F")
+		displayFolder: 12 Formatação
+		lineageTag: 5542e0c8-b2d8-46fc-904a-5c8cdb5a2a57
+
+	measure 'Cor Pill Loja Pedidos' = IF([Pedidos vs Média] >= 0, "#00995A", "#C41F1F")
+		displayFolder: 12 Formatação
+		lineageTag: 37cdd779-38e7-4e10-8c7c-b39a542f57d0
+
+	measure 'Cor Pill Loja Ticket' = IF([Ticket vs Média] >= 0, "#00995A", "#C41F1F")
+		displayFolder: 12 Formatação
+		lineageTag: 29d198f7-b3b6-4233-a18f-6b4483ba79b0
+
+	measure 'Cor Pill Loja Cancelamento' = IF([Taxa Cancelamento] <= [Taxa Cancelamento Rede], "#00995A", "#C41F1F")
+		displayFolder: 12 Formatação
+		lineageTag: 72055f85-1a5f-4ed4-ac25-f03141d60182
+
+	measure 'Receita Mi' = DIVIDE([Receita_Total], 1000000)
+		formatString: 0.0
+		displayFolder: 13 Visuais
+		lineageTag: 055d35f9-cf0e-4e11-a22e-f9b49673e3f1
+
+	measure 'Meta Mi' = DIVIDE([Meta_Faturamento], 1000000)
+		formatString: 0.0
+		displayFolder: 13 Visuais
+		lineageTag: cfc9c962-2923-4bc2-984c-9ca301b29498
+
+	measure 'Receita mil' = DIVIDE([Receita_Total], 1000)
+		formatString: #,0
+		displayFolder: 13 Visuais
+		lineageTag: c870872e-8c1e-44f5-a8e8-d33cf57faac6
+
+	measure 'Meta mil' = DIVIDE([Meta_Faturamento], 1000)
+		formatString: #,0
+		displayFolder: 13 Visuais
+		lineageTag: fc458866-475c-48f4-a665-b2ec22b08f88
+
+	measure 'Excesso mil' = DIVIDE([Excesso Estoque], 1000)
+		formatString: #,0
+		displayFolder: 13 Visuais
+		lineageTag: 00c9f684-63d5-4faf-9dee-a52efdf28b7e
+
+	measure 'Estoque mil' = DIVIDE([Valor Estoque Final], 1000)
+		formatString: #,0
+		displayFolder: 13 Visuais
+		lineageTag: a7e121c0-3699-4718-8b38-2782a10d3d73
+
+	measure 'Txt Badge Cancelamento' = "Prioridade alta · " & [Txt Receita Perdida]
+		displayFolder: 11 Textos
+		lineageTag: 7b5aeda3-45f6-48be-96b9-b9c0d1eebfca
+
+	measure 'Txt Badge Estoque' = "Prioridade média · " & [Txt Excesso Estoque]
+		displayFolder: 11 Textos
+		lineageTag: e3ed1a5b-a27e-42fa-89f7-195cd432bb22
+
+	measure 'Txt Badge Lojas' = "Prioridade média · " & [Txt Gap Lojas]
+		displayFolder: 11 Textos
+		lineageTag: 8697e7d2-f6ae-40ce-a887-24f736fe0b15
 
 	column 'Coluna 1'
 		dataType: int64
