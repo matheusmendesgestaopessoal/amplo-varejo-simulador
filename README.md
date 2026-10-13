@@ -10,6 +10,11 @@
 </p>
 
 <p align="center">
+  <a href="https://portfolio-phi-lilac-19.vercel.app/projetos/amplo-varejo"><img src="https://img.shields.io/badge/%E2%96%B6%20Ver%20a%20apresenta%C3%A7%C3%A3o%20do%20projeto-1A6BF5?style=for-the-badge" alt="Ver a apresentação do projeto"></a>
+  <a href="https://portfolio-phi-lilac-19.vercel.app/downloads/amplo-varejo-dashboard.zip"><img src="https://img.shields.io/badge/%E2%AC%87%20Baixar%20o%20dashboard%20(.pbip)-111111?style=for-the-badge" alt="Baixar o dashboard (.pbip)"></a>
+</p>
+
+<p align="center">
   <a href="#-arquitetura">Arquitetura</a> ·
   <a href="#-python">Python</a> ·
   <a href="#-sql-e-modelagem">SQL e modelagem</a> ·
@@ -26,7 +31,7 @@ Construí, sozinho e do zero, o ecossistema de dados de uma rede varejista fict�
 > **Pergunta:** onde a Amplo Varejo perde faturamento em 2025, quanto isso vale e por onde começar?
 > **Resposta:** 3 frentes somam R$ 1,7 a 3,3 Mi recuperáveis; a maior é o cancelamento de pedidos (8,9% contra meta de 3%). [Análise completa](docs/05_analise_e_recomendacoes.md)
 
-O foco deste README é **como foi feito**: as ferramentas, por que cada uma, e as decisões técnicas no caminho.
+O foco deste README é **como foi feito**: as ferramentas, por que cada uma, e as decisões técnicas no caminho. A história do projeto, contada visualmente com o dashboard, está na [**apresentação no meu portfólio**](https://portfolio-phi-lilac-19.vercel.app/projetos/amplo-varejo).
 
 ![Stack: o que usei e para quê](assets/stack.png)
 
@@ -183,7 +188,7 @@ Escrevi a documentação como faria num projeto de empresa: alguém de fora cons
 
 ## ▶ Como executar
 
-**Só ver o dashboard:** baixe o repositório (**Code → Download ZIP**), instale o [Power BI Desktop](https://www.microsoft.com/pt-br/power-platform/products/power-bi/desktop) (gratuito) e abra `dashboard/amplo_varejo.pbip`. Os dados vêm junto; não precisa de banco.
+**Só ver o dashboard:** baixe o [ZIP do dashboard](https://portfolio-phi-lilac-19.vercel.app/downloads/amplo-varejo-dashboard.zip) (3 MB), extraia a pasta, instale o [Power BI Desktop](https://www.microsoft.com/pt-br/power-platform/products/power-bi/desktop) (gratuito) e abra `amplo_varejo.pbip`. Os dados vêm junto; não precisa de banco.
 
 **Rodar o projeto inteiro:**
 
